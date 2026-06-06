@@ -41,7 +41,7 @@ BUSINESS CONTEXT:
 - Company: Local Web SA (Pty) Ltd, Reg 2026/186580/07
 - Location: Pretoria, Gauteng, South Africa
 - Founder: Desmond Motha
-- Email: localwebcorp@gmail.com
+- Email: info@localwebsa.org
 - WhatsApp: +27 75 054 1175
 - Website: https://localwebsa.org
 

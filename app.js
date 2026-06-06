@@ -314,6 +314,7 @@
     const form = document.getElementById('chatForm');
     const typing = document.getElementById('chatTyping');
     const suggestions = document.getElementById('chatSuggestions');
+    const suggestionsToggle = document.getElementById('chatSuggestionsToggle');
     const badge = document.getElementById('chatBadge');
 
     if (!widget || !toggle || !windowEl) return;
@@ -326,6 +327,7 @@
     localStorage.setItem('lws_chat_session', sessionId);
     let history = JSON.parse(localStorage.getItem('lws_chat_history') || '[]');
     let isOpen = false;
+    let suggestionsCollapsed = true;  // Start collapsed to save space
 
     // Quick suggestion chips
     const suggestionChips = [
@@ -342,8 +344,14 @@
 
     function renderSuggestions() {
       suggestions.innerHTML = suggestionChips.map(text => `
-        <button type="button" class="suggestion-chip" data-text="${text.replace(/"/g, '&quot;')}">${text}</button>
-      `).join('');
+        <button type="button" class="suggestion-chip" data-text="${text.replace(/"/g, "&quot;")}">${text}</button>
+      `).join("");
+      // Apply collapsed state
+      suggestions.style.display = suggestionsCollapsed ? "none" : "flex";
+      if (suggestionsToggle) {
+        suggestionsToggle.setAttribute("aria-expanded", !suggestionsCollapsed);
+        suggestionsToggle.querySelector(".chevron").style.transform = suggestionsCollapsed ? "rotate(-90deg)" : "rotate(0deg)";
+      }
     }
 
     function addMessage(role, content, isTyping = false) {
@@ -434,6 +442,14 @@ What are you looking for?`;
       windowEl.setAttribute('aria-hidden', true);
       toggle.setAttribute('aria-expanded', false);
     });
+
+    // Toggle suggestions
+    if (suggestionsToggle) {
+      suggestionsToggle.addEventListener("click", () => {
+        suggestionsCollapsed = !suggestionsCollapsed;
+        renderSuggestions();
+      });
+    }
 
     // Form submit
     form.addEventListener('submit', e => {

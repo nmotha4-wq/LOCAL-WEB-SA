@@ -182,6 +182,9 @@
           <strong>Michael</strong>
           <span>Local Web SA Assistant</span>
         </div>
+        <button class="chat-suggestions-toggle" id="chatSuggestionsToggle" aria-label="Toggle suggestions" aria-expanded="false" title="Quick questions">
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
         <button class="chat-minimize" id="chatMinimize" aria-label="Close chat">&times;</button>
       </header>
 

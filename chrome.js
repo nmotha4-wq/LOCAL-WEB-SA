@@ -163,7 +163,45 @@
 
   <a class="wa-float" href="https://wa.me/27750541175" aria-label="WhatsApp us">
     <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.7.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.4 5.3 4.7.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.4zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.1-1.3c1.4.8 3.1 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
-  </a>`;
+  </a>
+
+  <!-- ============ CHAT WIDGET ============ -->
+  <div class="chat-widget" id="chatWidget" data-state="closed">
+    <button class="chat-toggle" id="chatToggle" aria-label="Chat with Michael" aria-expanded="false">
+      <svg class="chat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <svg class="chat-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <span class="chat-badge" id="chatBadge" aria-hidden="true">1</span>
+    </button>
+
+    <div class="chat-window" id="chatWindow" role="dialog" aria-label="Chat with Michael" aria-hidden="true">
+      <header class="chat-header">
+        <div class="chat-avatar" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M20 21c0-3.5-2.5-6.5-6-6.5S8 17.5 8 21"/></svg>
+        </div>
+        <div class="chat-title">
+          <strong>Michael</strong>
+          <span>Local Web SA Assistant</span>
+        </div>
+        <button class="chat-minimize" id="chatMinimize" aria-label="Close chat">&times;</button>
+      </header>
+
+      <div class="chat-messages" id="chatMessages" role="log" aria-live="polite"></div>
+
+      <div class="chat-typing" id="chatTyping" aria-hidden="true">
+        <span class="typing-dots"><span></span><span></span><span></span></span>
+        <span>Michael is typing...</span>
+      </div>
+
+      <form class="chat-input" id="chatForm" aria-label="Send message">
+        <input type="text" id="chatInput" placeholder="Type a message..." autocomplete="off" aria-label="Message" />
+        <button type="submit" aria-label="Send">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </form>
+
+      <div class="chat-suggestions" id="chatSuggestions" aria-label="Quick questions"></div>
+    </div>
+  </div>
 
   // inject
   const navMount = document.getElementById('navMount');

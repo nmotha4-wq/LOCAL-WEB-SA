@@ -303,6 +303,163 @@
     }
   }
 
+  // ============ CHAT WIDGET ============
+  (function(){
+    const widget = document.getElementById('chatWidget');
+    const toggle = document.getElementById('chatToggle');
+    const windowEl = document.getElementById('chatWindow');
+    const minimize = document.getElementById('chatMinimize');
+    const messages = document.getElementById('chatMessages');
+    const input = document.getElementById('chatInput');
+    const form = document.getElementById('chatForm');
+    const typing = document.getElementById('chatTyping');
+    const suggestions = document.getElementById('chatSuggestions');
+    const badge = document.getElementById('chatBadge');
+
+    if (!widget || !toggle || !windowEl) return;
+
+    // Worker endpoint - replace with your deployed worker URL
+    const WORKER_URL = 'https://chat-worker.localwebsa.pages.dev'; // TODO: update after deploy
+
+    // Session management
+    let sessionId = localStorage.getItem('lws_chat_session') || crypto.randomUUID();
+    localStorage.setItem('lws_chat_session', sessionId);
+    let history = JSON.parse(localStorage.getItem('lws_chat_history') || '[]');
+    let isOpen = false;
+
+    // Quick suggestion chips
+    const suggestionChips = [
+      'How much for a 5-page site?',
+      'What\'s included in hosting?',
+      'How long to build?',
+      'Do you do e-commerce?',
+      'WhatsApp me the details',
+    ];
+
+    function saveHistory() {
+      localStorage.setItem('lws_chat_history', JSON.stringify(history.slice(-20)));
+    }
+
+    function renderSuggestions() {
+      suggestions.innerHTML = suggestionChips.map(text => `
+        <button type="button" class="suggestion-chip" data-text="${text.replace(/"/g, '&quot;')}">${text}</button>
+      `).join('');
+    }
+
+    function addMessage(role, content, isTyping = false) {
+      const div = document.createElement('div');
+      div.className = `chat-message ${role}${isTyping ? ' typing' : ''}`;
+      div.innerHTML = `
+        ${role === 'assistant' ? '<div class="msg-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M20 21c0-3.5-2.5-6.5-6-6.5S8 17.5 8 21"/></svg></div>' : ''}
+        <div class="msg-bubble">${content}</div>
+        ${role === 'user' ? '<div class="msg-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div>' : ''}
+      `;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+      return div;
+    }
+
+    function showTyping(show) {
+      typing.style.display = show ? 'flex' : 'none';
+      typing.setAttribute('aria-hidden', !show);
+    }
+
+    async function sendToWorker(message) {
+      try {
+        const response = await fetch(WORKER_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message, history, sessionId }),
+        });
+        const data = await response.json();
+        if (data.sessionId) sessionId = data.sessionId;
+        return data.reply || 'Shot! Something went wrong. Try WhatsApp: +27 75 054 1175';
+      } catch (err) {
+        console.error('Chat error:', err);
+        return 'Eish, can\'t reach the server. WhatsApp Desmond directly: +27 75 054 1175 📱';
+      }
+    }
+
+    async function handleSend(text) {
+      if (!text.trim()) return;
+      const userMsg = text.trim();
+      input.value = '';
+      addMessage('user', userMsg);
+      history.push({ role: 'user', content: userMsg });
+      saveHistory();
+
+      showTyping(true);
+      const reply = await sendToWorker(userMsg);
+      showTyping(false);
+
+      const botMsg = addMessage('assistant', reply);
+      history.push({ role: 'assistant', content: reply });
+      saveHistory();
+    }
+
+    // Initialize: load history or show welcome
+    if (history.length === 0) {
+      const welcome = `Howzit! I'm Michael, your Local Web SA assistant 🇿🇦
+      
+I can help with:
+• Pricing & packages (from R799)
+• What's included in each plan
+• Hosting & maintenance details
+• Booking a consultation
+• Or just WhatsApp Desmond: +27 75 054 1175
+
+What are you looking for?`;
+      addMessage('assistant', welcome);
+      history.push({ role: 'assistant', content: welcome });
+      saveHistory();
+    } else {
+      history.forEach(m => addMessage(m.role, m.content));
+    }
+
+    renderSuggestions();
+
+    // Toggle chat
+    toggle.addEventListener('click', () => {
+      isOpen = !isOpen;
+      widget.dataset.state = isOpen ? 'open' : 'closed';
+      windowEl.setAttribute('aria-hidden', !isOpen);
+      toggle.setAttribute('aria-expanded', isOpen);
+      badge.style.display = 'none';
+      if (isOpen) input.focus();
+    });
+
+    minimize.addEventListener('click', () => {
+      isOpen = false;
+      widget.dataset.state = 'closed';
+      windowEl.setAttribute('aria-hidden', true);
+      toggle.setAttribute('aria-expanded', false);
+    });
+
+    // Form submit
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      handleSend(input.value);
+    });
+
+    // Suggestion chips
+    suggestions.addEventListener('click', e => {
+      const chip = e.target.closest('.suggestion-chip');
+      if (chip) handleSend(chip.dataset.text);
+    });
+
+    // Show badge after 10s if never opened
+    if (!localStorage.getItem('lws_chat_opened')) {
+      setTimeout(() => {
+        if (!isOpen) badge.style.display = 'flex';
+      }, 10000);
+    }
+
+    // Mark as opened when first used
+    widget.addEventListener('click', () => {
+      localStorage.setItem('lws_chat_opened', 'true');
+    }, { once: true });
+  })();
+
   // ============ CONTACT FORM ============
   const cf = document.getElementById('contactForm');
   const formStatus = document.getElementById('formStatus');

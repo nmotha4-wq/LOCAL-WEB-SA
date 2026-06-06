@@ -53,14 +53,15 @@
       <span class="eyebrow">Send a Brief</span>
       <h2 class="h2" style="margin-top:14px;font-size:32px">Tell us about your business.</h2>
       <p class="lede" style="margin-top:8px">We'll come back on WhatsApp with a one-page plan and a price.</p>
-      <form id="contactForm" style="margin-top:28px">
-        <div class="field"><label for="cf-name">Your name</label><input id="cf-name" type="text" placeholder="Thabo Mokoena" required/></div>
-        <div class="field"><label for="cf-wa">WhatsApp number</label><input id="cf-wa" type="tel" placeholder="+27 ..." required/></div>
-        <div class="field"><label for="cf-biz">Business name</label><input id="cf-biz" type="text" placeholder="Mokoena &amp; Co."/></div>
-        <div class="field"><label for="cf-pkg">Interested in</label><select id="cf-pkg"><option>Basic Website — R799</option><option selected>Professional 5-Page — R1,299</option><option>Booking System — R1,499</option><option>Not sure yet</option></select></div>
-        <div class="field"><label for="cf-msg">What does your business do?</label><textarea id="cf-msg" placeholder="Two lines is plenty — we'll ask the rest."></textarea></div>
+      <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" style="margin-top:28px">
+        <div class="field"><label for="cf-name">Your name</label><input id="cf-name" name="name" type="text" placeholder="Thabo Mokoena" required/></div>
+        <div class="field"><label for="cf-wa">WhatsApp number</label><input id="cf-wa" name="whatsapp" type="tel" placeholder="+27 ..." required/></div>
+        <div class="field"><label for="cf-biz">Business name</label><input id="cf-biz" name="business" type="text" placeholder="Mokoena &amp; Co."/></div>
+        <div class="field"><label for="cf-pkg">Interested in</label><select id="cf-pkg" name="package"><option>Basic Website — R799</option><option selected>Professional 5-Page — R1,299</option><option>Booking System — R1,499</option><option>Not sure yet</option></select></div>
+        <div class="field"><label for="cf-msg">What does your business do?</label><textarea id="cf-msg" name="message" placeholder="Two lines is plenty — we'll ask the rest."></textarea></div>
         <button class="btn btn-blue full" type="submit">Send brief →</button>
       </form>
+      <p id="formStatus" style="margin-top:12px;display:none"></p>
     </div>
   </div>
 </section>

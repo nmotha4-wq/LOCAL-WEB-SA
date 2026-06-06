@@ -305,12 +305,43 @@
 
   // ============ CONTACT FORM ============
   const cf = document.getElementById('contactForm');
+  const formStatus = document.getElementById('formStatus');
   if (cf){
-    cf.addEventListener('submit', e => {
+    cf.addEventListener('submit', async e => {
       e.preventDefault();
       const btn = cf.querySelector('button[type=submit]');
-      btn.textContent = 'Sent — we\'ll WhatsApp you back ✓';
+      const originalText = btn.textContent;
+      btn.textContent = 'Sending...';
       btn.disabled = true;
+      if (formStatus) { formStatus.style.display = 'none'; formStatus.className = ''; }
+      
+      try {
+        const formData = new FormData(cf);
+        const response = await fetch(cf.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+        
+        if (response.ok) {
+          btn.textContent = 'Sent — we\'ll WhatsApp you back ✓';
+          btn.style.background = '#10b981';
+          if (formStatus) { formStatus.textContent = 'Thanks! We\'ll reply on WhatsApp within 2 hours.'; formStatus.style.display = 'block'; formStatus.style.color = '#10b981'; }
+          cf.reset();
+        } else {
+          throw new Error('Form submission failed');
+        }
+      } catch (err) {
+        btn.textContent = 'Something went wrong — try again';
+        btn.style.background = '#ef4444';
+        if (formStatus) { formStatus.textContent = 'Could not send. Please WhatsApp us directly at +27 75 054 1175'; formStatus.style.display = 'block'; formStatus.style.color = '#ef4444'; }
+      }
+      
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 5000);
     });
   }
 

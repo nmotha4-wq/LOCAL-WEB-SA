@@ -202,7 +202,7 @@
       <div class="chat-suggestions" id="chatSuggestions" aria-label="Quick questions"></div>
     </div>
   </div>
-
+  `;
   // inject
   const navMount = document.getElementById('navMount');
   if (navMount) navMount.outerHTML = navHTML;

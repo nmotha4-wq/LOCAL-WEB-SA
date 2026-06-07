@@ -9,7 +9,7 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     // active link
     const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-    document.querySelectorAll('#nav .nav-links a, .mobihle-menu a').forEach(a => {
+    document.querySelectorAll('#nav .nav-links a, .mobile-menu a').forEach(a => {
       const href = (a.getAttribute('href')||'').toLowerCase();
       if (href === path || (path === '' && href === 'index.html')) a.classList.add('active');
     });

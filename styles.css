@@ -197,15 +197,18 @@ section.blue .lede{color:rgba(255,255,255,0.85)}
 
 /* Mobile Menu - Full Screen Overlay (Apple-style) */
 .mobile-menu{
-  position:fixed;inset:0;z-index:99;
+  /* Sits above the header (z 100) and chat widget (z 200) so it fully covers them */
+  position:fixed;inset:0;z-index:300;
   background:linear-gradient(180deg,#0007A8,#0011FF);
-  display:none;flex-direction:column;justify-content:center;align-items:center;gap:var(--space-3);
+  display:none;flex-direction:column;justify-content:center;align-items:center;gap:var(--space-2);
   padding:var(--space-8) var(--space-6);
   /* Safe area support for notch/Dynamic Island */
-  padding-top:max(var(--space-8), env(safe-area-inset-top));
+  padding-top:max(var(--space-10), env(safe-area-inset-top));
   padding-bottom:max(var(--space-8), env(safe-area-inset-bottom));
   padding-left:max(var(--space-6), env(safe-area-inset-left));
   padding-right:max(var(--space-6), env(safe-area-inset-right));
+  /* Allow scrolling on short screens so no item is clipped */
+  overflow-y:auto;
   /* Smooth spring animation */
   animation:mobileMenuIn 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
@@ -215,9 +218,10 @@ section.blue .lede{color:rgba(255,255,255,0.85)}
 }
 .mobile-menu.open{display:flex}
 .mobile-menu a{
-  font-size:var(--text-2xl);font-weight:700;color:#fff;
+  font-size:var(--text-lg);font-weight:700;color:#fff;
   padding:var(--space-3) var(--space-6);border-radius:12px;
-  min-height:var(--touch-target-comfortable);
+  min-height:var(--touch-target-min);
+  display:flex;align-items:center;justify-content:center;
   min-width:280px;text-align:center;
   transition:background .15s,transform .1s;
   width:100%;max-width:400px;
@@ -273,7 +277,9 @@ body.nav-open{overflow:hidden;position:fixed;width:100%}
 /* Full-width buttons on mobile */
 @media (max-width: 480px){
   .btn.full-mobile{width:100%}
-  .ctas .btn{flex:1;min-width:0}
+  /* Stack hero CTAs so long labels (e.g. "Get Started — From R799") never overlap or clip */
+  .hero .ctas{flex-direction:column;flex-wrap:nowrap}
+  .hero .ctas .btn{width:100%}
 }
 
 /* ====== HEROES ====== */
@@ -872,23 +878,6 @@ footer .wrap{position:relative;z-index:1}
 @media (min-width:720px){
   .foot-bottom{flex-direction:row;justify-content:space-between;align-items:center}
 }
-
-/* ====== WHATSAPP FLOAT ====== */
-.wa-float{
-  position:fixed;right:22px;bottom:22px;z-index:80;
-  width:60px;height:60px;border-radius:50%;
-  background:var(--whatsapp-green);
-  display:grid;place-items:center;color:#0A0A0A;
-  box-shadow:0 12px 30px rgba(0,230,118,.4);
-  transition:transform .2s;
-}
-.wa-float:hover{transform:scale(1.08)}
-.wa-float::before,.wa-float::after{
-  content:'';position:absolute;inset:0;border-radius:50%;
-  border:2px solid var(--whatsapp-green);animation:waPulse 3s ease-out infinite;
-}
-.wa-float::after{animation-delay:1.5s}
-@keyframes waPulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.8);opacity:0}}
 
 /* ====== LEGAL ====== */
 .legal-content{max-width:760px;margin:0 auto}

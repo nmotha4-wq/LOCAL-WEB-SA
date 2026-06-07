@@ -140,6 +140,12 @@ section.blue .lede{color:rgba(255,255,255,0.85)}
 .center{text-align:center}
 .muted{color:var(--text-grey)}
 
+/* Dial back the largest headings on phones so the layout breathes */
+@media (max-width:480px){
+  .h1{font-size:var(--text-3xl)}
+  .h2{font-size:var(--text-2xl)}
+}
+
 /* ====== NAV ====== */
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
@@ -457,7 +463,6 @@ body.nav-open{overflow:hidden;position:fixed;width:100%}
   border:2px solid rgba(255,255,255,.32);
   display:grid;place-items:center;flex:none;
   transition:all .2s;
-  min-width:var(--touch-target-min);
 }
 .pricing-card .radio::after{content:'';width:12px;height:12px;border-radius:50%;background:transparent;transition:background .2s}
 .pricing-card .name{font-size:var(--text-xl);font-weight:700;color:#fff;flex:1}
@@ -503,6 +508,16 @@ body.nav-open{overflow:hidden;position:fixed;width:100%}
 }
 .pricing-card.selected .includes li::before{
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M3 8.5l3 3 7-7'/></svg>");
+}
+/* Roomier, less cramped pricing + monthly cards on phones */
+@media (max-width:480px){
+  .pricing-card{padding:var(--space-5)}
+  .pricing-card .top{align-items:flex-start;gap:var(--space-2)}
+  .pricing-card .name{font-size:var(--text-lg)}
+  .pricing-card .price{font-size:var(--text-xl);text-align:right;white-space:nowrap}
+  .plan-card{padding:var(--space-5)}
+  .plan-card .name{font-size:var(--text-lg)}
+  .plan-card .price{font-size:var(--text-xl)}
 }
 
 /* ====== MONTHLY ====== */
@@ -948,6 +963,13 @@ section.black .stat .num{color:#3D52FF}
 }
 .plan .plan-price .amt{font-size:clamp(28px,3vw,38px);font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1}
 .plan .plan-price .per{display:block;font-size:13px;color:var(--text-grey);font-weight:500;margin-top:6px}
+@media (max-width:480px){
+  .plan{padding:24px 22px 26px}
+  .plan .plan-price{top:24px;right:22px}
+  .plan .plan-price .amt{font-size:26px}
+  /* Keep the title clear of the absolutely-positioned price */
+  .plan .plan-title{font-size:20px;padding-right:88px}
+}
 .plan .plan-divider{
   height:1px;background:var(--hairline);margin:24px 0 22px;
 }

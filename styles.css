@@ -325,21 +325,12 @@ body.nav-open{overflow:hidden;position:fixed;width:100%}
   background-position:0 0, 40px 40px;
   opacity:.45;
 }
-/* Living aurora glow — slow, GPU-friendly drift */
 .hero::before{
-  content:'';position:absolute;inset:-12%;z-index:2;pointer-events:none;
+  content:'';position:absolute;inset:0;
   background:
-    radial-gradient(38% 48% at 20% 26%, rgba(0,229,255,0.26), transparent 60%),
-    radial-gradient(42% 52% at 80% 20%, rgba(111,138,255,0.30), transparent 62%),
-    radial-gradient(55% 60% at 72% 88%, rgba(0,17,255,0.40), transparent 60%),
-    radial-gradient(48% 55% at 26% 92%, rgba(0,229,255,0.16), transparent 60%);
-  filter:blur(10px);
-  will-change:transform;
-  animation:auroraDrift 22s ease-in-out infinite alternate;
-}
-@keyframes auroraDrift{
-  0%{transform:translate3d(-1.5%,-1%,0) scale(1.04)}
-  100%{transform:translate3d(2%,1.5%,0) scale(1.08)}
+    radial-gradient(800px 600px at 50% 50%, rgba(0,229,255,0.18), transparent 60%),
+    radial-gradient(900px 700px at 0% 100%, rgba(0,7,168,0.35), transparent 60%);
+  pointer-events:none;z-index:2;
 }
 .hero .grid-overlay{
   position:absolute;inset:0;z-index:2;pointer-events:none;
@@ -349,28 +340,6 @@ body.nav-open{overflow:hidden;position:fixed;width:100%}
   background-size:56px 56px;
   mask-image:radial-gradient(ellipse at center, black 25%, transparent 75%);
 }
-
-/* Deeper, cinematic base for hero sections (richer than a flat blue) */
-.hero.blue{
-  background:
-    radial-gradient(130% 90% at 50% -20%, #14309b 0%, transparent 52%),
-    linear-gradient(180deg, #03050f 0%, #060a26 46%, #081046 100%);
-}
-/* Soft top spotlight + bottom vignette for focus and a smooth hand-off to the next section */
-.hero::after{
-  content:'';position:absolute;inset:0;z-index:3;pointer-events:none;
-  background:
-    radial-gradient(70% 55% at 50% 30%, rgba(255,255,255,0.07), transparent 58%),
-    radial-gradient(140% 100% at 50% 100%, transparent 50%, rgba(2,3,16,0.6) 100%);
-}
-/* Glowing gradient accent on hero headlines */
-.hero .h1 .cyan{
-  background:linear-gradient(100deg,#7CF5FF 0%,#6F8AFF 55%,#00E5FF 100%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;color:transparent;
-  filter:drop-shadow(0 0 22px rgba(0,229,255,0.22));
-}
-
 .hero.short{min-height:60dvb;padding:var(--space-14) 0 var(--space-10)}
 @media (max-width: 480px){
   .hero.short{min-height:auto;padding:var(--space-10) 0 var(--space-8)}

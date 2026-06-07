@@ -18,16 +18,34 @@
   const menuClose = document.getElementById('menuClose');
   const mm = document.getElementById('mobileMenu');
   if (menuBtn && mm) {
-    menuBtn.addEventListener('click', () => mm.classList.add('open'));
-    menuClose && menuClose.addEventListener('click', () => mm.classList.remove('open'));
-    mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mm.classList.remove('open')));
+    const openMenu = () => {
+      mm.classList.add('open');
+      document.body.classList.add('nav-open');
+      menuBtn.setAttribute('aria-expanded', 'true');
+    };
+    const closeMenu = () => {
+      mm.classList.remove('open');
+      document.body.classList.remove('nav-open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    };
+    menuBtn.addEventListener('click', openMenu);
+    menuClose && menuClose.addEventListener('click', closeMenu);
+    mm.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    // Close on backdrop click
+    mm.addEventListener('click', (e) => {
+      if (e.target === mm) closeMenu();
+    });
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mm.classList.contains('open')) closeMenu();
+    });
   }
 
   // ============ FADE IN ============
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  document.querySelectorAll('.fade-in').forEach(el => io.observe(el))
 
   // ============ FAQ ============
   document.querySelectorAll('.faq-q').forEach(btn => {

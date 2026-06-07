@@ -512,7 +512,7 @@ What are you looking for?`;
       const originalText = btn ? btn.textContent : '';
       if (btn){ btn.textContent = 'Opening WhatsApp…'; btn.disabled = true; }
       if (formStatus){
-        formStatus.textContent = 'Opening WhatsApp with your details — just hit send. Not opening? WhatsApp us at +27 75 054 1175.';
+        formStatus.textContent = 'Opening WhatsApp with your details, just hit send. Not opening? WhatsApp us at +27 75 054 1175.';
         formStatus.style.display = 'block';
         formStatus.style.color = '#10b981';
       }

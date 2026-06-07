@@ -102,10 +102,10 @@ window.LWSA_POSTS = [
     tag: 'Visibility',
     excerpt: "A customer in Centurion needs a plumber tonight. They open their phone. If you're not in there, you don't exist.",
     body: `
-<p>A customer in Centurion needs a plumber tonight. Geyser's leaking, kids are losing it, dinner's late. They pick up their phone — not a phone book, not a friend's WhatsApp — their phone. They type four words. <em>Plumber near me now.</em></p>
+<p>A customer in Centurion needs a plumber tonight. Geyser's leaking, kids are losing it, dinner's late. They pick up their phone. Not a phone book, not a friend's WhatsApp. Their phone. They type four words. <em>Plumber near me now.</em></p>
 <p>The first three results get their attention. The fourth gets their click. If you're the best plumber in Pretoria but you're not in those four results, you didn't lose a customer. You were never in the room.</p>
-<p>This is the part most small business owners miss. We tend to think of "not having a website" the way we'd think of "not having a billboard". A nice-to-have. A flex. Something the bigger guys do. But that's not what's happening anymore. A website isn't your billboard — it's your address. Without one, you don't have a location on the modern map. You're not invisible to <em>most</em> people. You're invisible to <em>every</em> person who didn't already know your name.</p>
-<p>That's a quiet but ruthless filter. The customers who find you by accident — the foot traffic, the friend-of-a-friend — those still come through. They're the survivors of an older system. But the customer who searches? The one with money in their hand, ready to buy <em>right now</em>? They never even know you tried.</p>
+<p>This is the part most small business owners miss. We tend to think of "not having a website" the way we'd think of "not having a billboard". A nice-to-have. A flex. Something the bigger guys do. But that's not what's happening anymore. A website isn't your billboard. It's your address. Without one, you don't have a location on the modern map. You're not invisible to <em>most</em> people. You're invisible to <em>every</em> person who didn't already know your name.</p>
+<p>That's a quiet but ruthless filter. The customers who find you by accident (the foot traffic, the friend-of-a-friend) still come through. They're the survivors of an older system. But the customer who searches? The one with money in their hand, ready to buy <em>right now</em>? They never even know you tried.</p>
 <p>The honest truth: most small SA businesses lose more money to invisibility every month than a website would cost them once. The damage isn't dramatic. It's quiet. A lost lead here, an unread enquiry there. You don't see the customers you didn't get. They just go to whoever showed up.</p>
 <p>If you're reading this on a phone right now, look up. There are probably three people within arm's reach also looking at theirs. That's your storefront window. You either have something in it, or you don't.</p>
 `
@@ -119,8 +119,8 @@ window.LWSA_POSTS = [
     excerpt: "Nobody books a service at 11pm. But that's when they decide who to book in the morning. Your website is the salesperson on that shift.",
     body: `
 <p>Nobody books a hairdresser at 11pm. Nobody hires a tutor at 11pm. Nobody calls a panel beater at 11pm. But that's exactly when customers <em>decide</em> who they'll call in the morning.</p>
-<p>Lying in bed. Phone on chest. Light off. A long, slow scroll through three or four options. By the time they fall asleep, the decision is mostly made. Whoever earned trust on that scroll wins. Whoever didn't, doesn't get a call — and never knows why.</p>
-<p>If your business shows up on that screen as a thoughtful website with clear prices, a few good photos, and a sentence that sounds like a real person — you win that night. If you show up as a half-finished Facebook page, the same three blurry photos from 2019, and a phone number that may or may not work — they keep scrolling. Quietly. Politely. Permanently.</p>
+<p>Lying in bed. Phone on chest. Light off. A long, slow scroll through three or four options. By the time they fall asleep, the decision is mostly made. Whoever earned trust on that scroll wins. Whoever didn't, doesn't get a call, and never knows why.</p>
+<p>If your business shows up on that screen as a thoughtful website with clear prices, a few good photos, and a sentence that sounds like a real person, you win that night. If you show up as a half-finished Facebook page, the same three blurry photos from 2019, and a phone number that may or may not work, they keep scrolling. Quietly. Politely. Permanently.</p>
 <p>This is the silent shift in how South Africans now buy. We research before we commit. We screenshot. We send links to a friend. We sleep on it. The customer who calls you in the morning is the one who decided last night. Your website is the salesperson working that shift, in their bedroom, on their phone, in the dark.</p>
 <p>You're not paying that salesperson. You only have to hire them once.</p>
 `
@@ -136,9 +136,9 @@ window.LWSA_POSTS = [
 <p>A Facebook page is a great thing. Treat it as a marketing channel. Treat it as a community. Treat it as a place to post the daily special or the new haircut.</p>
 <p>Don't treat it as your business.</p>
 <p>Here's the difference. A Facebook page is rented space. You don't own the audience. You don't own the layout. You don't own the rules. Facebook can change the algorithm tomorrow and your reach drops by 80% overnight. They've done it before. They'll do it again. When Mark Zuckerberg sneezes, your small business in Mamelodi catches a cold.</p>
-<p>You also don't own the trust. Walk up to any customer over thirty-five and ask them, honestly: <em>do you trust a business that only exists on Facebook?</em> Most will hesitate. The page might be active. The reviews might be good. But there's a faint, uneasy feeling — "is this a real business?" That feeling costs you customers, and it costs you the right to charge proper prices.</p>
-<p>A website fixes both. It's land you own — a place that doesn't disappear because a platform changed its mind. And it's a trust signal in itself. Your own domain. Your own design. Your own words, laid out the way <em>you</em> want them laid out. It tells a customer, before they read a single sentence: <em>this person takes their business seriously.</em></p>
-<p>Keep the Facebook page. Keep the Instagram. Use them to point people to your real home — the one with your name on the gate.</p>
+<p>You also don't own the trust. Walk up to any customer over thirty-five and ask them, honestly: <em>do you trust a business that only exists on Facebook?</em> Most will hesitate. The page might be active. The reviews might be good. But there's a faint, uneasy feeling: "is this a real business?" That feeling costs you customers, and it costs you the right to charge proper prices.</p>
+<p>A website fixes both. It's land you own, a place that doesn't disappear because a platform changed its mind. And it's a trust signal in itself. Your own domain. Your own design. Your own words, laid out the way <em>you</em> want them laid out. It tells a customer, before they read a single sentence: <em>this person takes their business seriously.</em></p>
+<p>Keep the Facebook page. Keep the Instagram. Use them to point people to your real home, the one with your name on the gate.</p>
 `
   },
   {
@@ -150,9 +150,9 @@ window.LWSA_POSTS = [
     excerpt: 'Your shop closes at six. Your competitors don\'t. A website is the part of your business that works while you sleep.',
     body: `
 <p>You close at six. Your competitors don't.</p>
-<p>Not the ones around the corner — they probably close at six too. The ones who took the time to put up a website. They keep selling at 7pm. They keep selling at 11pm. They keep selling at 3am on Sunday. They keep selling on Christmas Day. The shop's "closed" sign means nothing to a Google search.</p>
+<p>Not the ones around the corner, they probably close at six too. The ones who took the time to put up a website. They keep selling at 7pm. They keep selling at 11pm. They keep selling at 3am on Sunday. They keep selling on Christmas Day. The shop's "closed" sign means nothing to a Google search.</p>
 <p>This is the part of having a website that's easiest to underestimate, because we think of selling as a thing that requires <em>us</em>. A conversation. A phone call. A meeting. But most of what selling actually is, in 2026, is <em>answering questions before someone has to ask them.</em> Are you in my area? What do you charge? Do you do this thing I need? Are you any good?</p>
-<p>Every one of those questions can be answered on a page that costs you nothing to keep open. You wrote the answers once. The website serves them, in your voice, in your branding, with a one-tap WhatsApp button at the bottom — forever. While you cook dinner. While you sleep. While you're on holiday in Margate.</p>
+<p>Every one of those questions can be answered on a page that costs you nothing to keep open. You wrote the answers once. The website serves them, in your voice, in your branding, with a one-tap WhatsApp button at the bottom, forever. While you cook dinner. While you sleep. While you're on holiday in Margate.</p>
 <p>This is the part most owners only feel after they have it. The phone starts ringing in the morning from people who already decided, last night, that you were the one. That's not magic. That's a salesperson who never logs off.</p>
 `
   },
@@ -166,7 +166,7 @@ window.LWSA_POSTS = [
     body: `
 <p>There's a question every customer asks, silently, before they hand over money to a business they've never used. Most of them don't even know they're asking it.</p>
 <p>"Do they have a website?"</p>
-<p>Not "is it beautiful?" Not "is it long?" Just — does it exist. The presence of a real website, with a real domain, with a real address and a real phone number, settles something in a customer's nervous system. It's a tiny, instant trust signal. <em>This is a real business. This isn't a scam. This person will probably still be here next month.</em></p>
+<p>Not "is it beautiful?" Not "is it long?" Just: does it exist. The presence of a real website, with a real domain, with a real address and a real phone number, settles something in a customer's nervous system. It's a tiny, instant trust signal. <em>This is a real business. This isn't a scam. This person will probably still be here next month.</em></p>
 <p>The absence of one does the opposite. It's not a deal-breaker for every customer. But it's a tax. It's a doubt. It's a reason to ask one more friend, or check one more competitor, or hold off till next week. And next week is where customers go to die.</p>
 <p>In South Africa especially, where scams are everywhere and small businesses come and go, that trust signal is louder than people realise. A R799 website pays for itself the first time a customer didn't have to wonder.</p>
 <p>You can be the most honest plumber, the best tutor, the most reliable cleaner in town. None of that matters if the customer never quite gets past the doubt. The website doesn't sell you. The website lets the customer give themselves permission to trust you.</p>
@@ -183,7 +183,7 @@ window.LWSA_POSTS = [
 <p>Word of mouth is still the best marketing there is. But the way it travels has changed.</p>
 <p>Twenty years ago, "I know a guy" was a verbal handoff. A phone number scribbled on the back of a card. A name spoken at a braai. Today, the same recommendation happens in a WhatsApp group, on a Sunday afternoon, while everyone's looking at their phones. The mom in the school group asks: "Anyone know a good tutor?" Three people reply. Two send a link. One sends a phone number.</p>
 <p>Who do you think gets called first?</p>
-<p>The link wins, every time. It's tap-and-go. It opens a page that's already designed to convince. It works on the recommender's behalf without them having to type a single character of explanation. Your happy customer didn't have to be a great salesperson — your website did the selling.</p>
+<p>The link wins, every time. It's tap-and-go. It opens a page that's already designed to convince. It works on the recommender's behalf without them having to type a single character of explanation. Your happy customer didn't have to be a great salesperson; your website did the selling.</p>
 <p>The owner without a website forces every referral to do work. Look up the business. Find the phone number. Hope the WhatsApp is monitored. That friction is invisible but it's brutal. Most referrals never complete that journey. They just don't.</p>
 <p>If you have one customer who loves you, give them a link. Give every customer who loves you a link. That link is the lightest, fastest, most leverageable piece of marketing you'll ever own.</p>
 `
@@ -194,12 +194,12 @@ window.LWSA_POSTS = [
     date: 'Apr 5, 2026',
     readMin: 4,
     tag: 'Economics',
-    excerpt: 'A website costs less than one job. The customers you don\'t get every month, because they couldn\'t find you, cost more than that — forever.',
+    excerpt: 'A website costs less than one job. The customers you don\'t get every month, because they couldn\'t find you, cost more than that, forever.',
     body: `
 <p>Let's do the maths. Honestly, without flinching.</p>
 <p>A basic, professional website from us is R799 once. Hosting is R149 a month. So for a year, the all-in cost of being properly findable online is under R2,500. That's less than one decent job for most service businesses. One. Job.</p>
-<p>Now let's look at the other side. How many people search for what you do, every month, in your suburb? Even conservatively — even if it's just twenty searches a month for "[your service] near [your area]" — and even if only one of those becomes a paying customer — that's twelve new customers a year you didn't have. Twelve. Customers.</p>
-<p>If the average customer is worth R500 to you over their lifetime, that's R6,000 of revenue you didn't earn. If they're worth R2,000, it's R24,000. If they're worth R10,000 — and for plumbers, electricians, contractors, they often are — we're talking R120,000 of revenue you handed quietly to the competitor who showed up.</p>
+<p>Now let's look at the other side. How many people search for what you do, every month, in your suburb? Even conservatively, even if it's just twenty searches a month for "[your service] near [your area]", and even if only one of those becomes a paying customer, that's twelve new customers a year you didn't have. Twelve. Customers.</p>
+<p>If the average customer is worth R500 to you over their lifetime, that's R6,000 of revenue you didn't earn. If they're worth R2,000, it's R24,000. If they're worth R10,000 (and for plumbers, electricians, contractors, they often are) we're talking R120,000 of revenue you handed quietly to the competitor who showed up.</p>
 <p>This is the part that makes us a little angry on behalf of business owners. The cost of a website is small. The cost of not having one compounds. Every month you wait is another month of customers who chose someone else, not because they were better, but because they were findable.</p>
 <p>If you can find R799, you can stop the bleeding. That's the whole calculation.</p>
 `
@@ -213,10 +213,10 @@ window.LWSA_POSTS = [
     excerpt: 'Your customer decided what you cost before they ever asked. They decided it in the first scroll of your website. So design what you want them to decide.',
     body: `
 <p>By the time a customer asks for a quote, they've already decided what you cost.</p>
-<p>Not the exact rand amount — that comes later. But the shape of it. The order of magnitude. The class of business you are. They decided it in the first three seconds of looking at your website. They decided it before they read a single word.</p>
-<p>This is uncomfortable but it's true. Customers price you by the way your website feels in their hand. A site that loads slowly, with stretched logos and clashing fonts, says "cheap" — even if you're actually excellent. A site that loads cleanly, with confident type and one good photo, says "premium" — even before you've shown them what you do.</p>
+<p>Not the exact rand amount, that comes later. But the shape of it. The order of magnitude. The class of business you are. They decided it in the first three seconds of looking at your website. They decided it before they read a single word.</p>
+<p>This is uncomfortable but it's true. Customers price you by the way your website feels in their hand. A site that loads slowly, with stretched logos and clashing fonts, says "cheap", even if you're actually excellent. A site that loads cleanly, with confident type and one good photo, says "premium", even before you've shown them what you do.</p>
 <p>You can fight this. You can insist that customers should care about the work, not the website. You'd be right, philosophically. And you'd still lose the bidding war to the competitor whose homepage felt expensive.</p>
-<p>The thing nobody tells small business owners is that <em>design is just permission to charge what you're worth.</em> A good website doesn't make you a better plumber. It lets you charge like a better plumber. It lets you walk into a quote conversation with the customer already half-convinced you're the premium choice — because they already saw the premium choice. They saw it before you opened your mouth.</p>
+<p>The thing nobody tells small business owners is that <em>design is just permission to charge what you're worth.</em> A good website doesn't make you a better plumber. It lets you charge like a better plumber. It lets you walk into a quote conversation with the customer already half-convinced you're the premium choice, because they already saw the premium choice. They saw it before you opened your mouth.</p>
 <p>So design what you want them to decide. They will decide it, either way.</p>
 `
   }
@@ -232,7 +232,7 @@ window.LWSA_shareLinks = function (post) {
   const title = post.title;
   return {
     url,
-    whatsapp: 'https://wa.me/?text=' + encodeURIComponent(title + ' — ' + url),
+    whatsapp: 'https://wa.me/?text=' + encodeURIComponent(title + ': ' + url),
     twitter: 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(title) + '&url=' + encodeURIComponent(url),
     facebook: 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url),
     linkedin: 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url),

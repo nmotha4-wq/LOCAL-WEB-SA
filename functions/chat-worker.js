@@ -6,13 +6,56 @@
  * the friendly, knowledgeable Local Web SA assistant.
  */
 
+// Origins allowed to call this worker from the browser.
+// Production domains + Cloudflare Pages previews + local dev.
+const ALLOWED_ORIGINS = [
+  'https://localwebsa.org',
+  'https://www.localwebsa.org',
+];
+const ALLOWED_ORIGIN_RE = /^https:\/\/[a-z0-9-]+\.(localwebsa\.pages\.dev|pages\.dev)$/i;
+const LOCAL_ORIGIN_RE = /^http:\/\/localhost(:\d+)?$/i;
+
+function isAllowedOrigin(origin) {
+  if (!origin) return false;
+  return ALLOWED_ORIGINS.includes(origin) ||
+         ALLOWED_ORIGIN_RE.test(origin) ||
+         LOCAL_ORIGIN_RE.test(origin);
+}
+
+function corsFor(origin) {
+  // Reflect the origin only when it's on the allowlist; otherwise send a
+  // non-matching value so the browser blocks the response.
+  return {
+    'Access-Control-Allow-Origin': isAllowedOrigin(origin) ? origin : 'https://localwebsa.org',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Vary': 'Origin',
+  };
+}
+
+// Best-effort per-IP rate limit. In-memory per isolate (not global), so it's a
+// soft guard against scripted abuse — for hard limits add a KV/Durable Object.
+const RATE = { windowMs: 60_000, max: 15 };
+const hits = new Map(); // ip -> { count, resetAt }
+function rateLimited(ip) {
+  if (!ip) return false;
+  const now = Date.now();
+  const rec = hits.get(ip);
+  if (!rec || now > rec.resetAt) {
+    hits.set(ip, { count: 1, resetAt: now + RATE.windowMs });
+    return false;
+  }
+  rec.count += 1;
+  return rec.count > RATE.max;
+}
+
+const MAX_MESSAGE_LEN = 1000;
+const MAX_HISTORY = 6;
+
 export default {
   async fetch(request, env, ctx) {
-    const corsHeaders = {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
-    };
+    const origin = request.headers.get('Origin');
+    const corsHeaders = corsFor(origin);
 
     if (request.method === 'OPTIONS') {
       return new Response(null, { headers: corsHeaders });
@@ -22,8 +65,28 @@ export default {
       return new Response('Method not allowed', { status: 405, headers: corsHeaders });
     }
 
+    // Reject browser calls from origins we don't recognise.
+    if (origin && !isAllowedOrigin(origin)) {
+      return new Response(JSON.stringify({ error: 'Origin not allowed' }), {
+        status: 403,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Per-IP rate limit.
+    const ip = request.headers.get('CF-Connecting-IP');
+    if (rateLimited(ip)) {
+      return new Response(JSON.stringify({
+        reply: "Whoa, lots of messages! Give me a sec, or just WhatsApp Desmond: +27 75 054 1175",
+      }), {
+        status: 429,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
     try {
-      const { message, history = [], sessionId } = await request.json();
+      const body = await request.json();
+      let { message, history = [], sessionId } = body;
 
       if (!message || typeof message !== 'string') {
         return new Response(JSON.stringify({ error: 'Message required' }), {
@@ -31,6 +94,10 @@ export default {
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
       }
+
+      // Bound the input so a single call can't be made arbitrarily expensive.
+      message = message.slice(0, MAX_MESSAGE_LEN);
+      if (!Array.isArray(history)) history = [];
 
       const systemPrompt = `You are Michael, the friendly AI assistant for Local Web SA — a Pretoria-based web agency building affordable, modern websites for South African small businesses.
 
@@ -83,9 +150,14 @@ RESPONSE STYLE:
 - Friendly emoji occasionally, not every message
 - Match the user energy — short question = short answer`;
 
+      const safeHistory = history
+        .slice(-MAX_HISTORY)
+        .filter(m => m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string')
+        .map(m => ({ role: m.role, content: m.content.slice(0, MAX_MESSAGE_LEN) }));
+
       const messages = [
         { role: 'system', content: systemPrompt },
-        ...history.slice(-6).map(m => ({ role: m.role, content: m.content })),
+        ...safeHistory,
         { role: 'user', content: message },
       ];
 

@@ -9,7 +9,7 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     // active link
     const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-    document.querySelectorAll('#nav .nav-links a, .mobihle-menu a').forEach(a => {
+    document.querySelectorAll('#nav .nav-links a, .mobile-menu a').forEach(a => {
       const href = (a.getAttribute('href')||'').toLowerCase();
       if (href === path || (path === '' && href === 'index.html')) a.classList.add('active');
     });
@@ -226,9 +226,9 @@
 
   if (pricingGrid){
     const packages = [
-      { id:'basic', name:'Basic Website', price:799, desc:'Perfect for getting online fast with a clean, professional look.', features:['1-page long-scroll site','Custom domain + SSL','WhatsApp CTA button','Google Business sync','Mobile-first design','7-day delivery'] },
-      { id:'professional', name:'Professional 5-Page', price:1299, desc:'Ideal for established businesses wanting a full online presence.', popular:true, features:['Up to 5 pages','Contact + enquiry form','SEO basics + sitemap','Per-page meta tags','Photo gallery','Free first revision','7-day delivery'] },
-      { id:'booking', name:'Booking System', price:1499, desc:'Take online bookings 24/7 and automate your appointment schedule.', features:['Everything in Professional','Online booking calendar','Email + WhatsApp notifications','Service & staff management','Customer reminders','Two revision rounds','10–14 day delivery'] }
+      { id:'basic', name:'Basic Website', price:799, desc:'Perfect for getting online fast with a clean, professional look.', features:['1–3 page website','Home, services & about sections','Contact details + WhatsApp button','Mobile-friendly design','Free .co.za or .com domain (first year)','7-day delivery'] },
+      { id:'professional', name:'Professional 5-Page', price:1299, desc:'Ideal for established businesses wanting a full online presence.', popular:true, features:['Up to 5 pages (Home, About, Services, Gallery, Contact)','Works on phones, tablets & desktops','WhatsApp + contact form integration','Social media links (Facebook & Instagram)','SEO-friendly structure','Free .co.za or .com domain (first year)','7-day delivery'] },
+      { id:'booking', name:'Booking System', price:1499, desc:'Take online bookings 24/7 and automate your appointment schedule.', features:['Customer booking form (date & time)','Available slots based on your hours','Confirmation message to customer','Simple admin dashboard for bookings','Mobile-friendly on any phone','Free .co.za or .com domain (first year)','10–14 day delivery'] }
     ];
     const monthly = { hosting:{ name:'Website Hosting', price:149 }, care:{ name:'Care & Maintenance', price:299 } };
 
@@ -476,45 +476,53 @@ What are you looking for?`;
     }, { once: true });
   })();
 
-  // ============ CONTACT FORM ============
+  // ============ CONTACT FORM (WhatsApp deep-link) ============
+  // No backend: on submit we compose a pre-filled WhatsApp message to the
+  // business number so the lead lands straight in the chat we already use.
   const cf = document.getElementById('contactForm');
   const formStatus = document.getElementById('formStatus');
   if (cf){
-    cf.addEventListener('submit', async e => {
+    const waNumber = (cf.dataset.waNumber || '27750541175').replace(/\D/g, '');
+    cf.addEventListener('submit', e => {
       e.preventDefault();
+
+      // Native required-field validation first.
+      if (typeof cf.reportValidity === 'function' && !cf.reportValidity()) return;
+
+      const get = n => { const el = cf.elements[n]; return el ? el.value.trim() : ''; };
+      const name = get('name');
+      const whatsapp = get('whatsapp');
+      const business = get('business');
+      const pkg = get('package');
+      const message = get('message');
+
+      const lines = [
+        'Hi Local Web SA! I\'d like a website.',
+        '',
+        name && `Name: ${name}`,
+        whatsapp && `My number: ${whatsapp}`,
+        business && `Business: ${business}`,
+        pkg && `Interested in: ${pkg}`,
+        message && `What we do: ${message}`,
+      ].filter(Boolean);
+
+      const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(lines.join('\n'))}`;
+
       const btn = cf.querySelector('button[type=submit]');
-      const originalText = btn.textContent;
-      btn.textContent = 'Sending...';
-      btn.disabled = true;
-      if (formStatus) { formStatus.style.display = 'none'; formStatus.className = ''; }
-      
-      try {
-        const formData = new FormData(cf);
-        const response = await fetch(cf.action, {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        });
-        
-        if (response.ok) {
-          btn.textContent = 'Sent — we\'ll WhatsApp you back ✓';
-          btn.style.background = '#10b981';
-          if (formStatus) { formStatus.textContent = 'Thanks! We\'ll reply on WhatsApp within 2 hours.'; formStatus.style.display = 'block'; formStatus.style.color = '#10b981'; }
-          cf.reset();
-        } else {
-          throw new Error('Form submission failed');
-        }
-      } catch (err) {
-        btn.textContent = 'Something went wrong — try again';
-        btn.style.background = '#ef4444';
-        if (formStatus) { formStatus.textContent = 'Could not send. Please WhatsApp us directly at +27 75 054 1175'; formStatus.style.display = 'block'; formStatus.style.color = '#ef4444'; }
+      const originalText = btn ? btn.textContent : '';
+      if (btn){ btn.textContent = 'Opening WhatsApp…'; btn.disabled = true; }
+      if (formStatus){
+        formStatus.textContent = 'Opening WhatsApp with your details — just hit send. Not opening? WhatsApp us at +27 75 054 1175.';
+        formStatus.style.display = 'block';
+        formStatus.style.color = '#10b981';
       }
-      
+
+      // Open in a new tab so the lead keeps the site open behind them.
+      window.open(url, '_blank', 'noopener');
+
       setTimeout(() => {
-        btn.textContent = originalText;
-        btn.style.background = '';
-        btn.disabled = false;
-      }, 5000);
+        if (btn){ btn.textContent = originalText; btn.disabled = false; }
+      }, 4000);
     });
   }
 

@@ -234,6 +234,17 @@ section.blue .lede{color:rgba(255,255,255,0.85)}
 }
 .mobile-menu a:hover{background:rgba(255,255,255,.1)}
 .mobile-menu a:active{background:rgba(255,255,255,.2);transform:scale(0.98)}
+/* Chat-with-Michael entry */
+.mobile-menu a.mm-chat{
+  gap:10px;color:var(--accent-cyan);
+  background:rgba(0,229,255,.08);
+  border:1px solid rgba(0,229,255,.35);
+}
+.mobile-menu a.mm-chat:hover{background:rgba(0,229,255,.16)}
+.mobile-menu a.mm-chat svg{width:20px;height:20px}
+/* CTA keeps dark text on white (the generic .mobile-menu a color was making it invisible) */
+.mobile-menu a.btn-white{color:#0A0A0A;margin-top:14px}
+.mobile-menu a.btn-white:hover{background:#fff;color:#0A0A0A}
 .mobile-menu .close{
   position:absolute;top:var(--space-4);right:var(--space-4);display:grid;
   width:var(--touch-target-comfortable);height:var(--touch-target-comfortable);
@@ -1488,6 +1499,24 @@ section.black .stat .num{color:#3D52FF}
 .tpl-c .ms-booking .slot.off{opacity:.4;text-decoration:line-through}
 .tpl-c .ms-booking .go{margin-top:auto;background:#9B5C4A;color:#fff;padding:12px;border-radius:9999px;text-align:center;font-weight:700;font-size:12px;letter-spacing:.04em}
 
+/* ============ CHAT LAUNCHER (FAB → dedicated chat page) ============ */
+.chat-fab{
+  position:fixed;bottom:24px;right:24px;z-index:200;
+  width:56px;height:56px;border-radius:16px;
+  background:linear-gradient(135deg,var(--brand-blue) 0%,var(--brand-blue-mid) 100%);
+  box-shadow:0 8px 32px rgba(0,17,255,0.4),0 0 0 1px rgba(255,255,255,0.08) inset;
+  display:grid;place-items:center;color:#fff;
+  transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;
+}
+.chat-fab:hover{transform:scale(1.06);box-shadow:0 12px 40px rgba(0,17,255,0.5),0 0 0 1px rgba(255,255,255,0.12) inset}
+.chat-fab:active{transform:scale(0.98)}
+.chat-fab .chat-icon{width:24px;height:24px;display:block}
+.chat-fab .chat-badge{display:flex}
+@media (max-width:480px){
+  .chat-fab{bottom:env(safe-area-inset-bottom, 16px);right:16px;
+    width:var(--touch-target-comfortable);height:var(--touch-target-comfortable)}
+}
+
 /* ============ CHAT WIDGET ============ */
 .chat-widget{
   position:fixed;bottom:24px;right:24px;z-index:200;
@@ -1700,6 +1729,61 @@ section.black .stat .num{color:#3D52FF}
     min-height:var(--touch-target-min);
   }
 }
+
+/* ============ DEDICATED CHAT PAGE ============ */
+.chat-page{
+  height:100vh;
+  height:100dvh;
+  display:flex;flex-direction:column;
+  padding-top:76px; /* clear the fixed nav */
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(0,17,255,0.18), transparent 55%),
+    var(--bg-black-2);
+}
+.chat-shell{
+  width:100%;max-width:760px;margin:0 auto;
+  flex:1;min-height:0;
+  display:flex;flex-direction:column;
+  padding:0 var(--space-4);
+}
+.chat-page-head{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 2px;border-bottom:1px solid var(--hairline);
+}
+.chat-page-head .chat-status{display:flex;align-items:center;gap:6px}
+.chat-online-dot{width:7px;height:7px;border-radius:50%;background:var(--whatsapp-green);box-shadow:0 0 8px var(--whatsapp-green)}
+.chat-back{
+  width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  background:rgba(255,255,255,0.06);border:1px solid var(--hairline);
+  color:var(--text-grey);display:grid;place-items:center;
+  transition:background .15s,color .15s;
+}
+.chat-back:hover{background:rgba(255,255,255,0.12);color:#fff}
+.chat-back svg{width:20px;height:20px}
+.chat-page .chat-messages{flex:1;min-height:0;padding:20px 2px}
+.chat-page .chat-typing{padding:0 2px 8px}
+.chat-page .chat-suggestions{padding:0 2px 10px}
+/* [hidden] must win over the .chat-suggestions display:flex so it can collapse */
+.chat-suggestions[hidden]{display:none}
+/* Collapsible "Quick questions" toggle — keeps the conversation visible by default */
+.chat-suggest-toggle{
+  align-self:center;
+  display:inline-flex;align-items:center;gap:8px;
+  margin:0 auto 8px;padding:8px 16px;border-radius:9999px;
+  background:var(--surface-card);border:1px solid var(--hairline);
+  color:var(--text-grey);font-size:13px;font-weight:600;font-family:inherit;
+  cursor:pointer;transition:background .15s,color .15s;
+  min-height:var(--touch-target-min);
+}
+.chat-suggest-toggle:hover{background:rgba(255,255,255,.08);color:#fff}
+.chat-suggest-toggle .chevron{width:16px;height:16px;transition:transform .2s}
+.chat-suggest-toggle[aria-expanded="true"] .chevron{transform:rotate(180deg)}
+.chat-page .chat-input{
+  background:transparent;border-top:1px solid var(--hairline);
+  padding:12px 0 calc(14px + env(safe-area-inset-bottom));
+}
+/* Preserve line breaks from the assistant's plain-text replies */
+.chat-page .msg-bubble{white-space:pre-line}
 
 /* Tablet adjustments */
 @media (min-width: 481px) and (max-width: 768px){

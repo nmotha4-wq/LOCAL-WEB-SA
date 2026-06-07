@@ -11,10 +11,11 @@
       <a href="about.html">About Us</a>
       <a href="our-work.html">Our Work</a>
       <a href="benefits.html">Benefits</a>
-      <a href="pricing.html">Pricing Calculator</a>
+      <a href="pricing.html">Pricing</a>
       <a href="blog.html">Blog</a>
       <a href="faq.html">FAQ</a>
       <a href="contact.html">Contact</a>
+      <a href="chat.html">Chat</a>
     </nav>
     <a href="contact.html" class="btn btn-white sm nav-cta">Get a Quote</a>
     <button class="menu-btn" id="menuBtn" aria-label="Open menu">
@@ -33,7 +34,11 @@
     <a href="blog.html">Blog</a>
     <a href="faq.html">FAQ</a>
     <a href="contact.html">Contact</a>
-    <a href="contact.html" class="btn btn-white" style="margin-top:14px">Get a Quote</a>
+    <a href="chat.html" class="mm-chat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Chat with Michael
+    </a>
+    <a href="contact.html" class="btn btn-white mm-cta">Get a Quote</a>
   </nav>`;
 
   const footerHTML = `
@@ -161,46 +166,11 @@
     </div>
   </footer>
 
-  <!-- ============ CHAT WIDGET ============ -->
-  <div class="chat-widget" id="chatWidget" data-state="closed">
-    <button class="chat-toggle" id="chatToggle" aria-label="Chat with Michael" aria-expanded="false">
-      <svg class="chat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      <svg class="chat-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      <span class="chat-badge" id="chatBadge" aria-hidden="true">1</span>
-    </button>
-
-    <div class="chat-window" id="chatWindow" role="dialog" aria-label="Chat with Michael" aria-hidden="true">
-      <header class="chat-header">
-        <div class="chat-avatar" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M20 21c0-3.5-2.5-6.5-6-6.5S8 17.5 8 21"/></svg>
-        </div>
-        <div class="chat-title">
-          <strong>Michael</strong>
-          <span>Local Web SA Assistant</span>
-        </div>
-        <button class="chat-suggestions-toggle" id="chatSuggestionsToggle" aria-label="Toggle suggestions" aria-expanded="false" title="Quick questions">
-          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <button class="chat-minimize" id="chatMinimize" aria-label="Close chat">&times;</button>
-      </header>
-
-      <div class="chat-messages" id="chatMessages" role="log" aria-live="polite"></div>
-
-      <div class="chat-typing" id="chatTyping" aria-hidden="true">
-        <span class="typing-dots"><span></span><span></span><span></span></span>
-        <span>Michael is typing...</span>
-      </div>
-
-      <form class="chat-input" id="chatForm" aria-label="Send message">
-        <input type="text" id="chatInput" placeholder="Type a message..." autocomplete="off" aria-label="Message" />
-        <button type="submit" aria-label="Send">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        </button>
-      </form>
-
-      <div class="chat-suggestions" id="chatSuggestions" aria-label="Quick questions"></div>
-    </div>
-  </div>
+  <!-- ============ CHAT LAUNCHER (opens dedicated chat page) ============ -->
+  <a class="chat-fab" href="chat.html" aria-label="Chat with Michael, our assistant">
+    <svg class="chat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span class="chat-badge" aria-hidden="true">1</span>
+  </a>
   `;
   // inject
   const navMount = document.getElementById('navMount');

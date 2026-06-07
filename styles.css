@@ -340,39 +340,6 @@ body.nav-open{overflow:hidden;position:fixed;width:100%}
   background-size:56px 56px;
   mask-image:radial-gradient(ellipse at center, black 25%, transparent 75%);
 }
-
-/* ====== PHOTOGRAPHIC HERO (cinematic image backdrop) ====== */
-.hero.has-photo{
-  background-color:#04061a;
-  background-image:url('assets/hero-mobile.jpg');
-  background-size:cover;
-  background-position:center top;
-  background-repeat:no-repeat;
-}
-@media (min-width:768px){
-  .hero.has-photo{
-    background-image:url('assets/hero-desktop.jpg');
-    background-position:center;
-  }
-}
-/* The photo replaces the animated/gradient backdrop layers */
-.hero.has-photo .orbit-canvas,
-.hero.has-photo .orbit-fallback,
-.hero.has-photo .grid-overlay{display:none}
-/* Legibility scrim — dark over the text column, fading to reveal the scene */
-.hero.has-photo::before{
-  background:
-    linear-gradient(180deg, rgba(4,6,22,0.55) 0%, rgba(4,6,22,0.22) 24%, rgba(4,6,22,0.55) 62%, rgba(4,6,22,0.94) 100%);
-  z-index:2;
-}
-@media (min-width:768px){
-  .hero.has-photo::before{
-    background:
-      linear-gradient(90deg, rgba(4,6,22,0.93) 0%, rgba(4,6,22,0.78) 34%, rgba(4,6,22,0.30) 64%, rgba(4,6,22,0.42) 100%),
-      linear-gradient(180deg, rgba(4,6,22,0.40) 0%, transparent 26%, transparent 64%, rgba(4,6,22,0.72) 100%);
-  }
-}
-
 .hero.short{min-height:60dvb;padding:var(--space-14) 0 var(--space-10)}
 @media (max-width: 480px){
   .hero.short{min-height:auto;padding:var(--space-10) 0 var(--space-8)}

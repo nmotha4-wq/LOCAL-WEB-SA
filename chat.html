@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Chat with Michael — Local Web SA</title>
+<meta name="description" content="Chat with Michael, the Local Web SA assistant — pricing, packages, hosting and bookings. Or WhatsApp Desmond directly." />
+<meta name="theme-color" content="#0011FF" />
+<meta name="robots" content="noindex" />
+<link rel="icon" href="assets/logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="navMount"></div>
+
+<main class="chat-page">
+  <div class="chat-shell">
+    <header class="chat-page-head">
+      <div class="chat-avatar" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M20 21c0-3.5-2.5-6.5-6-6.5S8 17.5 8 21"/></svg>
+      </div>
+      <div class="chat-title">
+        <strong>Michael</strong>
+        <span class="chat-status"><span class="chat-online-dot"></span>Local Web SA Assistant · Online</span>
+      </div>
+      <a class="chat-back" href="index.html" aria-label="Back to site">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      </a>
+    </header>
+
+    <div class="chat-messages" id="chatMessages" role="log" aria-live="polite"></div>
+
+    <div class="chat-typing" id="chatTyping" aria-hidden="true">
+      <span class="typing-dots"><span></span><span></span><span></span></span>
+      <span>Michael is typing…</span>
+    </div>
+
+    <div class="chat-suggestions" id="chatSuggestions" aria-label="Quick questions"></div>
+
+    <form class="chat-input" id="chatForm" aria-label="Send message">
+      <input type="text" id="chatInput" placeholder="Type a message…" autocomplete="off" aria-label="Message" />
+      <button type="submit" aria-label="Send">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </form>
+  </div>
+</main>
+
+<script src="chrome.js"></script>
+<script src="app.js"></script>
+</body></html>

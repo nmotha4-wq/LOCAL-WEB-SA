@@ -321,33 +321,25 @@
     }
   }
 
-  // ============ CHAT WIDGET ============
+  // ============ DEDICATED CHAT PAGE (chat.html) ============
   (function(){
-    const widget = document.getElementById('chatWidget');
-    const toggle = document.getElementById('chatToggle');
-    const windowEl = document.getElementById('chatWindow');
-    const minimize = document.getElementById('chatMinimize');
     const messages = document.getElementById('chatMessages');
     const input = document.getElementById('chatInput');
     const form = document.getElementById('chatForm');
     const typing = document.getElementById('chatTyping');
     const suggestions = document.getElementById('chatSuggestions');
-    const suggestionsToggle = document.getElementById('chatSuggestionsToggle');
-    const badge = document.getElementById('chatBadge');
 
-    if (!widget || !toggle || !windowEl) return;
+    // Only runs on the dedicated chat page
+    if (!messages || !form || !input) return;
 
-    // Worker endpoint - replace with your deployed worker URL
     const WORKER_URL = 'https://localwebsa-chat-worker.nmotha4.workers.dev';
 
-    // Session management
-    let sessionId = localStorage.getItem('lws_chat_session') || crypto.randomUUID();
+    let sessionId = localStorage.getItem('lws_chat_session') ||
+      (crypto.randomUUID ? crypto.randomUUID() : 'lws-' + Date.now() + '-' + Math.random().toString(16).slice(2));
     localStorage.setItem('lws_chat_session', sessionId);
-    let history = JSON.parse(localStorage.getItem('lws_chat_history') || '[]');
-    let isOpen = false;
-    let suggestionsCollapsed = true;  // Start collapsed to save space
+    let history = [];
+    try { history = JSON.parse(localStorage.getItem('lws_chat_history') || '[]'); } catch (e) { history = []; }
 
-    // Quick suggestion chips
     const suggestionChips = [
       'How much for a 5-page site?',
       'What\'s included in hosting?',
@@ -356,38 +348,40 @@
       'WhatsApp me the details',
     ];
 
+    // Escape user/assistant text before injecting — prevents HTML injection
+    const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
     function saveHistory() {
-      localStorage.setItem('lws_chat_history', JSON.stringify(history.slice(-20)));
+      try { localStorage.setItem('lws_chat_history', JSON.stringify(history.slice(-20))); } catch (e) {}
     }
 
     function renderSuggestions() {
-      suggestions.innerHTML = suggestionChips.map(text => `
-        <button type="button" class="suggestion-chip" data-text="${text.replace(/"/g, "&quot;")}">${text}</button>
-      `).join("");
-      // Apply collapsed state
-      suggestions.style.display = suggestionsCollapsed ? "none" : "flex";
-      if (suggestionsToggle) {
-        suggestionsToggle.setAttribute("aria-expanded", !suggestionsCollapsed);
-        suggestionsToggle.querySelector(".chevron").style.transform = suggestionsCollapsed ? "rotate(-90deg)" : "rotate(0deg)";
-      }
+      if (!suggestions) return;
+      suggestions.innerHTML = suggestionChips.map(text =>
+        `<button type="button" class="suggestion-chip" data-text="${esc(text).replace(/"/g, '&quot;')}">${esc(text)}</button>`
+      ).join('');
     }
 
-    function addMessage(role, content, isTyping = false) {
+    const AVATAR_BOT = '<div class="msg-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M20 21c0-3.5-2.5-6.5-6-6.5S8 17.5 8 21"/></svg></div>';
+    const AVATAR_USER = '<div class="msg-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div>';
+
+    function addMessage(role, content) {
       const div = document.createElement('div');
-      div.className = `chat-message ${role}${isTyping ? ' typing' : ''}`;
-      div.innerHTML = `
-        ${role === 'assistant' ? '<div class="msg-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M20 21c0-3.5-2.5-6.5-6-6.5S8 17.5 8 21"/></svg></div>' : ''}
-        <div class="msg-bubble">${content}</div>
-        ${role === 'user' ? '<div class="msg-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div>' : ''}
-      `;
+      div.className = `chat-message ${role}`;
+      div.innerHTML =
+        (role === 'assistant' ? AVATAR_BOT : '') +
+        `<div class="msg-bubble">${esc(content)}</div>` +
+        (role === 'user' ? AVATAR_USER : '');
       messages.appendChild(div);
       messages.scrollTop = messages.scrollHeight;
       return div;
     }
 
     function showTyping(show) {
+      if (!typing) return;
       typing.style.display = show ? 'flex' : 'none';
-      typing.setAttribute('aria-hidden', !show);
+      typing.setAttribute('aria-hidden', String(!show));
+      if (show) messages.scrollTop = messages.scrollHeight;
     }
 
     async function sendToWorker(message) {
@@ -406,8 +400,10 @@
       }
     }
 
+    let sending = false;
     async function handleSend(text) {
-      if (!text.trim()) return;
+      if (sending || !text.trim()) return;
+      sending = true;
       const userMsg = text.trim();
       input.value = '';
       addMessage('user', userMsg);
@@ -418,15 +414,17 @@
       const reply = await sendToWorker(userMsg);
       showTyping(false);
 
-      const botMsg = addMessage('assistant', reply);
+      addMessage('assistant', reply);
       history.push({ role: 'assistant', content: reply });
       saveHistory();
+      sending = false;
+      input.focus();
     }
 
-    // Initialize: load history or show welcome
+    // Welcome message or replay saved history
     if (history.length === 0) {
       const welcome = `Howzit! I'm Michael, your Local Web SA assistant 🇿🇦
-      
+
 I can help with:
 • Pricing & packages (from R799)
 • What's included in each plan
@@ -444,54 +442,14 @@ What are you looking for?`;
 
     renderSuggestions();
 
-    // Toggle chat
-    toggle.addEventListener('click', () => {
-      isOpen = !isOpen;
-      widget.dataset.state = isOpen ? 'open' : 'closed';
-      windowEl.setAttribute('aria-hidden', !isOpen);
-      toggle.setAttribute('aria-expanded', isOpen);
-      badge.style.display = 'none';
-      if (isOpen) input.focus();
-    });
-
-    minimize.addEventListener('click', () => {
-      isOpen = false;
-      widget.dataset.state = 'closed';
-      windowEl.setAttribute('aria-hidden', true);
-      toggle.setAttribute('aria-expanded', false);
-    });
-
-    // Toggle suggestions
-    if (suggestionsToggle) {
-      suggestionsToggle.addEventListener("click", () => {
-        suggestionsCollapsed = !suggestionsCollapsed;
-        renderSuggestions();
+    form.addEventListener('submit', e => { e.preventDefault(); handleSend(input.value); });
+    if (suggestions) {
+      suggestions.addEventListener('click', e => {
+        const chip = e.target.closest('.suggestion-chip');
+        if (chip) handleSend(chip.dataset.text);
       });
     }
-
-    // Form submit
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      handleSend(input.value);
-    });
-
-    // Suggestion chips
-    suggestions.addEventListener('click', e => {
-      const chip = e.target.closest('.suggestion-chip');
-      if (chip) handleSend(chip.dataset.text);
-    });
-
-    // Show badge after 10s if never opened
-    if (!localStorage.getItem('lws_chat_opened')) {
-      setTimeout(() => {
-        if (!isOpen) badge.style.display = 'flex';
-      }, 10000);
-    }
-
-    // Mark as opened when first used
-    widget.addEventListener('click', () => {
-      localStorage.setItem('lws_chat_opened', 'true');
-    }, { once: true });
+    input.focus();
   })();
 
   // ============ CONTACT FORM ============

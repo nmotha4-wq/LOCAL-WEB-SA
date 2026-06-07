@@ -38,7 +38,11 @@
       <span>Michael is typing…</span>
     </div>
 
-    <div class="chat-suggestions" id="chatSuggestions" aria-label="Quick questions"></div>
+    <div class="chat-suggestions" id="chatSuggestions" aria-label="Quick questions" hidden></div>
+    <button type="button" class="chat-suggest-toggle" id="chatSuggestToggle" aria-expanded="false" aria-controls="chatSuggestions">
+      <span>Quick questions</span>
+      <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
 
     <form class="chat-input" id="chatForm" aria-label="Send message">
       <input type="text" id="chatInput" placeholder="Type a message…" autocomplete="off" aria-label="Message" />

@@ -11,10 +11,11 @@
       <a href="about.html">About Us</a>
       <a href="our-work.html">Our Work</a>
       <a href="benefits.html">Benefits</a>
-      <a href="pricing.html">Pricing Calculator</a>
+      <a href="pricing.html">Pricing</a>
       <a href="blog.html">Blog</a>
       <a href="faq.html">FAQ</a>
       <a href="contact.html">Contact</a>
+      <a href="chat.html">Chat</a>
     </nav>
     <a href="contact.html" class="btn btn-white sm nav-cta">Get a Quote</a>
     <button class="menu-btn" id="menuBtn" aria-label="Open menu">
@@ -33,7 +34,11 @@
     <a href="blog.html">Blog</a>
     <a href="faq.html">FAQ</a>
     <a href="contact.html">Contact</a>
-    <a href="contact.html" class="btn btn-white" style="margin-top:14px">Get a Quote</a>
+    <a href="chat.html" class="mm-chat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Chat with Michael
+    </a>
+    <a href="contact.html" class="btn btn-white mm-cta">Get a Quote</a>
   </nav>`;
 
   const footerHTML = `

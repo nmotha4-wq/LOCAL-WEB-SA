@@ -328,9 +328,16 @@
     const form = document.getElementById('chatForm');
     const typing = document.getElementById('chatTyping');
     const suggestions = document.getElementById('chatSuggestions');
+    const suggestToggle = document.getElementById('chatSuggestToggle');
 
     // Only runs on the dedicated chat page
     if (!messages || !form || !input) return;
+
+    function setSuggestions(open) {
+      if (!suggestions) return;
+      suggestions.hidden = !open;
+      if (suggestToggle) suggestToggle.setAttribute('aria-expanded', String(open));
+    }
 
     const WORKER_URL = 'https://localwebsa-chat-worker.nmotha4.workers.dev';
 
@@ -421,6 +428,12 @@
       input.focus();
     }
 
+    // Collapse the quick-questions after one is used, to free reading space
+    function handleSendAndCollapse(text) {
+      setSuggestions(false);
+      handleSend(text);
+    }
+
     // Welcome message or replay saved history
     if (history.length === 0) {
       const welcome = `Howzit! I'm Michael, your Local Web SA assistant 🇿🇦
@@ -441,12 +454,19 @@ What are you looking for?`;
     }
 
     renderSuggestions();
+    setSuggestions(false); // collapsed by default — conversation stays readable
+
+    if (suggestToggle) {
+      suggestToggle.addEventListener('click', () => {
+        setSuggestions(suggestions.hidden); // open if currently hidden
+      });
+    }
 
     form.addEventListener('submit', e => { e.preventDefault(); handleSend(input.value); });
     if (suggestions) {
       suggestions.addEventListener('click', e => {
         const chip = e.target.closest('.suggestion-chip');
-        if (chip) handleSend(chip.dataset.text);
+        if (chip) handleSendAndCollapse(chip.dataset.text);
       });
     }
     input.focus();

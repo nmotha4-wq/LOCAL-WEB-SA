@@ -234,6 +234,17 @@ section.blue .lede{color:rgba(255,255,255,0.85)}
 }
 .mobile-menu a:hover{background:rgba(255,255,255,.1)}
 .mobile-menu a:active{background:rgba(255,255,255,.2);transform:scale(0.98)}
+/* Chat-with-Michael entry */
+.mobile-menu a.mm-chat{
+  gap:10px;color:var(--accent-cyan);
+  background:rgba(0,229,255,.08);
+  border:1px solid rgba(0,229,255,.35);
+}
+.mobile-menu a.mm-chat:hover{background:rgba(0,229,255,.16)}
+.mobile-menu a.mm-chat svg{width:20px;height:20px}
+/* CTA keeps dark text on white (the generic .mobile-menu a color was making it invisible) */
+.mobile-menu a.btn-white{color:#0A0A0A;margin-top:14px}
+.mobile-menu a.btn-white:hover{background:#fff;color:#0A0A0A}
 .mobile-menu .close{
   position:absolute;top:var(--space-4);right:var(--space-4);display:grid;
   width:var(--touch-target-comfortable);height:var(--touch-target-comfortable);
@@ -1752,6 +1763,21 @@ section.black .stat .num{color:#3D52FF}
 .chat-page .chat-messages{flex:1;min-height:0;padding:20px 2px}
 .chat-page .chat-typing{padding:0 2px 8px}
 .chat-page .chat-suggestions{padding:0 2px 10px}
+/* [hidden] must win over the .chat-suggestions display:flex so it can collapse */
+.chat-suggestions[hidden]{display:none}
+/* Collapsible "Quick questions" toggle — keeps the conversation visible by default */
+.chat-suggest-toggle{
+  align-self:center;
+  display:inline-flex;align-items:center;gap:8px;
+  margin:0 auto 8px;padding:8px 16px;border-radius:9999px;
+  background:var(--surface-card);border:1px solid var(--hairline);
+  color:var(--text-grey);font-size:13px;font-weight:600;font-family:inherit;
+  cursor:pointer;transition:background .15s,color .15s;
+  min-height:var(--touch-target-min);
+}
+.chat-suggest-toggle:hover{background:rgba(255,255,255,.08);color:#fff}
+.chat-suggest-toggle .chevron{width:16px;height:16px;transition:transform .2s}
+.chat-suggest-toggle[aria-expanded="true"] .chevron{transform:rotate(180deg)}
 .chat-page .chat-input{
   background:transparent;border-top:1px solid var(--hairline);
   padding:12px 0 calc(14px + env(safe-area-inset-bottom));

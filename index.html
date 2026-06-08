@@ -24,20 +24,22 @@
 <div id="navMount"></div>
 
 <!-- ============ HERO ============ -->
-<section class="hero blue" data-screen-label="01 Home Hero">
-  <canvas class="orbit-canvas" aria-hidden="true"></canvas>
-  <div class="orbit-fallback" aria-hidden="true"></div>
-  <div class="grid-overlay" aria-hidden="true"></div>
+<section class="hero has-art" data-screen-label="01 Home Hero">
+  <picture class="hero-art" aria-hidden="true">
+    <source media="(max-width:768px)" srcset="assets/hero/scene-b-mobile.jpg" />
+    <img src="assets/hero/scene-b-web.png" alt="" fetchpriority="high" decoding="async" />
+  </picture>
+  <div class="hero-art-scrim" aria-hidden="true"></div>
   <div class="wrap">
     <span class="badge fade-in"><span class="pulse"></span>South African Web Agency</span>
     <h1 class="h1 fade-in">Your Business<br/><span class="cyan">Deserves to Be Online</span></h1>
     <p class="sub fade-in">Professional websites that put your business on the map — built for South African entrepreneurs who are ready to grow, attract customers, and stand out online.</p>
     <div class="ctas fade-in">
-      <a href="pricing.html" class="btn btn-white">
+      <a href="pricing.html" class="btn btn-art-primary">
         Get Started — From R799
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
-      <a href="https://wa.me/27750541175" class="btn btn-wa">
+      <a href="https://wa.me/27750541175" class="btn btn-art-wa">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.7.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.4 5.3 4.7.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.4zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.1-1.3c1.4.8 3.1 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
         WhatsApp Us
       </a>

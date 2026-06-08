@@ -1001,11 +1001,31 @@ footer .wrap{position:relative;z-index:1}
 .final-cta p{color:var(--text-grey);margin:0 0 24px;max-width:46ch;margin-left:auto;margin-right:auto}
 
 /* ====== STATS ====== */
-.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-@media (min-width:720px){.stats{grid-template-columns:repeat(4,1fr)}}
-.stat .num{font-size:36px;font-weight:800;letter-spacing:-0.02em;color:var(--accent-cyan);font-family:Inter;font-variant-numeric:tabular-nums}
-section.black .stat .num{color:#3D52FF}
-.stat .lbl{font-family:monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-grey-soft);margin-top:6px}
+/* Stat panel — hairline-divided, structured (T4 numbered stat strip) */
+.stats-head{margin-bottom:var(--space-6)}
+.stats-eyebrow{display:inline-block;font-size:var(--text-xs);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-cyan)}
+.stats-title{font-family:var(--font-display);font-weight:600;font-size:var(--text-2xl);letter-spacing:-0.01em;line-height:1.1;color:#fff;margin:var(--space-2) 0 0}
+
+.stats{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  border:1px solid rgba(255,255,255,.20);border-radius:18px;overflow:hidden;
+  background:rgba(255,255,255,.05);backdrop-filter:blur(2px);
+}
+.stat{
+  padding:var(--space-6) var(--space-5);
+  border-bottom:1px solid rgba(255,255,255,.16);
+  transition:background .25s;
+}
+.stat:nth-child(odd){border-right:1px solid rgba(255,255,255,.16)}
+.stat:nth-last-child(-n+2){border-bottom:none}
+.stat:hover{background:rgba(255,255,255,.04)}
+@media (min-width:720px){
+  .stats{grid-template-columns:repeat(4,1fr)}
+  .stat{border-bottom:none;border-right:1px solid rgba(255,255,255,.16)}
+  .stat:last-child{border-right:none}
+}
+.stat .num{font-size:40px;font-weight:800;letter-spacing:-0.02em;color:#fff;font-family:Inter;font-variant-numeric:tabular-nums;line-height:1}
+.stat .lbl{font-family:monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-top:var(--space-3)}
 
 /* ====== HOME PRICING (PLAN CARDS) ====== */
 .plans{display:flex;flex-direction:column;gap:24px}

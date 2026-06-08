@@ -1752,6 +1752,7 @@ section.black .stat .num{color:#3D52FF}
   text-shadow:0 1px 18px rgba(0,8,26,.7);
 }
 .hero.has-art .feats{text-shadow:0 1px 12px rgba(0,8,26,.7)}
+.hero.has-art .eyebrow{text-shadow:0 1px 14px rgba(0,8,26,.7)}
 .hero.has-art .badge{
   background:rgba(0,8,26,.32);
   border-color:rgba(255,255,255,.30);

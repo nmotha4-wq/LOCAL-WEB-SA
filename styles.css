@@ -1705,3 +1705,137 @@ section.black .stat .num{color:#3D52FF}
 @media (min-width: 481px) and (max-width: 768px){
   .chat-window{width:400px;max-width:calc(100vw - 48px)}
 }
+
+/* ==========================================================================
+   ART HERO — full-bleed cherry-blossom × cyberpunk artwork backdrop
+   Palette pulled from the artwork: coral/blossom pink -> electric cyan/purple
+   ========================================================================== */
+.hero.has-art{
+  background:var(--canvas);
+  text-align:center;
+  overflow:hidden;
+}
+/* artwork sits behind everything; the shared ::before glow is not needed */
+.hero.has-art::before{display:none}
+
+.hero-art{position:absolute;inset:0;z-index:0;pointer-events:none}
+.hero-art img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center 35%;
+  /* gentle, very slow ken-burns drift for life without distraction */
+  animation:artDrift 38s ease-in-out infinite alternate;
+  will-change:transform;
+}
+@keyframes artDrift{
+  from{transform:scale(1.04) translate3d(0,0,0)}
+  to{transform:scale(1.12) translate3d(-1.5%,-1.5%,0)}
+}
+
+/* Legibility scrim: darken top (under nav), keep the art's glow mid,
+   fade hard into the black section that follows. Plus a soft vignette. */
+.hero-art-scrim{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(180deg,
+      rgba(0,8,26,.62) 0%,
+      rgba(0,8,26,.22) 30%,
+      rgba(0,8,26,.30) 60%,
+      rgba(0,8,26,.78) 88%,
+      var(--canvas) 100%),
+    radial-gradient(125% 85% at 50% 42%, transparent 34%, rgba(0,8,26,.55) 100%);
+}
+
+/* Make copy crisp over the bright artwork */
+.hero.has-art .h1{text-shadow:0 2px 30px rgba(0,8,26,.65),0 1px 4px rgba(0,8,26,.5)}
+.hero.has-art .sub{
+  color:rgba(255,255,255,.92);
+  text-shadow:0 1px 18px rgba(0,8,26,.7);
+}
+.hero.has-art .feats{text-shadow:0 1px 12px rgba(0,8,26,.7)}
+.hero.has-art .badge{
+  background:rgba(0,8,26,.32);
+  border-color:rgba(255,255,255,.30);
+}
+
+/* Stronger scrim on phones (busier vertical art) */
+@media (max-width:768px){
+  .hero-art img{object-position:center 28%}
+  .hero-art-scrim{
+    background:
+      linear-gradient(180deg,
+        rgba(0,8,26,.66) 0%,
+        rgba(0,8,26,.34) 26%,
+        rgba(0,8,26,.46) 62%,
+        rgba(0,8,26,.86) 90%,
+        var(--canvas) 100%);
+  }
+}
+
+/* ---- Art-aligned glass buttons ---- */
+.btn-art-primary{
+  position:relative;color:#fff;letter-spacing:.01em;
+  /* glass fill (padding-box) + coral→purple→cyan gradient ring (border-box) */
+  background:
+    linear-gradient(135deg, rgba(255,110,138,.20), rgba(0,240,255,.16)) padding-box,
+    linear-gradient(120deg, #FF7E9B 0%, #B06BFF 48%, var(--electric) 100%) border-box;
+  border:1.6px solid transparent;
+  -webkit-backdrop-filter:blur(12px) saturate(150%);backdrop-filter:blur(12px) saturate(150%);
+  box-shadow:
+    0 8px 30px rgba(255,80,130,.28),
+    0 8px 34px rgba(0,128,255,.28),
+    0 0 0 1px rgba(255,255,255,.04) inset;
+}
+.btn-art-primary svg{transition:transform .25s ease}
+.btn-art-primary:hover{
+  color:#fff;
+  transform:translateY(-3px);
+  box-shadow:
+    0 14px 44px rgba(255,80,130,.42),
+    0 14px 48px rgba(0,180,255,.42),
+    0 0 28px rgba(0,240,255,.35),
+    0 0 0 1px rgba(255,255,255,.08) inset;
+}
+.btn-art-primary:hover svg{transform:translateX(4px)}
+
+.btn-art-wa{
+  color:#fff;
+  background:rgba(0,8,26,.22);
+  border:1.5px solid rgba(255,255,255,.30);
+  -webkit-backdrop-filter:blur(12px) saturate(140%);backdrop-filter:blur(12px) saturate(140%);
+  box-shadow:0 8px 28px rgba(0,8,26,.35),0 0 0 1px rgba(255,255,255,.04) inset;
+}
+.btn-art-wa svg{color:var(--whatsapp-green);filter:drop-shadow(0 0 6px rgba(0,230,118,.6))}
+.btn-art-wa:hover{
+  color:#fff;
+  transform:translateY(-3px);
+  border-color:rgba(0,230,118,.85);
+  background:rgba(0,230,118,.10);
+  box-shadow:0 12px 38px rgba(0,230,118,.30),0 0 26px rgba(0,230,118,.30);
+}
+
+/* ==========================================================================
+   FOOTER — soft blurred blend of the hero palette
+   ========================================================================== */
+footer::before{
+  content:'';position:absolute;inset:-15%;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(38% 42% at 12% 18%, rgba(255,110,138,.30), transparent 70%),
+    radial-gradient(42% 44% at 86% 26%, rgba(0,240,255,.24), transparent 72%),
+    radial-gradient(48% 50% at 62% 92%, rgba(140,98,255,.30), transparent 72%),
+    radial-gradient(40% 40% at 30% 80%, rgba(0,128,255,.20), transparent 72%);
+  filter:blur(70px);
+  opacity:.85;
+  animation:footBlend 24s ease-in-out infinite alternate;
+  will-change:transform,opacity;
+}
+@keyframes footBlend{
+  from{transform:translate3d(-2%,-1%,0) scale(1)}
+  to{transform:translate3d(2%,2%,0) scale(1.08)}
+}
+/* keep the constellation + content above the blend */
+footer .constellation{z-index:1}
+footer .wrap{z-index:2}
+
+@media (prefers-reduced-motion:reduce){
+  .hero-art img,footer::before{animation:none !important}
+}

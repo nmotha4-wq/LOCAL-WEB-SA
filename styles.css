@@ -944,6 +944,32 @@ footer .wrap{position:relative;z-index:1}
 section.black .stat .num{color:#3D52FF}
 .stat .lbl{font-family:monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-grey-soft);margin-top:6px}
 
+/* Floating, spinning 3D logo — replaces the orbital field in the stats strip */
+.logo-stage{
+  display:flex;justify-content:center;align-items:center;
+  perspective:1100px;
+  margin-bottom:44px;
+  position:relative;z-index:2;
+}
+.float-logo{
+  width:min(360px,72vw);height:auto;
+  transform-style:preserve-3d;
+  animation:logoSpin 11s linear infinite, logoFloat 4.5s ease-in-out infinite;
+  filter:drop-shadow(0 20px 42px rgba(0,0,0,.55)) drop-shadow(0 0 34px rgba(0,229,255,.20));
+  will-change:transform,translate;
+}
+@keyframes logoSpin{
+  from{transform:rotateY(0deg)}
+  to{transform:rotateY(360deg)}
+}
+@keyframes logoFloat{
+  0%,100%{translate:0 0}
+  50%{translate:0 -16px}
+}
+@media (prefers-reduced-motion:reduce){
+  .float-logo{animation:none}
+}
+
 /* ====== HOME PRICING (PLAN CARDS) ====== */
 .plans{display:flex;flex-direction:column;gap:24px}
 .plan{

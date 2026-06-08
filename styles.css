@@ -7,11 +7,15 @@
   --accent-cyan:#00E5FF;
   --whatsapp-green:#00E676;
 
-  /* Backgrounds */
-  --bg-black:#0A0A0A;
-  --bg-black-2:#07070B;
-  --surface-card:#15151A;
-  --surface-card-2:#1B1B22;
+  /* Backgrounds — tinted toward the blue anchor, never flat #000 */
+  --bg-black:#0A0B12;
+  --bg-black-2:#07080F;
+  --surface-card:#15161F;
+  --surface-card-2:#1B1C28;
+
+  /* Type roles — distinctive display face paired with a refined body face */
+  --font-display:'Playfair Display',Georgia,'Times New Roman',serif;
+  --font-body:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
 
   /* Text */
   --text-grey:#B8B8C0;
@@ -57,7 +61,7 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0;background:var(--bg-black);color:var(--white);scroll-behavior:smooth}
 body{
-  font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  font-family:var(--font-body);
   font-size:var(--text-base);line-height:1.6;font-weight:400;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
 }
@@ -126,11 +130,13 @@ section.black{background:var(--bg-black)}
 }
 section.black .eyebrow{color:var(--brand-blue);color:#3D52FF}
 .h1{
-  font-size:var(--text-4xl);font-weight:800;line-height:1.04;letter-spacing:-0.025em;
+  font-family:var(--font-display);
+  font-size:var(--text-4xl);font-weight:600;line-height:1.05;letter-spacing:-0.015em;
   margin:0;color:#fff;
 }
 .h2{
-  font-size:var(--text-3xl);font-weight:700;letter-spacing:-0.02em;line-height:1.1;
+  font-family:var(--font-display);
+  font-size:var(--text-3xl);font-weight:600;letter-spacing:-0.01em;line-height:1.12;
   margin:0;color:#fff;
 }
 .h3{font-size:var(--text-xl);font-weight:700;margin:0;color:#fff;letter-spacing:-0.01em}
@@ -473,7 +479,7 @@ body.nav-open{overflow:hidden;position:fixed;width:100%}
   width:28px;height:28px;border-radius:50%;
   border:2px solid rgba(255,255,255,.32);
   display:grid;place-items:center;flex:none;
-  transition:all .2s;
+  transition:border-color .2s,background .2s;
 }
 .pricing-card .radio::after{content:'';width:12px;height:12px;border-radius:50%;background:transparent;transition:background .2s}
 .pricing-card .name{font-size:var(--text-xl);font-weight:700;color:#fff;flex:1}

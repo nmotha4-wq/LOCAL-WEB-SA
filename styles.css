@@ -948,16 +948,25 @@ section.black .stat .num{color:#3D52FF}
 .logo-stage{
   display:flex;justify-content:center;align-items:center;
   perspective:1100px;
-  margin-bottom:44px;
   position:relative;z-index:2;
 }
 .float-logo{
-  width:min(360px,72vw);height:auto;
+  position:relative;
+  width:min(360px,72vw);
+  aspect-ratio:594 / 379;
   transform-style:preserve-3d;
   animation:logoSpin 11s linear infinite, logoFloat 4.5s ease-in-out infinite;
-  filter:drop-shadow(0 20px 42px rgba(0,0,0,.55)) drop-shadow(0 0 34px rgba(0,229,255,.20));
   will-change:transform,translate;
 }
+/* Front + back faces share the same artwork; backface-visibility hides whichever
+   face is turned away, so the mirrored half of every rotation is never seen. */
+.lf-face{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:contain;
+  -webkit-backface-visibility:hidden;backface-visibility:hidden;
+  filter:drop-shadow(0 20px 42px rgba(0,0,0,.55)) drop-shadow(0 0 34px rgba(0,229,255,.20));
+}
+.lf-back{transform:rotateY(180deg)}
 @keyframes logoSpin{
   from{transform:rotateY(0deg)}
   to{transform:rotateY(360deg)}

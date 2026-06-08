@@ -13,7 +13,7 @@
 <link rel="icon" href="assets/logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css" />
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"LocalBusiness","name":"Local Web SA","url":"https://localwebsa.org","email":"info@localwebsa.org","telephone":"+27750541175","areaServed":"ZA","address":{"@type":"PostalAddress","addressLocality":"Pretoria","addressRegion":"Gauteng","addressCountry":"ZA"},"priceRange":"R799–R1499","founder":{"@type":"Person","name":"Desmond Motha"}}
@@ -24,101 +24,34 @@
 <div id="navMount"></div>
 
 <!-- ============ HERO ============ -->
-<section class="hero-x" id="home" data-screen-label="01 Home Hero">
-  <canvas class="hero-x__particles" aria-hidden="true"></canvas>
-  <div class="hero-x__glow" aria-hidden="true"></div>
-  <div class="hero-x__grid" aria-hidden="true"></div>
-  <div class="hero-x__beam" aria-hidden="true"></div>
-
-  <div class="hero-x__inner wrap">
-    <!-- LEFT: copy -->
-    <div class="hero-x__copy">
-      <span class="hero-x__badge reveal" style="--d:.05s">
-        <span class="hero-x__badge-dot"></span>
-        South African Digital Agency
-      </span>
-
-      <h1 class="hero-x__title reveal" style="--d:.15s">
-        Websites That Turn
-        <span class="hero-x__grad">Visitors</span>
-        Into
-        <span class="hero-x__grad">Customers.</span>
-      </h1>
-
-      <p class="hero-x__sub reveal" style="--d:.28s">
-        We help South African businesses grow with modern websites, digital
-        branding, and technology solutions built for results.
-      </p>
-
-      <div class="hero-x__ctas reveal" style="--d:.4s">
-        <a href="pricing.html" class="hero-x__btn hero-x__btn--primary">
-          <span>Get Your Website</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-        <a href="our-work.html" class="hero-x__btn hero-x__btn--ghost">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
-          <span>View Our Work</span>
-        </a>
-      </div>
-
-      <ul class="hero-x__trust reveal" style="--d:.52s" aria-label="What sets us apart">
-        <li><span class="hero-x__trust-dot"></span>South African Business Focused</li>
-        <li><span class="hero-x__trust-dot"></span>Mobile Optimized</li>
-        <li><span class="hero-x__trust-dot"></span>Results Driven</li>
-      </ul>
+<section class="hero blue" data-screen-label="01 Home Hero">
+  <canvas class="orbit-canvas" aria-hidden="true"></canvas>
+  <div class="orbit-fallback" aria-hidden="true"></div>
+  <div class="grid-overlay" aria-hidden="true"></div>
+  <div class="wrap">
+    <span class="badge fade-in"><span class="pulse"></span>South African Web Agency</span>
+    <h1 class="h1 fade-in">Your Business<br/><span class="cyan">Deserves to Be Online</span></h1>
+    <p class="sub fade-in">Professional websites that put your business on the map — built for South African entrepreneurs who are ready to grow, attract customers, and stand out online.</p>
+    <div class="ctas fade-in">
+      <a href="pricing.html" class="btn btn-white">
+        Get Started — From R799
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="https://wa.me/27750541175" class="btn btn-wa">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.7.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.4 5.3 4.7.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.4zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.1-1.3c1.4.8 3.1 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+        WhatsApp Us
+      </a>
     </div>
-
-    <!-- RIGHT: 3D floating scene -->
-    <div class="hero-x__scene reveal" style="--d:.45s" aria-hidden="true">
-      <div class="hero-x__stage" data-parallax-stage>
-
-        <article class="pcard pcard--3" data-depth="0.18">
-          <div class="pcard__bar"><i></i><i></i><i></i><span class="pcard__url"></span></div>
-          <div class="pcard__body">
-            <div class="pcard__nav"><span class="pcard__logo"></span><span class="pcard__links"></span></div>
-            <div class="pcard__block"></div>
-            <div class="pcard__block sm"></div>
-            <div class="pcard__cards"><b></b><b></b></div>
-          </div>
-        </article>
-
-        <article class="pcard pcard--2" data-depth="0.4">
-          <div class="pcard__bar"><i></i><i></i><i></i><span class="pcard__url"></span></div>
-          <div class="pcard__body">
-            <div class="pcard__nav"><span class="pcard__logo"></span><span class="pcard__links"></span></div>
-            <div class="pcard__media"></div>
-            <div class="pcard__block sm"></div>
-            <div class="pcard__cards"><b></b><b></b><b></b></div>
-          </div>
-        </article>
-
-        <article class="pcard pcard--1" data-depth="0.7">
-          <div class="pcard__bar"><i></i><i></i><i></i><span class="pcard__url"></span></div>
-          <div class="pcard__body">
-            <div class="pcard__nav"><span class="pcard__logo"></span><span class="pcard__links"></span></div>
-            <div class="pcard__hero">
-              <span class="pcard__h"></span>
-              <span class="pcard__h sm"></span>
-              <span class="pcard__btn"></span>
-            </div>
-            <div class="pcard__metric">
-              <span class="pcard__metric-val">+212%</span>
-              <span class="pcard__metric-bars"><u></u><u></u><u></u><u></u><u></u></span>
-            </div>
-          </div>
-        </article>
-
-      </div>
+    <div class="feats fade-in">
+      <span class="item"><span class="dot"></span>Fast Delivery</span>
+      <span class="item"><span class="dot"></span>Mobile Friendly</span>
+      <span class="item"><span class="dot"></span>SA Based</span>
     </div>
   </div>
-
-  <a href="#services" class="hero-x__scroll reveal" style="--d:.7s" aria-label="Scroll to content">
-    <span class="hero-x__scroll-line"></span>
-  </a>
 </section>
 
 <!-- ============ SERVICES ============ -->
-<section class="black" id="services">
+<section class="black">
   <div class="wrap">
     <div class="section-head fade-in">
       <span class="eyebrow">What We Do</span>
@@ -910,116 +843,6 @@
     else if(e.key === 'ArrowLeft') show(current - 1);
     else if(e.key === 'ArrowRight') show(current + 1);
   });
-})();
-</script>
-
-<!-- ============ HERO: particles, parallax, staggered load ============ -->
-<script>
-(function(){
-  const hero = document.querySelector('.hero-x');
-  if(!hero) return;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---- Staggered reveal on load ---- */
-  requestAnimationFrame(() => requestAnimationFrame(() => hero.classList.add('loaded')));
-
-  if(reduce) return; /* skip canvas + parallax for reduced-motion users */
-
-  /* ---- Mouse parallax (background layers + 3D stage) ---- */
-  const stage = hero.querySelector('[data-parallax-stage]');
-  const glow  = hero.querySelector('.hero-x__glow');
-  let tx = 0, ty = 0, cx = 0, cy = 0, parX = 0, parY = 0, rafP = 0;
-  const isTouch = window.matchMedia('(hover: none)').matches || window.innerWidth < 901;
-
-  function onMove(e){
-    const r = hero.getBoundingClientRect();
-    tx = ((e.clientX - r.left) / r.width  - 0.5);   /* -0.5 .. 0.5 */
-    ty = ((e.clientY - r.top)  / r.height - 0.5);
-    if(!rafP) rafP = requestAnimationFrame(applyParallax);
-  }
-  function applyParallax(){
-    rafP = 0;
-    cx += (tx - cx) * 0.08;
-    cy += (ty - cy) * 0.08;
-    parX = cx; parY = cy;
-    if(stage){
-      stage.style.transform =
-        'rotateY(' + (cx * 10) + 'deg) rotateX(' + (-cy * 8) + 'deg) translate3d(' + (cx * 26) + 'px,' + (cy * 20) + 'px,0)';
-    }
-    if(glow){
-      glow.style.marginLeft = (cx * 40) + 'px';
-      glow.style.marginTop  = (cy * 30) + 'px';
-    }
-    if(Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001){
-      rafP = requestAnimationFrame(applyParallax);
-    }
-  }
-  if(!isTouch) hero.addEventListener('mousemove', onMove, { passive:true });
-
-  /* ---- Particle field (electric dots drifting upward) ---- */
-  const canvas = hero.querySelector('.hero-x__particles');
-  if(!canvas || !canvas.getContext) return;
-  const ctx = canvas.getContext('2d');
-  let W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
-  let particles = [], running = true, rafId = 0;
-
-  function size(){
-    const r = hero.getBoundingClientRect();
-    W = r.width; H = r.height;
-    canvas.width = W * dpr; canvas.height = H * dpr;
-    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const target = Math.round(Math.min(W, 1400) / (window.innerWidth < 901 ? 38 : 20));
-    particles = [];
-    for(let i = 0; i < target; i++) particles.push(spawn(true));
-  }
-  function spawn(initial){
-    return {
-      x: Math.random() * W,
-      y: initial ? Math.random() * H : H + 12,
-      r: Math.random() * 1.8 + 0.5,
-      vy: Math.random() * 0.35 + 0.12,
-      drift: (Math.random() - 0.5) * 0.25,
-      a: Math.random() * 0.5 + 0.12,
-      tw: Math.random() * Math.PI * 2,
-      tws: Math.random() * 0.02 + 0.006
-    };
-  }
-  function draw(){
-    if(!running){ rafId = 0; return; }
-    ctx.clearRect(0, 0, W, H);
-    for(const p of particles){
-      p.y -= p.vy;
-      p.x += p.drift + parX * p.r * 1.6;   /* deeper (bigger) dots parallax more */
-      p.tw += p.tws;
-      if(p.y < -12){ Object.assign(p, spawn(false)); }
-      const tw = (Math.sin(p.tw) * 0.4 + 0.6);
-      ctx.beginPath();
-      ctx.arc(p.x, p.y + parY * p.r * 1.6, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0,240,255,' + (p.a * tw) + ')';
-      ctx.shadowColor = 'rgba(0,240,255,0.8)';
-      ctx.shadowBlur = p.r * 3;
-      ctx.fill();
-    }
-    ctx.shadowBlur = 0;
-    rafId = requestAnimationFrame(draw);
-  }
-  function start(){ if(!rafId){ running = true; rafId = requestAnimationFrame(draw); } }
-  function stop(){ running = false; }
-
-  size();
-  start();
-
-  let rt;
-  window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(size, 200); }, { passive:true });
-  document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
-
-  /* Pause particles when the hero scrolls off-screen */
-  if('IntersectionObserver' in window){
-    new IntersectionObserver((es) => {
-      es.forEach(e => e.isIntersecting ? start() : stop());
-    }, { threshold: 0 }).observe(hero);
-  }
 })();
 </script>
 

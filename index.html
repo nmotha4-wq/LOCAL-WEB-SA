@@ -781,9 +781,23 @@
   const blurbEl = document.getElementById('tplBlurb');
   const ctaEl = document.getElementById('tplCta');
   const thumbsWrap = document.getElementById('tplThumbs');
+  const frameWrap = modal.querySelector('.tpl-frame-wrap');
   let pkgFrames = [];
   let current = 0;
   let currentPkg = 'basic';
+
+  // Scale each preview (rendered at a fixed 1024×640 desktop size) to fit the
+  // frame, so the mini-site shrinks faithfully instead of overlapping on mobile.
+  function fitMini(){
+    if (!frameWrap) return;
+    const w = frameWrap.clientWidth;
+    if (!w) return;
+    const s = w / 1024;
+    modal.querySelectorAll('.tpl-frame .mini-site').forEach(m => {
+      m.style.transform = 'scale(' + s + ')';
+    });
+  }
+  window.addEventListener('resize', fitMini);
 
   const PKG_LABEL = {
     basic:   'Basic Plan · 1–3 Page Website',
@@ -819,6 +833,7 @@
     nameEl.innerHTML = f.dataset.name;
     blurbEl.textContent = f.dataset.blurb;
     ctaEl.href = 'contact.html?package=' + encodeURIComponent(currentPkg) + '&style=' + encodeURIComponent(f.dataset.name.replace(/<[^>]+>/g,''));
+    fitMini();
   }
 
   function openModal(pkg){
@@ -830,6 +845,7 @@
     modal.classList.add('open');
     modal.setAttribute('aria-hidden','false');
     document.body.style.overflow = 'hidden';
+    requestAnimationFrame(fitMini);
   }
   function close(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
 

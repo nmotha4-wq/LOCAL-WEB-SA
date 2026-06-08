@@ -1281,15 +1281,19 @@ section.black .stat .num{color:#3D52FF}
   .tpl-thumb{flex:none;width:96px;height:60px}
   .tpl-foot{grid-template-columns:1fr;text-align:left}
   .tpl-foot .btn{width:100%}
-  .tpl-frame-wrap{aspect-ratio:4/3}
+  /* keep 16/10 so the scale-to-fit preview holds its desktop proportions */
 }
 
 /* ====== TEMPLATE FRAMES (mini-websites) ====== */
 .tpl-frame .mini-site{
-  width:100%;height:100%;
+  /* render at true desktop size; JS scales the whole thing to fit the frame
+     so the preview is a faithful shrunk-down site (never cramped/overlapping) */
+  width:1024px;height:640px;transform-origin:top left;
   display:flex;flex-direction:column;
   overflow:hidden;font-family:'Inter',system-ui,sans-serif;
 }
+/* thumbnails clone the frame markup — never inherit the stage's inline scale */
+.tpl-thumb .mini .mini-site{transform:none !important;width:1024px;height:640px}
 .tpl-frame .ms-nav{
   display:flex;align-items:center;justify-content:space-between;
   padding:14px 28px;flex:none;font-size:12px;

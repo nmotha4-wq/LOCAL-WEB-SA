@@ -12,7 +12,7 @@
 
   /* Backgrounds */
   --canvas:#050D1A;
-  --bg-black:#0A0A0A;
+  --bg-black:#050D1A;
   --bg-black-2:#07070B;
   --surface-card:#15151A;
   --surface-card-2:#1B1B22;
@@ -1020,9 +1020,9 @@ section.black .stat .num{color:#3D52FF}
   position:relative;
   border-radius:22px;
   padding:0;
-  background:linear-gradient(180deg,var(--brand-blue) 0%,var(--brand-blue-mid) 100%);
-  box-shadow:0 24px 80px -20px rgba(0,17,255,.55),
-             0 0 0 1px rgba(0,17,255,.4);
+  background:var(--amber);
+  box-shadow:0 24px 80px -20px rgba(245,166,35,.45),
+             0 0 0 1px rgba(245,166,35,.5);
 }
 .plan-popular .popular-bar{
   display:flex;align-items:center;justify-content:center;

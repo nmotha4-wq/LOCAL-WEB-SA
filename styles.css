@@ -1839,3 +1839,45 @@ footer .wrap{z-index:2}
 @media (prefers-reduced-motion:reduce){
   .hero-art img,footer::before{animation:none !important}
 }
+
+/* ==========================================================================
+   SECONDARY-PAGE HEROES — unified art-palette ambient backdrop
+   (About, Pricing, Contact, FAQ, Benefits, Our Work, Blog, etc.)
+   These don't have their own artwork yet, so they share a soft blurred blend
+   of the cherry-blossom × cyberpunk palette over the near-black canvas.
+   Drop in a <picture class="hero-art"> later to give any page real art.
+   ========================================================================== */
+.hero.blue{
+  background:var(--canvas);
+  color:#fff;
+}
+/* Replace the default cyan radial glow with the warm→cool art blend */
+.hero.blue::before{
+  z-index:0;
+  background:
+    radial-gradient(52% 62% at 14% 18%, rgba(255,110,138,.26), transparent 70%),
+    radial-gradient(56% 66% at 88% 28%, rgba(0,240,255,.22), transparent 72%),
+    radial-gradient(62% 72% at 72% 104%, rgba(140,98,255,.28), transparent 72%),
+    radial-gradient(50% 60% at 28% 98%, rgba(0,128,255,.18), transparent 72%);
+  filter:blur(44px);
+  animation:artBlend 26s ease-in-out infinite alternate;
+  will-change:transform;
+}
+/* keep the constellation dots + grid texture sparkling above the blend */
+.hero.blue .orbit-canvas,
+.hero.blue .orbit-fallback{z-index:1}
+.hero.blue .grid-overlay{z-index:2;opacity:.55}
+/* the cyan grid lines read better tinted toward the palette */
+.hero.blue .grid-overlay{
+  background-image:
+    linear-gradient(rgba(0,240,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,240,255,0.05) 1px, transparent 1px);
+}
+
+@keyframes artBlend{
+  from{transform:translate3d(-2%,-1%,0) scale(1.02)}
+  to{transform:translate3d(2%,2%,0) scale(1.12)}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero.blue::before{animation:none !important}
+}

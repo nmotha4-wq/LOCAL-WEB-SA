@@ -15,6 +15,7 @@
 
   /* Backgrounds — tinted toward the blue anchor, never flat #000 */
   --bg-black:#0A0B12;
+  --canvas:#0A0B12; /* colour the hero artwork/scrim fades into */
   --bg-black-2:#07080F;
   --surface-card:#15161F;
   --surface-card-2:#1B1C28;
@@ -324,7 +325,7 @@ body.nav-open{overflow:hidden;position:fixed;width:100%}
   position:relative;
   min-height:92dvb; /* dynamic viewport height for mobile address bar */
   min-height:92vh; /* fallback */
-  padding:var(--space-16) 0 var(--space-10);
+  padding:var(--space-12) 0 var(--space-16);
   display:flex;align-items:center;
   text-align:center;
 }
@@ -333,14 +334,14 @@ body.nav-open{overflow:hidden;position:fixed;width:100%}
 
 /* Mobile-first hero spacing */
 @media (max-width: 480px){
-  .hero{min-height:85dvb;padding:var(--space-12) 0 var(--space-8)}
+  .hero{min-height:85dvb;padding:var(--space-10) 0 var(--space-12)}
   .hero .wrap{padding-top:env(safe-area-inset-top, 0)}
 }
 @media (min-width: 640px){
-  .hero{padding:var(--space-16) 0 var(--space-12)}
+  .hero{padding:var(--space-12) 0 var(--space-16)}
 }
 @media (min-width: 980px){
-  .hero{padding:var(--space-16) 0 var(--space-10)}
+  .hero{padding:var(--space-12) 0 var(--space-16)}
 }
 
 .orbit-canvas{
@@ -381,7 +382,11 @@ body.nav-open{overflow:hidden;position:fixed;width:100%}
   color:rgba(255,255,255,.85);font-size:var(--text-lg);
   max-width:60ch;margin:0 auto var(--space-8);line-height:1.55
 }
-.hero.left .sub{margin-left:0;margin-right:0}
+.hero.left .sub{margin-left:0;margin-right:0;max-width:46ch}
+@media (min-width:980px){
+  /* anchor the copy to the left ~half; let the artwork breathe on the right */
+  .hero.left .sub{max-width:40ch}
+}
 .hero .ctas{
   display:flex;gap:var(--space-3);flex-wrap:wrap;justify-content:center;
   width:100%
@@ -1893,6 +1898,21 @@ section.black .stat .num{color:#3D52FF}
     radial-gradient(125% 85% at 50% 42%, transparent 34%, rgba(0,8,26,.55) 100%);
 }
 
+/* Left-anchored hero: darken the left where the copy sits, let the art breathe right */
+.hero.has-art.left{text-align:left}
+.hero.has-art.left .hero-art-scrim{
+  background:
+    linear-gradient(90deg,
+      rgba(0,8,26,.84) 0%,
+      rgba(0,8,26,.60) 36%,
+      rgba(0,8,26,.24) 66%,
+      rgba(0,8,26,.05) 100%),
+    linear-gradient(180deg,
+      transparent 55%,
+      rgba(0,8,26,.55) 84%,
+      var(--canvas) 100%);
+}
+
 /* Make copy crisp over the bright artwork */
 .hero.has-art .h1{text-shadow:0 2px 30px rgba(0,8,26,.65),0 1px 4px rgba(0,8,26,.5)}
 .hero.has-art .sub{
@@ -1909,7 +1929,8 @@ section.black .stat .num{color:#3D52FF}
 /* Stronger scrim on phones (busier vertical art) */
 @media (max-width:768px){
   .hero-art img{object-position:center 28%}
-  .hero-art-scrim{
+  .hero-art-scrim,
+  .hero.has-art.left .hero-art-scrim{
     background:
       linear-gradient(180deg,
         rgba(0,8,26,.66) 0%,

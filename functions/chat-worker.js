@@ -6,6 +6,37 @@
  * the friendly, knowledgeable Local Web SA assistant.
  */
 
+// Best-effort per-IP rate limiting. NOTE: this lives in per-isolate memory,
+// so it only protects a single Worker isolate and resets when the isolate is
+// recycled. For stronger, globally-consistent limits use a Durable Object or KV.
+const RATE_LIMIT_MAX = 20;
+const RATE_LIMIT_WINDOW_MS = 60 * 1000;
+const rateLimitMap = new Map();
+
+function checkRateLimit(ip) {
+  const now = Date.now();
+
+  // Opportunistically prune expired entries to avoid unbounded growth.
+  for (const [key, entry] of rateLimitMap) {
+    if (entry.resetAt <= now) {
+      rateLimitMap.delete(key);
+    }
+  }
+
+  const existing = rateLimitMap.get(ip);
+  if (!existing || existing.resetAt <= now) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return true;
+  }
+
+  if (existing.count >= RATE_LIMIT_MAX) {
+    return false;
+  }
+
+  existing.count += 1;
+  return true;
+}
+
 export default {
   async fetch(request, env, ctx) {
     const corsHeaders = {
@@ -22,11 +53,29 @@ export default {
       return new Response('Method not allowed', { status: 405, headers: corsHeaders });
     }
 
+    const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+    if (!checkRateLimit(ip)) {
+      return new Response(JSON.stringify({
+        reply: "Whoa, slow down a sec! Give me a moment and try again 🙏",
+        error: 'rate_limited',
+      }), {
+        status: 429,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
     try {
       const { message, history = [], sessionId } = await request.json();
 
       if (!message || typeof message !== 'string') {
         return new Response(JSON.stringify({ error: 'Message required' }), {
+          status: 400,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
+      if (message.length > 2000) {
+        return new Response(JSON.stringify({ error: 'Message too long' }), {
           status: 400,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
@@ -84,9 +133,13 @@ RESPONSE STYLE:
 - Friendly emoji occasionally, not every message
 - Match the user energy: short question = short answer`;
 
+      const safeHistory = Array.isArray(history) ? history : [];
       const messages = [
         { role: 'system', content: systemPrompt },
-        ...history.slice(-6).map(m => ({ role: m.role, content: m.content })),
+        ...safeHistory
+          .slice(-6)
+          .filter(m => m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string')
+          .map(m => ({ role: m.role, content: m.content.slice(0, 2000) })),
         { role: 'user', content: message },
       ];
 

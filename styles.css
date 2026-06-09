@@ -1046,6 +1046,18 @@ footer .footer-art-scrim{
 }
 footer .constellation{position:absolute;inset:0;pointer-events:none;z-index:3;opacity:.6}
 footer .wrap{position:relative;z-index:4}
+/* Dissolve the footer in from the page canvas at the top — the mirror of the
+   hero artwork fading out into the same #0A0A0A black. Sits above the art,
+   scrim and constellation but below the content, so text stays crisp. */
+footer::after{
+  content:'';position:absolute;left:0;right:0;top:0;height:36%;
+  z-index:3;pointer-events:none;
+  background:linear-gradient(180deg,
+    var(--bg-black) 0%,
+    var(--bg-black) 6%,
+    rgba(10,10,10,.62) 34%,
+    transparent 100%);
+}
 /* Ft5 · Statement footer — a closing line, not a sitemap */
 .foot-statement{padding-bottom:var(--space-8);border-bottom:1px solid rgba(255,255,255,.10)}
 .foot-brandmark{margin-bottom:var(--space-5)}
@@ -2032,6 +2044,10 @@ footer .wrap{position:relative;z-index:4}
   /* gentle, very slow ken-burns drift for life without distraction */
   animation:artDrift 38s ease-in-out infinite alternate;
   will-change:transform;
+  /* Dissolve the photo into the black section below — the pixels fade to
+     transparent so the page canvas shows through (removes the hard seam). */
+  -webkit-mask-image:linear-gradient(180deg, #000 0%, #000 50%, rgba(0,0,0,.6) 76%, rgba(0,0,0,.18) 92%, transparent 100%);
+  mask-image:linear-gradient(180deg, #000 0%, #000 50%, rgba(0,0,0,.6) 76%, rgba(0,0,0,.18) 92%, transparent 100%);
 }
 @keyframes artDrift{
   from{transform:scale(1.04) translate3d(0,0,0)}
@@ -2082,7 +2098,12 @@ footer .wrap{position:relative;z-index:4}
 
 /* Stronger scrim on phones (busier vertical art) */
 @media (max-width:768px){
-  .hero-art img{object-position:center 28%}
+  .hero-art img{
+    object-position:center 28%;
+    /* phones: start the dissolve a little higher so it clears the copy */
+    -webkit-mask-image:linear-gradient(180deg, #000 0%, #000 44%, rgba(0,0,0,.55) 72%, rgba(0,0,0,.15) 90%, transparent 100%);
+    mask-image:linear-gradient(180deg, #000 0%, #000 44%, rgba(0,0,0,.55) 72%, rgba(0,0,0,.15) 90%, transparent 100%);
+  }
   .hero-art-scrim,
   .hero.has-art.left .hero-art-scrim{
     background:

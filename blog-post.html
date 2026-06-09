@@ -7,9 +7,19 @@
 <meta name="description" id="metaDesc" content="A weekly essay for South African small business owners on why having a website matters." />
 <meta name="theme-color" content="#0011FF" />
 <meta property="og:type" content="article" />
+<meta property="og:site_name" content="Local Web SA" />
 <meta property="og:title" id="ogTitle" content="The Journal — Local Web SA" />
 <meta property="og:description" id="ogDesc" content="A weekly essay for South African small business owners." />
+<meta property="og:url" id="ogUrl" content="https://localwebsa.org/blog.html" />
+<meta property="og:image" content="https://localwebsa.org/assets/hero/scene-b-web.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" id="twTitle" content="The Journal — Local Web SA" />
+<meta name="twitter:description" id="twDesc" content="A weekly essay for South African small business owners." />
+<meta name="twitter:image" content="https://localwebsa.org/assets/hero/scene-b-web.png" />
+<link rel="canonical" id="canonicalLink" href="https://localwebsa.org/blog.html" />
 <link rel="icon" href="assets/logo.png" />
+<link rel="apple-touch-icon" href="assets/logo.png" />
+<link rel="manifest" href="manifest.webmanifest" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
@@ -58,6 +68,11 @@
   document.getElementById('metaDesc').setAttribute('content', post.excerpt);
   document.getElementById('ogTitle').setAttribute('content', post.title);
   document.getElementById('ogDesc').setAttribute('content', post.excerpt);
+  document.getElementById('twTitle').setAttribute('content', post.title);
+  document.getElementById('twDesc').setAttribute('content', post.excerpt);
+  const postUrl = 'https://localwebsa.org/blog-post.html?slug=' + encodeURIComponent(post.slug);
+  document.getElementById('ogUrl').setAttribute('content', postUrl);
+  document.getElementById('canonicalLink').setAttribute('href', postUrl);
 
   const cover = window.LWSA_makeCover(post.slug, { w: 1600, h: 720 });
 

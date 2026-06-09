@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://localwebsa.org/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://localwebsa.org/pricing.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://localwebsa.org/our-work.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://localwebsa.org/benefits.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://localwebsa.org/about.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://localwebsa.org/faq.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://localwebsa.org/contact.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://localwebsa.org/blog.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://localwebsa.org/blog-post.html?slug=your-google-maps-pin-needs-a-website</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://localwebsa.org/blog-post.html?slug=the-invisible-business</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://localwebsa.org/blog-post.html?slug=what-customers-do-at-11pm</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://localwebsa.org/blog-post.html?slug=why-a-facebook-page-isnt-enough</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://localwebsa.org/blog-post.html?slug=the-247-shopfront</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://localwebsa.org/blog-post.html?slug=the-trust-gap</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://localwebsa.org/blog-post.html?slug=word-of-mouth-has-a-url</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://localwebsa.org/blog-post.html?slug=what-youre-losing-each-month</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://localwebsa.org/blog-post.html?slug=first-impressions-are-now-first-scrolls</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://localwebsa.org/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://localwebsa.org/terms.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+</urlset>

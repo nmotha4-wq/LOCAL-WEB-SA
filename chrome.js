@@ -23,22 +23,29 @@
     </button>
   </header>
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile menu">
-    <button class="menu-btn close" id="menuClose" aria-label="Close menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-    <a href="index.html">Home</a>
-    <a href="about.html">About Us</a>
-    <a href="our-work.html">Our Work</a>
-    <a href="benefits.html">Benefits</a>
-    <a href="pricing.html">Pricing</a>
-    <a href="blog.html">Blog</a>
-    <a href="faq.html">FAQ</a>
-    <a href="contact.html">Contact</a>
-    <a href="chat.html" class="mm-chat">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      Chat with Michael
-    </a>
-    <a href="contact.html" class="btn btn-white mm-cta">Get a Quote</a>
+    <div class="mm-top">
+      <a href="index.html" class="mm-brand" aria-label="Local Web SA"><b>LOCAL WEB</b><span>SA</span></a>
+      <button class="menu-btn close" id="menuClose" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="mm-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="our-work.html">Our Work</a>
+      <a href="benefits.html">Benefits</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="blog.html">Blog</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="mm-actions">
+      <a href="chat.html" class="mm-chat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Chat with Michael
+      </a>
+      <a href="contact.html" class="btn btn-white mm-cta">Get a Quote</a>
+    </div>
   </nav>`;
 
   const footerHTML = `

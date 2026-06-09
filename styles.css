@@ -1046,6 +1046,18 @@ footer .footer-art-scrim{
 }
 footer .constellation{position:absolute;inset:0;pointer-events:none;z-index:3;opacity:.6}
 footer .wrap{position:relative;z-index:4}
+/* Dissolve the footer in from the page canvas at the top — the mirror of the
+   hero artwork fading out into the same #0A0A0A black. Sits above the art,
+   scrim and constellation but below the content, so text stays crisp. */
+footer::after{
+  content:'';position:absolute;left:0;right:0;top:0;height:36%;
+  z-index:3;pointer-events:none;
+  background:linear-gradient(180deg,
+    var(--bg-black) 0%,
+    var(--bg-black) 6%,
+    rgba(10,10,10,.62) 34%,
+    transparent 100%);
+}
 /* Ft5 · Statement footer — a closing line, not a sitemap */
 .foot-statement{padding-bottom:var(--space-8);border-bottom:1px solid rgba(255,255,255,.10)}
 .foot-brandmark{margin-bottom:var(--space-5)}

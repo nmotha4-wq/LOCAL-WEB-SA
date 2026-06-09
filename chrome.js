@@ -4,7 +4,7 @@
   <header class="nav" id="nav">
     <a href="index.html" class="brand" aria-label="Local Web SA">
       <span class="brand-mark" aria-hidden="true"></span>
-      <span class="brand-text"><b>LOCAL WEB</b><span>SA</span></span>
+      <img class="brand-wordmark" src="assets/logo-wordmark.png" alt="Local Web SA" width="847" height="135" />
     </a>
     <nav class="nav-links" aria-label="Main">
       <a href="index.html">Home</a>
@@ -24,7 +24,7 @@
   </header>
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile menu">
     <div class="mm-top">
-      <a href="index.html" class="mm-brand" aria-label="Local Web SA"><b>LOCAL WEB</b><span>SA</span></a>
+      <a href="index.html" class="mm-brand" aria-label="Local Web SA"><img src="assets/logo-wordmark.png" alt="Local Web SA" width="847" height="135" /></a>
       <button class="menu-btn close" id="menuClose" aria-label="Close menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>

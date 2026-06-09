@@ -493,7 +493,7 @@ What are you looking for?`;
         });
         
         if (response.ok) {
-          btn.textContent = 'Sent — we\'ll WhatsApp you back ✓';
+          btn.textContent = 'Sent. We\'ll WhatsApp you back ✓';
           btn.style.background = '#10b981';
           if (formStatus) { formStatus.textContent = 'Thanks! We\'ll reply on WhatsApp within 2 hours.'; formStatus.style.display = 'block'; formStatus.style.color = '#10b981'; }
           cf.reset();
@@ -501,7 +501,7 @@ What are you looking for?`;
           throw new Error('Form submission failed');
         }
       } catch (err) {
-        btn.textContent = 'Something went wrong — try again';
+        btn.textContent = 'Something went wrong, try again';
         btn.style.background = '#ef4444';
         if (formStatus) { formStatus.textContent = 'Could not send. Please WhatsApp us directly at +27 75 054 1175'; formStatus.style.display = 'block'; formStatus.style.color = '#ef4444'; }
       }

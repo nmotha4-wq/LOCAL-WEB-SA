@@ -1849,6 +1849,73 @@ footer::after{
 .tpl-l{--mxbg:#E9F7F1;--mxalt:#fff;--mxink:#0F2A22;--mxmut:#3a5048;--mxac:#2BBF8C;--mxcard:#fff;--mxline:#DCEEE5;--mxr:16px;--mxcta:#2BBF8C;--mxctaink:#fff}
 .tpl-l .mx-step .num{color:#fff}
 
+/* ====== MOBILE TEMPLATE PREVIEWS (phone-format, like Wix on mobile) ====== */
+@media (max-width:780px){
+  /* render each template at true phone width; JS scales 390px → frame width,
+     so the preview reads like a real mobile site, not a shrunken desktop */
+  .tpl-frame .mini-site{width:390px;min-height:0}
+  .tpl-frame .ms-nav{padding:14px 20px}
+  .tpl-frame .ms-nav .links{display:none}
+  .tpl-frame .ms-hero{min-height:0}
+  .tpl-frame .mini-site h1{font-size:33px}
+  .tpl-frame .mini-site .ms-sub{max-width:none}
+
+  /* stack the two-column heroes: copy first, image/booking widget below */
+  .tpl-frame .tpl-a .ms-hero,
+  .tpl-frame .tpl-c .ms-hero,
+  .tpl-frame .tpl-d .ms-hero,
+  .tpl-frame .tpl-g .ms-hero,
+  .tpl-frame .tpl-h .ms-hero,
+  .tpl-frame .tpl-j .ms-hero,
+  .tpl-frame .tpl-k .ms-hero,
+  .tpl-frame .tpl-l .ms-hero{flex-direction:column;align-items:stretch;gap:18px}
+
+  .tpl-frame .tpl-a .ms-hero{padding:12px 20px 26px}
+  .tpl-frame .tpl-a .ms-copy{padding:0}
+  .tpl-frame .tpl-a .ms-img{flex:none;min-height:210px}
+
+  .tpl-frame .tpl-b .ms-hero{min-height:430px}
+  .tpl-frame .tpl-b .ms-content{padding:24px 20px 26px}
+  .tpl-frame .tpl-b h1{font-size:38px}
+  .tpl-frame .tpl-b .ms-meta{flex-wrap:wrap;gap:12px 18px}
+
+  .tpl-frame .tpl-c .ms-hero{padding:12px 20px 26px}
+
+  .tpl-frame .tpl-d .ms-hero{padding:12px 20px 26px}
+  .tpl-frame .tpl-d .ms-stats{flex:none}
+
+  .tpl-frame .tpl-e .ms-hero{padding:24px 20px 26px;min-height:430px}
+  .tpl-frame .tpl-e .ms-copy{max-width:100%}
+  .tpl-frame .tpl-e .ms-stats{position:static;flex-direction:row;gap:20px;text-align:left;margin-top:22px}
+
+  .tpl-frame .tpl-f .ms-hero{padding:34px 20px 38px}
+  .tpl-frame .tpl-f .ms-copy{max-width:100%}
+  .tpl-frame .tpl-f h1{font-size:36px}
+  .tpl-frame .tpl-f .ms-row{flex-direction:column;align-items:flex-start;gap:16px}
+
+  .tpl-frame .tpl-g .ms-hero{padding:12px 20px 26px}
+  .tpl-frame .tpl-g .ms-img{flex:none;min-height:200px}
+
+  .tpl-frame .tpl-h .ms-hero{padding:14px 20px 28px;gap:22px}
+
+  .tpl-frame .tpl-i .ms-band{padding:24px 20px;flex-direction:column;align-items:flex-start;gap:14px}
+  .tpl-frame .tpl-i .ms-work{grid-template-columns:1fr 1fr}
+
+  .tpl-frame .tpl-j .ms-hero{padding:12px 20px 26px}
+  .tpl-frame .tpl-k .ms-hero{padding:12px 20px 26px}
+  .tpl-frame .tpl-l .ms-hero{padding:12px 20px 26px}
+
+  /* full-page sections go single column at phone width */
+  .ms-page .mx-sec{padding:44px 20px}
+  .ms-page h2{font-size:26px}
+  .ms-page .mx-cards,.ms-page .mx-steps,.ms-page .mx-gallery{grid-template-columns:1fr;gap:12px;margin-top:24px}
+  .ms-page .mx-gallery div{aspect-ratio:16/10}
+  .ms-page .mx-quote{padding:48px 24px}
+  .ms-page .mx-quote p{font-size:18px}
+  .ms-page .mx-cta{padding:48px 24px}
+  .ms-page .mx-foot{padding:22px 20px;flex-direction:column;align-items:flex-start;gap:10px}
+}
+
 /* ============ CHAT LAUNCHER (FAB → dedicated chat page) ============ */
 .chat-fab{
   position:fixed;bottom:24px;right:24px;z-index:200;

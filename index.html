@@ -1164,16 +1164,19 @@
   let currentPkg = 'basic';
 
   const hintEl = document.getElementById('tplScrollHint');
+  // below 780px the templates render in phone format (390px wide, stacked
+  // sections) and scale ~1:1; on desktop they render at 1024px and shrink
+  const mqMobile = window.matchMedia('(max-width:780px)');
 
-  // Scale each preview (rendered at a fixed 1024px desktop width) to fit the
-  // frame, so the mini-site shrinks faithfully instead of overlapping on mobile.
-  // The transform doesn't change layout size, so pull the layout box up with a
-  // negative margin — the frame's scrollable area then matches the scaled page.
+  // Scale each preview to fit the frame, so the mini-site shrinks faithfully
+  // instead of overlapping. The transform doesn't change layout size, so pull
+  // the layout box up with a negative margin — the frame's scrollable area
+  // then matches the scaled page.
   function fitMini(){
     if (!frameWrap) return;
     const w = frameWrap.clientWidth;
     if (!w) return;
-    const s = w / 1024;
+    const s = w / (mqMobile.matches ? 390 : 1024);
     modal.querySelectorAll('.tpl-frame .mini-site').forEach(m => {
       m.style.transform = 'scale(' + s + ')';
       m.style.marginBottom = (m.offsetHeight * (s - 1)) + 'px';

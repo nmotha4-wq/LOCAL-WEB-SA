@@ -382,8 +382,9 @@ body.nav-open{overflow:hidden;position:fixed;width:100%}
 @media (max-width: 480px){
   .btn.full-mobile{width:100%}
   /* Stack hero CTAs so long labels (e.g. "Get Started — From R799") never overlap or clip */
-  .hero .ctas{flex-direction:column;flex-wrap:nowrap}
-  .hero .ctas .btn{width:100%}
+  /* Keep them left-aligned with the hero text and short enough to clear the chat bubble on the right */
+  .hero .ctas{flex-direction:column;flex-wrap:nowrap;align-items:flex-start}
+  .hero .ctas .btn{width:100%;max-width:300px}
 }
 
 /* ====== HEROES ====== */

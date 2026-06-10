@@ -400,7 +400,7 @@ body.nav-open{overflow:hidden;position:fixed;width:100%}
 
 /* Mobile-first hero spacing */
 @media (max-width: 480px){
-  .hero{min-height:85dvb;padding:var(--space-10) 0 var(--space-12)}
+  .hero{min-height:85dvb;padding:var(--space-16) 0 var(--space-12)}
   .hero .wrap{padding-top:env(safe-area-inset-top, 0)}
 }
 @media (min-width: 640px){

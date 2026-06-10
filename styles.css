@@ -1364,7 +1364,8 @@ footer::after{
 
 .tpl-shell{
   position:relative;
-  width:100%;max-width:1180px;max-height:calc(100vh - 48px);
+  width:100%;max-width:1180px;
+  height:calc(100vh - 48px);max-height:calc(100vh - 48px);
   display:flex;flex-direction:column;
   background:
     radial-gradient(120% 90% at 50% 0%, rgba(0,0,255,0.16), transparent 55%),
@@ -1424,7 +1425,7 @@ footer::after{
 .tpl-frame-wrap{
   position:relative;
   width:100%;max-width:980px;
-  aspect-ratio:16/10;
+  height:100%;
   border-radius:14px;overflow:hidden;
   box-shadow:0 30px 80px rgba(0,0,0,.55);
 }
@@ -1433,9 +1434,29 @@ footer::after{
   position:absolute;inset:0;
   opacity:0;pointer-events:none;
   transition:opacity .35s ease;
-  overflow:hidden;
+  /* each template preview scrolls like a real page (Wix-style) */
+  overflow-y:auto;overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  scrollbar-width:none;
 }
+.tpl-frame::-webkit-scrollbar{display:none}
 .tpl-frame.active{opacity:1;pointer-events:auto}
+
+.tpl-scrollhint{
+  position:absolute;left:50%;bottom:14px;transform:translateX(-50%);
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(5,13,26,.78);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.16);color:#fff;
+  padding:9px 16px;border-radius:9999px;
+  font-size:11.5px;font-weight:600;letter-spacing:.04em;white-space:nowrap;
+  pointer-events:none;z-index:4;
+  transition:opacity .35s ease;
+}
+.tpl-scrollhint svg{width:14px;height:14px;animation:tplNudge 1.6s ease-in-out infinite}
+.tpl-scrollhint.hide{opacity:0}
+@keyframes tplNudge{0%,100%{transform:translateY(-1px)}50%{transform:translateY(3px)}}
 
 .tpl-thumbs{
   display:flex;gap:10px;justify-content:center;
@@ -1473,32 +1494,37 @@ footer::after{
 
 @media (max-width:780px){
   .tpl-modal{padding:0}
-  .tpl-shell{max-height:100vh;border-radius:0}
+  .tpl-shell{height:100vh;height:100dvh;max-height:100vh;max-height:100dvh;border-radius:0}
+  .tpl-stage{padding:12px}
   .tpl-arrow{width:38px;height:38px}
   .tpl-arrow.prev{left:8px}.tpl-arrow.next{right:8px}
   .tpl-thumbs{padding:12px;gap:8px;overflow-x:auto;scrollbar-width:none}
   .tpl-thumb{flex:none;width:96px;height:60px}
   .tpl-foot{grid-template-columns:1fr;text-align:left}
   .tpl-foot .btn{width:100%}
-  /* keep 16/10 so the scale-to-fit preview holds its desktop proportions */
+  .tpl-scrollhint{bottom:10px;padding:8px 14px;font-size:11px}
 }
 
 /* ====== TEMPLATE FRAMES (mini-websites) ====== */
 .tpl-frame .mini-site{
-  /* render at true desktop size; JS scales the whole thing to fit the frame
-     so the preview is a faithful shrunk-down site (never cramped/overlapping) */
-  width:1024px;height:640px;transform-origin:top left;
+  /* render at true desktop width; JS scales the whole thing to fit the frame
+     so the preview is a faithful shrunk-down site (never cramped/overlapping).
+     Height is auto: the hero plus the .ms-page sections form a full,
+     scrollable page inside the frame. */
+  width:1024px;height:auto;min-height:640px;transform-origin:top left;
   display:flex;flex-direction:column;
   overflow:hidden;font-family:'Inter',system-ui,sans-serif;
 }
-/* thumbnails clone the frame markup — never inherit the stage's inline scale */
-.tpl-thumb .mini .mini-site{transform:none !important;width:1024px;height:640px}
+/* thumbnails clone the frame markup — never inherit the stage's inline scale,
+   and only show the hero (the full page is hidden) */
+.tpl-thumb .mini .mini-site{transform:none !important;margin:0 !important;width:1024px;height:640px;min-height:0}
+.tpl-thumb .mini .ms-page{display:none}
 .tpl-frame .ms-nav{
   display:flex;align-items:center;justify-content:space-between;
   padding:14px 28px;flex:none;font-size:12px;
 }
 .tpl-frame .ms-nav .links{display:flex;gap:18px;color:rgba(0,0,0,.55);font-weight:500}
-.tpl-frame .ms-hero{flex:1;display:flex;position:relative;min-height:0}
+.tpl-frame .ms-hero{flex:none;display:flex;position:relative;min-height:556px}
 
 /* --- A: STUDIO (Consulting) --- */
 .tpl-a{background:#F2EBDD;color:#1A1A1A}
@@ -1768,6 +1794,60 @@ footer::after{
 .tpl-c .ms-booking .slot.on{background:#9B5C4A;color:#fff;border-color:#9B5C4A}
 .tpl-c .ms-booking .slot.off{opacity:.4;text-decoration:line-through}
 .tpl-c .ms-booking .go{margin-top:auto;background:#9B5C4A;color:#fff;padding:12px;border-radius:9999px;text-align:center;font-weight:700;font-size:12px;letter-spacing:.04em}
+
+/* ====== TEMPLATE FULL PAGES (scrollable sections under each hero) ====== */
+/* full-page backgrounds/glows were designed for a 640px hero — cap them so
+   they don't stretch down the whole scrollable page */
+.tpl-e .ms-bg{bottom:auto;height:640px}
+.tpl-d::before{bottom:auto;height:640px}
+
+.mini-site .ms-page{flex:none;background:var(--mxbg,#fff);color:var(--mxink,#111)}
+.ms-page .mx-sec{padding:56px 36px}
+.ms-page .mx-sec.alt{background:var(--mxalt,transparent)}
+.ms-page .mx-eb{display:block;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--mxac);font-weight:800;margin-bottom:12px}
+.ms-page h2{margin:0;font-family:var(--mxdisp,inherit);font-size:34px;line-height:1.08;letter-spacing:-0.02em;font-weight:var(--mxhw,800);color:var(--mxink)}
+.ms-page .mx-sub{margin:14px 0 0;font-size:13px;line-height:1.6;color:var(--mxmut);max-width:54ch}
+.ms-page .mx-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}
+.ms-page .mx-card{background:var(--mxcard);border:1px solid var(--mxline);border-radius:var(--mxr,12px);padding:22px}
+.ms-page .mx-card b{display:block;font-family:var(--mxdisp,inherit);font-size:15.5px;font-weight:700;color:var(--mxink);margin-bottom:7px}
+.ms-page .mx-card p{margin:0;font-size:11.5px;line-height:1.55;color:var(--mxmut)}
+.ms-page .mx-card .pr{display:inline-block;margin-top:14px;font-size:11px;font-weight:800;color:var(--mxac);letter-spacing:.08em;text-transform:uppercase}
+.ms-page .mx-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}
+.ms-page .mx-step{background:var(--mxcard);border:1px solid var(--mxline);border-radius:var(--mxr,12px);padding:22px}
+.ms-page .mx-step .num{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--mxac);color:var(--mxbg);font-size:12px;font-weight:800;margin-bottom:14px}
+.ms-page .mx-step b{display:block;font-size:13.5px;font-weight:700;color:var(--mxink);margin-bottom:5px}
+.ms-page .mx-step p{margin:0;font-size:11px;line-height:1.5;color:var(--mxmut)}
+.ms-page .mx-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
+.ms-page .mx-gallery div{aspect-ratio:4/3;border-radius:var(--mxr,12px);border:1px solid var(--mxline);background-color:var(--mxcard);background-size:cover;background-position:center}
+.ms-page .mx-quote{padding:64px 36px;text-align:center;background:var(--mxalt)}
+.ms-page .mx-quote p{margin:0 auto;font-family:var(--mxdisp,inherit);font-size:22px;line-height:1.45;color:var(--mxink);max-width:44ch;font-weight:var(--mxqw,500)}
+.ms-page .mx-quote span{display:block;margin-top:18px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--mxmut);font-weight:700}
+.ms-page .mx-cta{padding:64px 36px;text-align:center;background:var(--mxcta);color:var(--mxctaink)}
+.ms-page .mx-cta h2{color:var(--mxctaink)}
+.ms-page .mx-cta p{margin:14px auto 26px;font-size:13px;line-height:1.6;color:var(--mxctaink);opacity:.82;max-width:46ch}
+.ms-page .mx-btn{display:inline-flex;align-items:center;gap:8px;background:var(--mxbg);color:var(--mxink);padding:13px 24px;border-radius:var(--mxbr,9999px);font-size:12.5px;font-weight:800}
+.ms-page .mx-foot{padding:26px 36px;display:flex;align-items:center;justify-content:space-between;gap:18px;font-size:11px;color:var(--mxmut);border-top:1px solid var(--mxline)}
+.ms-page .mx-foot .links{display:flex;gap:16px}
+
+/* per-template palettes for the full-page sections */
+.tpl-a{--mxbg:#F2EBDD;--mxalt:#E9E0CB;--mxink:#16140F;--mxmut:#4a443a;--mxac:#9B7A3A;--mxcard:#FAF5E9;--mxline:rgba(22,20,15,.12);--mxdisp:'Playfair Display',Georgia,serif;--mxhw:600;--mxr:10px;--mxcta:#16140F;--mxctaink:#F2EBDD}
+.tpl-b{--mxbg:#1B0F0A;--mxalt:#241509;--mxink:#F5E9D6;--mxmut:rgba(245,233,214,.65);--mxac:#E8B86A;--mxcard:rgba(245,233,214,.05);--mxline:rgba(245,233,214,.14);--mxdisp:'Playfair Display',Georgia,serif;--mxhw:500;--mxr:10px;--mxcta:#E8B86A;--mxctaink:#1B0F0A}
+.tpl-c{--mxbg:#F6E6E0;--mxalt:#FBF1ED;--mxink:#2B1B1A;--mxmut:#5a4946;--mxac:#9B5C4A;--mxcard:#fff;--mxline:rgba(43,27,26,.08);--mxdisp:'Playfair Display',Georgia,serif;--mxhw:500;--mxr:16px;--mxcta:#9B5C4A;--mxctaink:#fff}
+.tpl-d{--mxbg:#0F1722;--mxalt:#131D2B;--mxink:#fff;--mxmut:rgba(255,255,255,.65);--mxac:#FFD60A;--mxcard:rgba(255,255,255,.04);--mxline:rgba(255,255,255,.1);--mxr:12px;--mxcta:#FFD60A;--mxctaink:#0F1722}
+.tpl-d .mx-step .num{color:#0F1722}
+.tpl-e{--mxbg:#0E0F12;--mxalt:#15161B;--mxink:#fff;--mxmut:rgba(255,255,255,.65);--mxac:#FF5A1F;--mxcard:#15161B;--mxline:rgba(255,255,255,.1);--mxr:0;--mxbr:0;--mxcta:#FF5A1F;--mxctaink:#0E0F12}
+.tpl-e .ms-page h2{text-transform:uppercase;font-weight:900;letter-spacing:-0.01em}
+.tpl-f{--mxbg:#F4F0E6;--mxalt:#ECE6D6;--mxink:#0E1B2C;--mxmut:#5a5849;--mxac:#7C684A;--mxcard:#FBF8F0;--mxline:rgba(14,27,44,.12);--mxdisp:'Playfair Display',Georgia,serif;--mxhw:500;--mxr:0;--mxbr:0;--mxcta:#0E1B2C;--mxctaink:#F4F0E6}
+.tpl-g{--mxbg:#F5EAD8;--mxalt:#EFE0C6;--mxink:#3D2817;--mxmut:#5b4534;--mxac:#A66B3F;--mxcard:#FBF3E4;--mxline:rgba(61,40,23,.14);--mxdisp:'Playfair Display',Georgia,serif;--mxhw:500;--mxr:8px;--mxcta:#3D2817;--mxctaink:#F5EAD8}
+.tpl-h{--mxbg:#0A1830;--mxalt:#0D1E3C;--mxink:#F0E6D2;--mxmut:rgba(240,230,210,.65);--mxac:#C9A977;--mxcard:rgba(240,230,210,.04);--mxline:rgba(240,230,210,.14);--mxdisp:'Playfair Display',Georgia,serif;--mxhw:500;--mxr:0;--mxbr:0;--mxcta:#C9A977;--mxctaink:#0A1830}
+.tpl-i{--mxbg:#FAFAFA;--mxalt:#F0F0EE;--mxink:#0A0A0A;--mxmut:rgba(0,0,0,.6);--mxac:#0A0A0A;--mxcard:#fff;--mxline:rgba(0,0,0,.12);--mxr:0;--mxbr:0;--mxcta:#0A0A0A;--mxctaink:#fff}
+.tpl-i .ms-page h2{font-weight:400}
+.tpl-i .ms-page h2 b{font-weight:800}
+.tpl-j{--mxbg:#0C1424;--mxalt:#101A2E;--mxink:#fff;--mxmut:rgba(255,255,255,.62);--mxac:#FF7A1F;--mxcard:rgba(255,255,255,.04);--mxline:rgba(255,255,255,.1);--mxr:12px;--mxcta:#FF7A1F;--mxctaink:#0C1424}
+.tpl-k{--mxbg:#F4F8FE;--mxalt:#fff;--mxink:#0E1A33;--mxmut:#475063;--mxac:#1F4FFF;--mxcard:#fff;--mxline:#E5ECF7;--mxr:14px;--mxcta:#1F4FFF;--mxctaink:#fff}
+.tpl-k .mx-step .num{color:#fff}
+.tpl-l{--mxbg:#E9F7F1;--mxalt:#fff;--mxink:#0F2A22;--mxmut:#3a5048;--mxac:#2BBF8C;--mxcard:#fff;--mxline:#DCEEE5;--mxr:16px;--mxcta:#2BBF8C;--mxctaink:#fff}
+.tpl-l .mx-step .num{color:#fff}
 
 /* ============ CHAT LAUNCHER (FAB → dedicated chat page) ============ */
 .chat-fab{

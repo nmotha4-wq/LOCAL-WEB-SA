@@ -1970,7 +1970,7 @@ footer::after{
   height:100vh;
   height:100dvh;
   display:flex;flex-direction:column;
-  padding-top:76px; /* clear the fixed nav */
+  padding-top:calc(env(safe-area-inset-top, 0px) + 12px); /* clear the device status bar; nav is hidden on this page */
   background:
     radial-gradient(120% 80% at 50% 0%, rgba(0,17,255,0.18), transparent 55%),
     var(--bg-black-2);

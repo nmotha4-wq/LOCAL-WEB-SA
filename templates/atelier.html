@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Atelier &amp; Co. — Brand Strategy &amp; Identity, Pretoria</title>
+<meta name="description" content="A small consultancy for brand strategy, identity systems and editorial work. Pretoria, est. 2014.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Hanken+Grotesk:wght@400;500;600&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+/* Hallmark · macrostructure: gallery index · genre: editorial (gallery wall)
+ * theme: custom (vibe: "white gallery wall, Klein blue, museum placards"
+ * · paper oklch(98% 0.002 90) · accent oklch(45% 0.3 264) IKB-cool
+ * · Marcellus + Hanken Grotesk + Space Mono)
+ * nav: N9 edge-aligned anchors · footer: colophon
+ * signature: museum placard work-index, image reveals behind rows
+ * pre-emit critique: P5 H4 E4 S4 R5 V5 · contrast: pass
+ * axes: light / roman-serif-caps / cool-blue
+ */
+:root{
+  --paper:#fbfaf8; --paper:oklch(98.3% 0.003 90);
+  --ink:#191919; --ink:oklch(19% 0 0);
+  --ink-soft:#5c5c58; --ink-soft:oklch(45% 0.004 90);
+  --ikb:#1f2fc4; --ikb:oklch(42% 0.25 268);
+  --ikb-soft:#e8eafd; --ikb-soft:oklch(94% 0.03 268);
+  --line:rgba(25,25,25,.14);
+  --font-display:'Marcellus',Georgia,serif;
+  --font-body:'Hanken Grotesk',system-ui,sans-serif;
+  --font-mono:'Space Mono',ui-monospace,monospace;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:96px;
+}
+*{box-sizing:border-box;margin:0}
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:var(--font-body);font-size:16.5px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:72px;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ikb);outline-offset:3px}
+img{max-width:100%;display:block}
+
+.bar{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s2);
+  padding:18px 20px;
+}
+.brand{font-family:var(--font-display);font-size:19px;letter-spacing:.04em;text-decoration:none}
+.bar nav{display:none;gap:26px}
+.bar nav a{
+  font-size:14px;font-weight:500;text-decoration:none;color:var(--ink-soft);
+  position:relative;padding-bottom:3px;
+}
+.bar nav a::after{
+  content:'';position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--ikb);
+  transition:width .25s var(--ease-out);
+}
+.bar nav a:hover{color:var(--ink)}
+.bar nav a:hover::after{width:100%}
+.bar-cta{
+  font-size:14px;font-weight:600;text-decoration:none;color:var(--ikb);white-space:nowrap;
+  border:1px solid var(--ikb);padding:9px 16px;
+  transition:background .2s var(--ease-out),color .2s var(--ease-out);
+}
+.bar-cta:hover{background:var(--ikb);color:#fff}
+
+/* hero */
+.hero{max-width:1150px;margin:0 auto;padding:var(--s5) 20px var(--s5)}
+.kick{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:var(--s3)}
+h1{
+  font-family:var(--font-display);font-weight:400;
+  font-size:clamp(40px,9vw,84px);line-height:1.06;letter-spacing:.005em;
+  max-width:18ch;overflow-wrap:anywhere;min-width:0;
+}
+h1 .blue{color:var(--ikb)}
+.sub{max-width:50ch;color:var(--ink-soft);font-size:18px;margin-top:var(--s3)}
+.hero-meta{
+  margin-top:var(--s4);display:flex;flex-wrap:wrap;gap:10px 32px;
+  font-family:var(--font-mono);font-size:12.5px;color:var(--ink-soft);
+}
+.hero-meta b{color:var(--ikb);font-weight:400}
+
+/* work index — museum placards */
+.work{max-width:1150px;margin:0 auto;padding:var(--s4) 20px var(--s5);position:relative}
+.sec-head{
+  font-family:var(--font-display);font-size:clamp(28px,6vw,44px);line-height:1.1;
+  margin-bottom:var(--s4);
+}
+.wrow{
+  display:block;text-decoration:none;border-top:1px solid var(--line);
+  padding:var(--s3) 0;position:relative;
+}
+.wrow:last-of-type{border-bottom:1px solid var(--line)}
+.wrow-in{display:grid;gap:14px;align-items:center}
+.wrow h3{font-family:var(--font-display);font-weight:400;font-size:clamp(24px,5.5vw,38px);line-height:1.1;transition:color .25s var(--ease-out)}
+.wrow:hover h3{color:var(--ikb)}
+.wimg{
+  height:200px;background-size:cover;background-position:center;
+  filter:grayscale(35%);transition:filter .4s var(--ease-out);
+}
+.wrow:hover .wimg{filter:grayscale(0%)}
+/* the placard */
+.placard{
+  background:#fff;border:1px solid var(--line);border-left:4px solid var(--ikb);
+  padding:14px 16px;width:fit-content;min-width:230px;
+  font-family:var(--font-mono);font-size:12px;line-height:1.7;color:var(--ink-soft);
+  box-shadow:0 8px 24px rgba(25,25,25,.07);
+}
+.placard b{display:block;font-family:var(--font-body);font-weight:600;font-size:14.5px;color:var(--ink);letter-spacing:.01em}
+
+/* studio */
+.studio{background:var(--ink);color:#efeeea;padding:var(--s5) 20px}
+.studio-in{max-width:1150px;margin:0 auto;display:grid;gap:var(--s4)}
+.studio .sec-head{color:#fff;margin-bottom:0}
+.studio .lead{font-size:19px;line-height:1.6;max-width:54ch;color:rgba(239,238,234,.85)}
+.svc{border-top:1px solid rgba(239,238,234,.2);padding:16px 0;display:flex;justify-content:space-between;gap:16px;align-items:baseline}
+.svc b{font-family:var(--font-display);font-weight:400;font-size:20px}
+.svc span{font-family:var(--font-mono);font-size:12px;color:rgba(239,238,234,.6)}
+
+/* journal */
+.journal{max-width:1150px;margin:0 auto;padding:var(--s5) 20px}
+.jrow{display:block;text-decoration:none;border-top:1px solid var(--line);padding:var(--s3) 0}
+.jrow:last-of-type{border-bottom:1px solid var(--line)}
+.jrow .date{font-family:var(--font-mono);font-size:12px;color:var(--ink-soft)}
+.jrow h3{font-family:var(--font-display);font-weight:400;font-size:clamp(20px,4.5vw,28px);margin-top:6px;transition:color .25s var(--ease-out)}
+.jrow:hover h3{color:var(--ikb)}
+
+/* contact */
+.contact{background:var(--ikb);color:#fff;padding:var(--s6) 20px;text-align:center}
+.contact h2{font-family:var(--font-display);font-weight:400;font-size:clamp(30px,7vw,52px);line-height:1.15;max-width:22ch;margin:0 auto}
+.contact p{color:rgba(255,255,255,.8);margin:var(--s3) auto;max-width:44ch}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-weight:600;font-size:16px;padding:15px 28px;text-decoration:none;min-height:50px;white-space:nowrap;
+  transition:background .2s var(--ease-out),color .2s var(--ease-out),transform .15s var(--ease-out);
+}
+.btn:active{transform:translateY(1px)}
+.contact .btn-main{background:#fff;color:var(--ikb)}
+.contact .btn-main:hover{background:var(--ink);color:#fff}
+.contact .tel{display:block;margin-top:var(--s3);font-family:var(--font-mono);font-size:13px;color:rgba(255,255,255,.8);text-decoration:none}
+
+.foot{
+  padding:var(--s3) 20px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;
+  font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);
+}
+
+.callbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);
+}
+.callbar a{
+  display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;
+  font-weight:600;font-size:15px;padding:15px 10px;min-height:54px;
+}
+.callbar .c1{background:var(--ikb);color:#fff}
+.callbar .c2{background:#fff;color:var(--ink)}
+
+.rv{opacity:0;transform:translateY(12px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+.rv.in{opacity:1;transform:none}
+
+@media (min-width:760px){
+  body{padding-bottom:0}
+  .callbar{display:none}
+  .bar{padding:22px 40px}
+  .bar nav{display:flex}
+  .hero,.work,.journal{padding-left:40px;padding-right:40px}
+  .hero{padding-top:var(--s6)}
+  .studio{padding:var(--s6) 40px}
+  .studio-in{grid-template-columns:1fr 1fr;align-items:start}
+  .wrow-in{grid-template-columns:1fr 300px auto;gap:28px}
+  .wimg{height:150px;width:300px}
+  .contact{padding:calc(var(--s6) + 20px) 40px}
+  .foot{padding:var(--s3) 40px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .rv{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a class="brand" href="#top">Atelier &amp; Co.</a>
+  <nav aria-label="Sections">
+    <a href="#work">Work</a>
+    <a href="#studio">Studio</a>
+    <a href="#journal">Journal</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a class="bar-cta" href="#contact">Schedule a call</a>
+</header>
+
+<main id="top">
+  <section class="hero rv">
+    <span class="kick">Strategy · Brand · Story — Pretoria, est. 2014</span>
+    <h1>Quietly <span class="blue">extraordinary</span> work for ambitious teams.</h1>
+    <p class="sub">A consultancy crafting brand strategy, identity systems and editorial work, built to outlast trend cycles. We write before we draw.</p>
+    <div class="hero-meta">
+      <span><b>—</b> Open for new projects · 2026</span>
+      <span><b>—</b> Six engagements a year</span>
+    </div>
+  </section>
+
+  <section class="work" id="work">
+    <h2 class="sec-head rv">Work that speaks in a lowered voice.</h2>
+
+    <a class="wrow rv" href="#contact">
+      <div class="wrow-in">
+        <h3>Marlow Legal</h3>
+        <div class="wimg" style="background-image:url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=900&q=70')" role="img" aria-label="Marlow Legal identity system"></div>
+        <div class="placard"><b>Marlow Legal</b>Identity &amp; voice · 2026<br>Engagement, 9 months</div>
+      </div>
+    </a>
+    <a class="wrow rv" href="#contact">
+      <div class="wrow-in">
+        <h3>Kestrel Wines</h3>
+        <div class="wimg" style="background-image:url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=900&q=70')" role="img" aria-label="Kestrel Wines packaging"></div>
+        <div class="placard"><b>Kestrel Wines</b>Packaging &amp; story · 2025<br>Three ranges, twelve labels</div>
+      </div>
+    </a>
+    <a class="wrow rv" href="#contact">
+      <div class="wrow-in">
+        <h3>The Brink Hotel</h3>
+        <div class="wimg" style="background-image:url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=900&q=70')" role="img" aria-label="The Brink Hotel naming and identity"></div>
+        <div class="placard"><b>The Brink Hotel</b>Naming &amp; identity · 2025<br>From a working title to a marque</div>
+      </div>
+    </a>
+    <a class="wrow rv" href="#contact">
+      <div class="wrow-in">
+        <h3>Fields &amp; Co.</h3>
+        <div class="wimg" style="background-image:url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&q=70')" role="img" aria-label="Fields and Co. brand strategy"></div>
+        <div class="placard"><b>Fields &amp; Co.</b>Brand strategy · 2024<br>Still with us, four years on</div>
+      </div>
+    </a>
+  </section>
+
+  <section class="studio" id="studio">
+    <div class="studio-in rv">
+      <div>
+        <h2 class="sec-head">The studio</h2>
+        <p class="lead" style="margin-top:18px">We are a small consultancy for brand strategy, identity systems and editorial work. We keep our clients for years, not quarters — and we take on six engagements a year so each one gets the partners, not the juniors.</p>
+      </div>
+      <div>
+        <div class="svc"><b>Brand strategy</b><span>positioning · naming</span></div>
+        <div class="svc"><b>Identity systems</b><span>marque · type · colour</span></div>
+        <div class="svc"><b>Editorial &amp; content</b><span>voice · journals · annual reports</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="journal" id="journal">
+    <h2 class="sec-head rv">Journal</h2>
+    <a class="jrow rv" href="#contact">
+      <span class="date">May 2026</span>
+      <h3>Why your rebrand should start with a sentence, not a sketch.</h3>
+    </a>
+    <a class="jrow rv" href="#contact">
+      <span class="date">Feb 2026</span>
+      <h3>Naming a wine: notes from the Kestrel project.</h3>
+    </a>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="rv">
+      <h2>We take on six engagements a year. Yours could be one of them.</h2>
+      <p>Tell us where the brand is stuck. A first call is thirty minutes and costs nothing.</p>
+      <a class="btn btn-main" href="https://wa.me/27762901183?text=Hello%20Atelier%20%26%20Co.%20%E2%80%94%20I%27d%20like%20to%20schedule%20a%20call%20about%20our%20brand." target="_blank" rel="noopener">Schedule a call</a>
+      <a class="tel" href="tel:+27762901183">or telephone · 076 290 1183</a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>Atelier &amp; Co. · Pretoria · est. 2014</span>
+  <span>Work · Journal · Contact</span>
+</footer>
+
+<nav class="callbar" aria-label="Quick contact">
+  <a class="c1" href="https://wa.me/27762901183?text=Hello%20Atelier%20%26%20Co.%20%E2%80%94%20I%27d%20like%20to%20schedule%20a%20call." target="_blank" rel="noopener">Schedule a call</a>
+  <a class="c2" href="tel:+27762901183">Telephone</a>
+</nav>
+
+<script>
+(function(){
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.15});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>

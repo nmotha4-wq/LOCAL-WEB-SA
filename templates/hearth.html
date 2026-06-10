@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Hearth &amp; Vine — Wood-fired Bistro, Brooklyn, Pretoria</title>
+<meta name="description" content="Slow food, loud flavours. A wood-fired bistro in Brooklyn, Pretoria. Set menu nightly, live jazz Fridays. Reserve a table.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+/* Hallmark · macrostructure: evening-menu document · genre: atmospheric (candlelit)
+ * theme: custom (vibe: "firelit umber room, bone linen, flame amber, wine"
+ * · paper oklch(16% 0.015 50) · accent oklch(72% 0.13 65) amber-warm
+ * · Prata + Lora) · nav: masthead strip · footer: colophon
+ * signature: tilted A5 printed menu card on the dark table + ember glow flicker
+ * pre-emit critique: P5 H4 E4 S5 R4 V5 · contrast: pass
+ * axes: dark-umber / didone-serif / warm-amber
+ */
+:root{
+  --paper:#161009; --paper:oklch(15.5% 0.015 55);
+  --paper-2:#1f1610; --paper-2:oklch(19% 0.018 55);
+  --bone:#f0e5d2; --bone:oklch(92% 0.02 85);
+  --bone-dim:#b3a68e; --bone-dim:oklch(72% 0.025 85);
+  --amber:#e0913c; --amber:oklch(71% 0.13 65);
+  --wine:#8e3742; --wine:oklch(42% 0.12 15);
+  --card:#f4ecdb; --card:oklch(94% 0.018 85);
+  --card-ink:#2b2118; --card-ink:oklch(24% 0.02 60);
+  --line:rgba(240,229,210,.16);
+  --font-display:'Prata',Georgia,serif;
+  --font-body:'Lora',Georgia,serif;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:96px;
+}
+*{box-sizing:border-box;margin:0}
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);color:var(--bone);
+  font-family:var(--font-body);font-size:17px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:76px;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+.bar{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s2);
+  padding:16px 20px;border-bottom:1px solid var(--line);
+}
+.brand{font-family:var(--font-display);font-size:18px;text-decoration:none;letter-spacing:.02em}
+.bar-est{display:none;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-dim)}
+.bar-cta{
+  font-size:14px;text-decoration:none;color:var(--amber);white-space:nowrap;
+  border:1px solid rgba(224,145,60,.5);padding:9px 16px;
+  transition:background .2s var(--ease-out),color .2s var(--ease-out);
+}
+.bar-cta:hover{background:var(--amber);color:var(--paper)}
+
+/* hero with ember glow */
+.hero{
+  position:relative;padding:var(--s6) 20px var(--s5);overflow:clip;
+}
+.hero::before{ /* the fire, off-frame to the right */
+  content:'';position:absolute;inset:-20%;pointer-events:none;
+  background:radial-gradient(55% 60% at 82% 70%, rgba(224,145,60,.22), transparent 65%);
+  animation:flicker 7s ease-in-out infinite;
+}
+@keyframes flicker{
+  0%,100%{opacity:.85;transform:scale(1)}
+  35%{opacity:1;transform:scale(1.04)}
+  60%{opacity:.78;transform:scale(.99)}
+  80%{opacity:.95;transform:scale(1.02)}
+}
+.hero-in{position:relative;max-width:1100px;margin:0 auto}
+.kick{font-size:12.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:var(--s3)}
+h1{
+  font-family:var(--font-display);font-weight:400;
+  font-size:clamp(44px,11vw,104px);line-height:1.02;letter-spacing:.005em;
+  overflow-wrap:anywhere;min-width:0;
+}
+h1 .amber{color:var(--amber)}
+.sub{max-width:46ch;color:var(--bone-dim);margin-top:var(--s3);font-size:18px}
+.hero-meta{
+  margin-top:var(--s4);display:grid;gap:14px;max-width:560px;
+}
+.hero-meta div{border-top:1px solid var(--line);padding-top:10px}
+.hero-meta b{font-family:var(--font-display);font-weight:400;display:block;font-size:15px;color:var(--amber);letter-spacing:.06em}
+.hero-meta span{font-size:15px;color:var(--bone-dim)}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:var(--s4)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:var(--font-body);font-weight:500;font-size:16px;
+  padding:15px 28px;text-decoration:none;min-height:50px;white-space:nowrap;
+  transition:background .2s var(--ease-out),color .2s var(--ease-out),transform .15s var(--ease-out);
+}
+.btn:active{transform:translateY(1px)}
+.btn-main{background:var(--amber);color:#221302}
+.btn-main:hover{background:#edaa5e}
+.btn-ghost{border:1px solid var(--line);color:var(--bone)}
+.btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+
+/* the menu card */
+.menu{padding:var(--s5) 20px;max-width:1100px;margin:0 auto}
+h2{
+  font-family:var(--font-display);font-weight:400;font-size:clamp(30px,7vw,52px);line-height:1.08;
+  margin-bottom:var(--s2);
+}
+.menu-note{color:var(--bone-dim);max-width:46ch;margin-bottom:var(--s4);font-style:italic}
+.card-menu{
+  background:var(--card);color:var(--card-ink);
+  max-width:560px;padding:clamp(26px,6vw,52px);
+  transform:rotate(-1.1deg) translateY(16px);opacity:0;
+  box-shadow:0 30px 70px rgba(0,0,0,.5);
+}
+.card-menu.in{transition:transform .9s var(--ease-out),opacity .9s var(--ease-out);transform:rotate(-1.1deg) translateY(0);opacity:1}
+.card-menu header{text-align:center;margin-bottom:var(--s3)}
+.card-menu header b{font-family:var(--font-display);font-weight:400;font-size:22px;letter-spacing:.04em;display:block}
+.card-menu header span{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--wine)}
+.mg{
+  display:block;text-align:center;font-size:12px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--wine);margin:22px 0 8px;
+}
+.mi{display:flex;align-items:baseline;gap:10px;padding:8px 0}
+.mi b{font-weight:500;font-size:16.5px}
+.mi .dots{flex:1;border-bottom:1px dotted rgba(43,33,24,.45);transform:translateY(-4px)}
+.mi .p{font-family:var(--font-display);font-size:15.5px;white-space:nowrap}
+.card-menu footer{
+  margin-top:var(--s3);padding-top:14px;border-top:1px solid rgba(43,33,24,.25);
+  text-align:center;font-style:italic;font-size:14.5px;color:rgba(43,33,24,.75);
+}
+
+/* evening timeline */
+.evening{background:var(--paper-2);padding:var(--s5) 20px}
+.evening-in{max-width:1100px;margin:0 auto}
+.t{
+  display:grid;grid-template-columns:auto 1fr;gap:4px 20px;align-items:baseline;
+  padding:16px 0;border-top:1px solid var(--line);
+}
+.t .h{font-family:var(--font-display);font-size:20px;color:var(--amber);white-space:nowrap}
+.t b{font-weight:500;color:var(--bone)}
+.t p{grid-column:2;color:var(--bone-dim);font-size:15.5px}
+
+/* find us / reserve */
+.find{max-width:1100px;margin:0 auto;padding:var(--s5) 20px}
+.find-grid{display:grid;gap:18px;margin-top:var(--s3)}
+.df{border-top:1px solid var(--line);padding-top:10px}
+.df span{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-dim);display:block}
+.df b{font-family:var(--font-display);font-weight:400;font-size:18px;line-height:1.4}
+.final{
+  text-align:center;padding:var(--s6) 20px;
+  border-top:1px solid var(--line);
+}
+.final h2{max-width:18ch;margin:0 auto var(--s3)}
+.foot{
+  border-top:1px solid var(--line);padding:var(--s3) 20px;
+  display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;
+  font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--bone-dim);
+}
+
+.callbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);
+}
+.callbar a{
+  display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;
+  font-weight:500;font-size:15.5px;padding:16px 10px;min-height:56px;
+}
+.callbar .c1{background:var(--amber);color:#221302}
+.callbar .c2{background:var(--paper-2);color:var(--bone)}
+
+.rv{opacity:0;transform:translateY(12px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out)}
+.rv.in{opacity:1;transform:none}
+
+@media (min-width:760px){
+  body{padding-bottom:0}
+  .callbar{display:none}
+  .bar{padding:18px 40px}
+  .bar-est{display:block}
+  .hero,.menu,.find{padding-left:40px;padding-right:40px}
+  .hero-meta{grid-template-columns:repeat(3,1fr);max-width:none}
+  .menu{display:grid;grid-template-columns:1fr 1.2fr;gap:var(--s5);align-items:center}
+  .evening{padding:var(--s6) 40px}
+  .t{grid-template-columns:90px auto 1fr;align-items:baseline}
+  .t p{grid-column:3}
+  .find-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .rv{opacity:1;transform:none}
+  .card-menu{opacity:1;transform:rotate(-1.1deg)}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a class="brand" href="#top">Hearth &amp; Vine</a>
+  <span class="bar-est">Est. 2014 · Brooklyn, Pretoria</span>
+  <a class="bar-cta" href="tel:+27123460821">Reserve a table</a>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-in rv">
+      <span class="kick">Brooklyn, Pretoria · Open Tue–Sun, 5pm till late</span>
+      <h1>Slow food.<br><span class="amber">Loud flavours.</span></h1>
+      <p class="sub">A wood-fired bistro at 14 Brooklyn Road. Everything is made in-house, down to the butter.</p>
+      <div class="hero-meta">
+        <div><b>Tonight</b><span>Set menu · R385</span></div>
+        <div><b>This week</b><span>Live jazz Friday</span></div>
+        <div><b>Private dining</b><span>Up to 24 guests</span></div>
+      </div>
+      <div class="ctas">
+        <a class="btn btn-main" href="tel:+27123460821">Reserve · 012 346 0821</a>
+        <a class="btn btn-ghost" href="https://wa.me/27634460821?text=Good%20evening%20Hearth%20%26%20Vine%20%E2%80%94%20a%20table%20for%20two%2C%20please." target="_blank" rel="noopener">WhatsApp the maître d'</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu">
+    <div class="rv">
+      <h2>Tonight</h2>
+      <p class="menu-note">The menu changes with the season. Three courses, no decisions — or order from the card.</p>
+    </div>
+    <div class="card-menu rv" role="group" aria-label="Tonight's menu card">
+      <header><b>Hearth &amp; Vine</b><span>du soir</span></header>
+      <span class="mg">To begin</span>
+      <div class="mi"><b>Charred leeks, smoked butter</b><span class="dots"></span><span class="p">R88</span></div>
+      <div class="mi"><b>Springbok carpaccio, pickled mustard</b><span class="dots"></span><span class="p">R110</span></div>
+      <span class="mg">To follow</span>
+      <div class="mi"><b>Wood-fired lamb shoulder, for two</b><span class="dots"></span><span class="p">R225</span></div>
+      <div class="mi"><b>Pan-seared linefish, brown butter</b><span class="dots"></span><span class="p">R198</span></div>
+      <span class="mg">To finish</span>
+      <div class="mi"><b>Burnt honey pavlova</b><span class="dots"></span><span class="p">R85</span></div>
+      <footer>Set menu, three courses · R385 · the fire decides the special</footer>
+    </div>
+  </section>
+
+  <section class="evening">
+    <div class="evening-in rv">
+      <h2>An evening at Hearth</h2>
+      <div class="t"><span class="h">17:00</span><b>Doors &amp; aperitivo</b><p>Small plates at the bar, the fire already going.</p></div>
+      <div class="t"><span class="h">19:00</span><b>First seating</b><p>The set menu begins. Three courses, no decisions.</p></div>
+      <div class="t"><span class="h">21:30</span><b>Last orders</b><p>Dessert, a nightcap, and the long goodbye.</p></div>
+    </div>
+  </section>
+
+  <section class="find rv">
+    <h2>Find us</h2>
+    <div class="find-grid">
+      <div class="df"><span>Address</span><b>14 Brooklyn Road, Pretoria</b></div>
+      <div class="df"><span>Hours</span><b>Tue–Sun · 5pm till late</b></div>
+      <div class="df"><span>Reservations</span><b>Call, or WhatsApp for eight or more</b></div>
+    </div>
+  </section>
+
+  <section class="final rv">
+    <h2>The fire is lit at five.</h2>
+    <div class="ctas" style="justify-content:center">
+      <a class="btn btn-main" href="tel:+27123460821">Reserve a table</a>
+      <a class="btn btn-ghost" href="https://wa.me/27634460821?text=Good%20evening%20Hearth%20%26%20Vine%20%E2%80%94%20a%20table%2C%20please." target="_blank" rel="noopener">WhatsApp us</a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>Hearth &amp; Vine · est. 2014</span>
+  <span>14 Brooklyn Road · 012 346 0821</span>
+</footer>
+
+<nav class="callbar" aria-label="Quick contact">
+  <a class="c1" href="tel:+27123460821">Reserve · call</a>
+  <a class="c2" href="https://wa.me/27634460821?text=Good%20evening%20Hearth%20%26%20Vine%20%E2%80%94%20a%20table%2C%20please." target="_blank" rel="noopener">WhatsApp</a>
+</nav>
+
+<script>
+(function(){
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.2});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>

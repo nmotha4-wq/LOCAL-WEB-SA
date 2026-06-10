@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Lush Aesthetics — Hair, Skin &amp; Nails, Menlo Park, Pretoria</title>
+<meta name="description" content="A neighbourhood beauty studio in Menlo Park. Book your appointment in under 30 seconds — confirmation straight to your phone.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Mulish:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* Hallmark · macrostructure: booking split · genre: editorial (beauty editorial)
+ * theme: custom (vibe: "alabaster porcelain, deep plum lacquer, vanity mirror"
+ * · paper oklch(96.5% 0.008 340) · accent oklch(35% 0.12 330) plum-cool
+ * · Bodoni Moda + Mulish) · nav: boutique bar · footer: colophon
+ * signature: arched vanity-mirror booking card → WhatsApp-confirmed booking
+ * pre-emit critique: P5 H4 E5 S5 R4 V5 · contrast: pass
+ * axes: light / didone / plum
+ */
+:root{
+  --paper:#f8f3f4; --paper:oklch(96.5% 0.008 340);
+  --paper-2:#f1e8ea; --paper-2:oklch(93.5% 0.012 340);
+  --ink:#352028; --ink:oklch(26% 0.04 340);
+  --ink-soft:#74616a; --ink-soft:oklch(50% 0.03 340);
+  --plum:#5c2547; --plum:oklch(34% 0.11 335);
+  --plum-deep:#421a33; --plum-deep:oklch(27% 0.1 335);
+  --line:rgba(53,32,40,.16);
+  --font-display:'Bodoni Moda',Georgia,serif;
+  --font-body:'Mulish',system-ui,sans-serif;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:96px;
+}
+*{box-sizing:border-box;margin:0}
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:var(--font-body);font-size:16px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:72px;
+}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--plum);outline-offset:3px}
+
+.bar{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s2);
+  padding:16px 20px;border-bottom:1px solid var(--line);
+}
+.brand{font-family:var(--font-display);font-weight:600;font-size:19px;letter-spacing:.02em;text-decoration:none}
+.bar-loc{display:none;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
+.bar-cta{
+  font-weight:700;font-size:13.5px;letter-spacing:.06em;text-decoration:none;white-space:nowrap;
+  background:var(--plum);color:#f6edf2;padding:10px 18px;border-radius:999px;
+  transition:background .2s var(--ease-out),transform .15s var(--ease-out);
+}
+.bar-cta:hover{background:var(--plum-deep)}
+.bar-cta:active{transform:translateY(1px)}
+
+/* hero + mirror booking */
+.hero{max-width:1150px;margin:0 auto;padding:var(--s5) 20px;display:grid;gap:var(--s4)}
+.kick{font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--plum);display:block;margin-bottom:var(--s2)}
+h1{
+  font-family:var(--font-display);font-weight:500;
+  font-size:clamp(40px,9.5vw,82px);line-height:1.02;letter-spacing:-.01em;
+  overflow-wrap:anywhere;min-width:0;
+}
+h1 .p{color:var(--plum)}
+.sub{max-width:46ch;color:var(--ink-soft);font-size:17px;margin-top:var(--s3)}
+.price-pegs{display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--s3)}
+.price-pegs span{
+  font-size:13px;font-weight:600;border:1px solid var(--line);border-radius:999px;padding:7px 13px;
+}
+
+/* the vanity mirror */
+.mirror{
+  background:#fff;border:1px solid var(--line);
+  border-radius:200px 200px 18px 18px;
+  padding:clamp(26px,5vw,40px) clamp(20px,4vw,32px) clamp(22px,4vw,30px);
+  box-shadow:0 24px 60px rgba(53,32,40,.14);
+  max-width:430px;width:100%;margin:0 auto;
+}
+.mirror h3{
+  font-family:var(--font-display);font-weight:600;font-size:21px;text-align:center;
+  padding-top:clamp(8px,2vw,16px);
+}
+.mirror .mh-sub{text-align:center;font-size:13px;color:var(--ink-soft);margin:4px 0 18px}
+.lbl{font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);display:block;margin:14px 0 8px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{
+  border:1px solid var(--line);border-radius:10px;padding:10px 8px;
+  font-size:13.5px;font-weight:600;text-align:center;
+  transition:border-color .15s var(--ease-out),background .15s var(--ease-out),color .15s var(--ease-out);
+}
+.opt small{display:block;font-weight:400;font-size:12px;color:var(--ink-soft)}
+.opt[aria-pressed="true"]{background:var(--plum);border-color:var(--plum);color:#f6edf2}
+.opt[aria-pressed="true"] small{color:rgba(246,237,242,.75)}
+.opt.off{opacity:.38;text-decoration:line-through;pointer-events:none}
+.opts.times{grid-template-columns:repeat(3,1fr)}
+.go{
+  display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
+  margin-top:18px;background:var(--plum);color:#f6edf2;border-radius:999px;
+  font-weight:700;font-size:15px;padding:15px 18px;min-height:52px;text-decoration:none;
+  transition:background .2s var(--ease-out),transform .15s var(--ease-out);
+}
+.go:hover{background:var(--plum-deep)}
+.go:active{transform:translateY(1px)}
+.go-note{text-align:center;font-size:12px;color:var(--ink-soft);margin-top:10px}
+
+/* service menu */
+.menu{background:var(--plum);color:#f6edf2;padding:var(--s5) 20px}
+.menu-in{max-width:1150px;margin:0 auto}
+h2{font-family:var(--font-display);font-weight:500;font-size:clamp(30px,7vw,52px);line-height:1.06;margin-bottom:var(--s2)}
+.menu .note{color:rgba(246,237,242,.72);max-width:46ch;margin-bottom:var(--s4)}
+.cols{display:grid;gap:var(--s4)}
+.mg{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#d8a8c8;display:block;margin-bottom:10px}
+.mi{display:flex;align-items:baseline;gap:10px;padding:10px 0;border-bottom:1px solid rgba(246,237,242,.18)}
+.mi b{font-weight:600;font-size:16px}
+.mi .dots{flex:1;border-bottom:1px dotted rgba(246,237,242,.4);transform:translateY(-4px)}
+.mi .p{font-family:'Bodoni Moda',Georgia,serif;font-size:16px;white-space:nowrap}
+
+/* quote + visit */
+.quote{max-width:760px;margin:0 auto;padding:var(--s5) 20px;text-align:center}
+.quote p{font-family:var(--font-display);font-weight:500;font-size:clamp(22px,5vw,32px);line-height:1.3}
+.quote footer{margin-top:14px;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
+.visit{max-width:1150px;margin:0 auto;padding:0 20px var(--s5)}
+.visit-grid{display:grid;gap:16px}
+.vf{border-top:1px solid var(--line);padding-top:10px}
+.vf span{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);display:block}
+.vf b{font-family:var(--font-display);font-weight:600;font-size:18px}
+
+.foot{
+  border-top:1px solid var(--line);padding:var(--s3) 20px;
+  display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;
+  font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);
+}
+
+.callbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);
+}
+.callbar a{
+  display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;
+  font-weight:700;font-size:14.5px;padding:15px 10px;min-height:54px;
+}
+.callbar .c1{background:var(--plum);color:#f6edf2}
+.callbar .c2{background:#fff;color:var(--ink)}
+
+.rv{opacity:0;transform:translateY(12px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+.rv.in{opacity:1;transform:none}
+
+@media (min-width:880px){
+  body{padding-bottom:0}
+  .callbar{display:none}
+  .bar{padding:18px 40px}
+  .bar-loc{display:block}
+  .hero{grid-template-columns:1.1fr 1fr;align-items:center;padding:var(--s6) 40px}
+  .menu-in{padding:0}
+  .menu{padding:var(--s6) 40px}
+  .cols{grid-template-columns:1fr 1fr;gap:var(--s5)}
+  .visit{padding:0 40px var(--s6)}
+  .visit-grid{grid-template-columns:repeat(3,1fr)}
+  .foot{padding:var(--s3) 40px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .rv{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a class="brand" href="#top">Lush Aesthetics</a>
+  <span class="bar-loc">Menlo Park · Tue–Sat 9:00–18:00</span>
+  <a class="bar-cta" href="#book">Book</a>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="rv">
+      <span class="kick">Hair · Skin · Nails — Menlo Park</span>
+      <h1>Book your <span class="p">glow</span> in under 30 seconds.</h1>
+      <p class="sub">A neighbourhood studio. Pick a service, pick a time, and we'll handle the rest. Confirmation goes straight to your phone.</p>
+      <div class="price-pegs">
+        <span>Balayage from R780</span><span>Lash lift R420</span><span>Facials R650</span>
+      </div>
+    </div>
+
+    <div class="mirror rv" id="book" role="group" aria-label="Book an appointment">
+      <h3>Book an appointment</h3>
+      <p class="mh-sub">Friday, 12 June · Menlo Park studio</p>
+      <span class="lbl">Service</span>
+      <div class="opts" data-pick="service">
+        <button class="opt" type="button" aria-pressed="false" data-v="Cut &amp; style">Cut &amp; style<small>R480</small></button>
+        <button class="opt" type="button" aria-pressed="true" data-v="Balayage">Balayage<small>from R780</small></button>
+        <button class="opt" type="button" aria-pressed="false" data-v="Signature facial">Signature facial<small>R650</small></button>
+        <button class="opt" type="button" aria-pressed="false" data-v="Gel manicure">Gel manicure<small>R280</small></button>
+      </div>
+      <span class="lbl">Time</span>
+      <div class="opts times" data-pick="time">
+        <button class="opt off" type="button" aria-pressed="false" data-v="09:00" disabled>09:00</button>
+        <button class="opt" type="button" aria-pressed="false" data-v="10:30">10:30</button>
+        <button class="opt" type="button" aria-pressed="true" data-v="12:00">12:00</button>
+        <button class="opt" type="button" aria-pressed="false" data-v="13:30">13:30</button>
+        <button class="opt off" type="button" aria-pressed="false" data-v="15:00" disabled>15:00</button>
+        <button class="opt" type="button" aria-pressed="false" data-v="16:30">16:30</button>
+      </div>
+      <a class="go" id="confirm" href="#" target="_blank" rel="noopener">Confirm on WhatsApp →</a>
+      <p class="go-note">No deposit for first visits · reschedule up to 24h before</p>
+    </div>
+  </section>
+
+  <section class="menu">
+    <div class="menu-in rv">
+      <h2>The service menu</h2>
+      <p class="note">Every visit starts with a consultation, and the price we quote is the price you pay.</p>
+      <div class="cols">
+        <div>
+          <span class="mg">Hair</span>
+          <div class="mi"><b>Cut &amp; style</b><span class="dots"></span><span class="p">R480</span></div>
+          <div class="mi"><b>Full balayage</b><span class="dots"></span><span class="p">R780</span></div>
+          <div class="mi"><b>Gloss &amp; tone</b><span class="dots"></span><span class="p">R390</span></div>
+        </div>
+        <div>
+          <span class="mg">Skin &amp; nails</span>
+          <div class="mi"><b>Signature facial</b><span class="dots"></span><span class="p">R650</span></div>
+          <div class="mi"><b>Lash lift</b><span class="dots"></span><span class="p">R420</span></div>
+          <div class="mi"><b>Gel manicure</b><span class="dots"></span><span class="p">R280</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote rv">
+    <p>“I booked from my couch at 9pm and walked in at noon the next day. Painless.”</p>
+    <footer>Zanele K. — regular since 2024</footer>
+  </section>
+
+  <section class="visit rv">
+    <div class="visit-grid">
+      <div class="vf"><span>Find us</span><b>23 Atterbury Lane, Menlo Park</b></div>
+      <div class="vf"><span>Hours</span><b>Tue–Sat · 9:00–18:00</b></div>
+      <div class="vf"><span>Walk-ins</span><b>Welcome when a chair is open</b></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>Lush Aesthetics · Menlo Park</span>
+  <span>Tue–Sat · 9:00–18:00</span>
+</footer>
+
+<nav class="callbar" aria-label="Quick contact">
+  <a class="c1" href="#book">Book now</a>
+  <a class="c2" href="tel:+27795002301">Call the studio</a>
+</nav>
+
+<script>
+(function(){
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.15});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+
+  // booking → prefilled WhatsApp
+  var confirmBtn = document.getElementById('confirm');
+  function picked(group){
+    var el = document.querySelector('[data-pick="'+group+'"] .opt[aria-pressed="true"]');
+    return el ? el.getAttribute('data-v') : '';
+  }
+  function sync(){
+    var msg = 'Hi Lush Aesthetics! I’d like to book '+picked('service')+' on Friday 12 June at '+picked('time')+', please.';
+    confirmBtn.href = 'https://wa.me/27795002301?text=' + encodeURIComponent(msg);
+  }
+  document.querySelectorAll('[data-pick]').forEach(function(group){
+    group.addEventListener('click', function(ev){
+      var b = ev.target.closest('.opt');
+      if(!b || b.disabled) return;
+      group.querySelectorAll('.opt').forEach(function(o){ o.setAttribute('aria-pressed','false'); });
+      b.setAttribute('aria-pressed','true');
+      sync();
+    });
+  });
+  sync();
+})();
+</script>
+</body>
+</html>

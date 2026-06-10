@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Sparkle Home — Vetted Home Cleaners, Pretoria &amp; Centurion</title>
+<meta name="description" content="Trusted, vetted cleaners across Pretoria and Centurion. Choose your package, pick a day, get your exact price. Next-day slots available.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Hallmark · macrostructure: before/after split + comparison · genre: playful (fresh)
+ * theme: custom (vibe: "fresh laundry white, teal slate, soap-bubble lilac"
+ * · paper oklch(98.5% 0.003 200) · accent oklch(40% 0.06 210) teal-slate
+ * · Bricolage Grotesque + Figtree) · nav: friendly bar · footer: colophon
+ * signature: draggable squeegee before/after wipe + drifting soap bubbles
+ * pre-emit critique: P5 H4 E5 S5 R4 V5 · contrast: pass
+ * axes: light / grotesk-display / cool-teal+lilac
+ */
+:root{
+  --paper:#fafcfc; --paper:oklch(98.6% 0.003 200);
+  --teal:#1d4452; --teal:oklch(36% 0.05 220);
+  --teal-deep:#143038; --teal-deep:oklch(28% 0.045 220);
+  --ink-soft:#54707b; --ink-soft:oklch(53% 0.03 220);
+  --lilac:#b9a3e8; --lilac:oklch(76% 0.09 295);
+  --aqua:#7fd6cb; --aqua:oklch(82% 0.08 185);
+  --line:rgba(29,68,82,.15);
+  --font-display:'Bricolage Grotesque',system-ui,sans-serif;
+  --font-body:'Figtree',system-ui,sans-serif;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:96px;
+}
+*{box-sizing:border-box;margin:0}
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);color:var(--teal);
+  font-family:var(--font-body);font-size:16px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:72px;
+}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+img{max-width:100%;display:block}
+
+.bar{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s2);
+  padding:14px 20px;border-bottom:1px solid var(--line);
+}
+.brand{font-family:var(--font-display);font-weight:800;font-size:19px;text-decoration:none}
+.brand .spark{background:linear-gradient(100deg,var(--aqua),var(--lilac));-webkit-background-clip:text;background-clip:text;color:transparent}
+.bar-sub{display:none;font-size:13px;font-weight:600;color:var(--ink-soft)}
+.bar-cta{
+  font-weight:700;font-size:14px;text-decoration:none;white-space:nowrap;
+  background:var(--teal);color:#fff;padding:10px 18px;border-radius:999px;
+  transition:background .2s var(--ease-out),transform .15s var(--ease-out);
+}
+.bar-cta:hover{background:var(--teal-deep)}
+.bar-cta:active{transform:translateY(1px)}
+
+/* hero */
+.hero{max-width:1150px;margin:0 auto;padding:var(--s5) 20px;display:grid;gap:var(--s4);position:relative}
+.bubble{
+  position:absolute;border-radius:50%;pointer-events:none;z-index:0;
+  background:radial-gradient(circle at 32% 30%, rgba(255,255,255,.9), rgba(185,163,232,.25) 45%, rgba(127,214,203,.3));
+  border:1px solid rgba(185,163,232,.35);
+  animation:drift 14s ease-in-out infinite;
+}
+.b1{width:64px;height:64px;top:8%;right:6%}
+.b2{width:36px;height:36px;top:30%;right:16%;animation-delay:-7s;animation-duration:18s}
+@keyframes drift{
+  0%,100%{transform:translateY(0) translateX(0)}
+  50%{transform:translateY(-26px) translateX(8px)}
+}
+.kick{font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:var(--s2)}
+.kick b{color:var(--teal)}
+h1{
+  font-family:var(--font-display);font-weight:800;
+  font-size:clamp(38px,9vw,78px);line-height:1.02;letter-spacing:-.02em;
+  overflow-wrap:anywhere;min-width:0;position:relative;z-index:1;
+}
+h1 .grad{background:linear-gradient(100deg,var(--aqua),var(--lilac));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{max-width:46ch;color:var(--ink-soft);font-size:17px;margin-top:var(--s3)}
+.points{display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--s3)}
+.points span{
+  font-size:13.5px;font-weight:700;border:1.5px solid var(--line);border-radius:999px;padding:7px 14px;background:#fff;
+}
+
+/* squeegee wipe */
+.wipe{
+  position:relative;border-radius:18px;overflow:hidden;
+  border:1.5px solid var(--line);box-shadow:0 22px 54px rgba(29,68,82,.16);
+  aspect-ratio:4/3;max-width:520px;width:100%;margin:0 auto;
+}
+.wipe img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.wipe .before{filter:sepia(.5) saturate(.5) brightness(.62) contrast(.92)}
+.wipe .after{clip-path:inset(0 calc(100% - var(--cut,55%)) 0 0)}
+.wipe .blade{
+  position:absolute;top:0;bottom:0;left:var(--cut,55%);width:3px;margin-left:-1.5px;
+  background:#fff;box-shadow:0 0 12px rgba(0,0,0,.35);pointer-events:none;
+}
+.wipe .knob{
+  position:absolute;top:50%;left:var(--cut,55%);transform:translate(-50%,-50%);
+  width:46px;height:46px;border-radius:50%;background:#fff;color:var(--teal);
+  display:grid;place-items:center;font-weight:800;font-size:15px;letter-spacing:-.04em;
+  box-shadow:0 6px 18px rgba(0,0,0,.3);pointer-events:none;
+}
+.wipe .tag{
+  position:absolute;bottom:10px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  background:rgba(255,255,255,.92);border-radius:999px;padding:5px 11px;pointer-events:none;
+}
+.wipe .tag.l{left:10px;color:#8a6a4f}
+.wipe .tag.r{right:10px;color:var(--teal)}
+.wipe input[type=range]{
+  position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0;
+  touch-action:pan-y;
+}
+.wipe-note{text-align:center;font-size:13px;color:var(--ink-soft);margin-top:10px;font-weight:600}
+
+/* booking */
+.bookwrap{background:var(--teal);color:#fff;padding:var(--s5) 20px}
+.book-in{max-width:1150px;margin:0 auto;display:grid;gap:var(--s4)}
+h2{font-family:var(--font-display);font-weight:800;font-size:clamp(28px,6.5vw,50px);line-height:1.05;letter-spacing:-.015em;margin-bottom:var(--s2)}
+.bookwrap .note{color:rgba(255,255,255,.72);max-width:46ch}
+.panel{background:#fff;color:var(--teal);border-radius:16px;padding:clamp(20px,4vw,30px);max-width:460px;width:100%}
+.lbl{font-weight:800;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);display:block;margin:14px 0 8px}
+.svcs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.svc{
+  border:1.5px solid var(--line);border-radius:12px;padding:12px 10px;text-align:left;
+  font-weight:700;font-size:14px;
+  transition:border-color .15s var(--ease-out),background .15s var(--ease-out),color .15s var(--ease-out);
+}
+.svc small{display:block;font-weight:600;font-size:12.5px;color:var(--ink-soft)}
+.svc[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
+.svc[aria-pressed="true"] small{color:rgba(255,255,255,.7)}
+.days{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.day{
+  border:1.5px solid var(--line);border-radius:10px;padding:8px 2px;text-align:center;
+  transition:border-color .15s var(--ease-out),background .15s var(--ease-out),color .15s var(--ease-out);
+}
+.day small{display:block;font-size:11px;font-weight:700;color:var(--ink-soft)}
+.day b{font-family:var(--font-display);font-size:16px}
+.day[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
+.day[aria-pressed="true"] small{color:rgba(255,255,255,.75)}
+.go{
+  display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
+  margin-top:18px;border-radius:999px;text-decoration:none;
+  background:linear-gradient(100deg,var(--aqua),var(--lilac));color:var(--teal-deep);
+  font-weight:800;font-size:15.5px;padding:15px 18px;min-height:52px;
+  transition:filter .2s var(--ease-out),transform .15s var(--ease-out);
+}
+.go:hover{filter:saturate(1.25)}
+.go:active{transform:translateY(1px)}
+
+/* compare table */
+.compare{max-width:760px;margin:0 auto;padding:var(--s5) 20px}
+.cmp{border:1.5px solid var(--line);border-radius:14px;overflow:hidden}
+.cr{display:grid;grid-template-columns:1.6fr repeat(3,1fr);align-items:center;border-bottom:1px solid var(--line)}
+.cr:last-child{border-bottom:0}
+.cr>*{padding:11px 10px;font-size:13.5px}
+.cr.th{background:var(--teal);color:#fff}
+.cr.th b{font-family:var(--font-display);font-weight:700;font-size:13px;text-align:center}
+.cr span{font-weight:600}
+.cr i{font-style:normal;text-align:center;color:var(--teal);font-weight:800}
+.cr i.no{color:rgba(29,68,82,.3)}
+.cr.pr{background:#f1f7f7}
+.cr.pr b{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;text-align:center;font-size:14.5px}
+.cmp-note{font-size:14px;color:var(--ink-soft);margin-top:12px}
+
+/* quote + final */
+.quote{max-width:760px;margin:0 auto;padding:0 20px var(--s5);text-align:center}
+.quote p{font-family:var(--font-display);font-weight:700;font-size:clamp(20px,4.5vw,28px);line-height:1.35}
+.quote footer{margin-top:10px;font-size:13.5px;font-weight:700;color:var(--ink-soft)}
+.final{text-align:center;padding:0 20px var(--s6)}
+.final h2{max-width:22ch;margin:0 auto var(--s3)}
+
+.foot{
+  border-top:1px solid var(--line);padding:var(--s3) 20px;
+  display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;
+  font-size:13px;font-weight:600;color:var(--ink-soft);
+}
+
+.callbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);
+}
+.callbar a{
+  display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;
+  font-weight:800;font-size:14.5px;padding:15px 10px;min-height:54px;
+}
+.callbar .c1{background:var(--teal);color:#fff}
+.callbar .c2{background:#fff;color:var(--teal)}
+
+.rv{opacity:0;transform:translateY(12px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+.rv.in{opacity:1;transform:none}
+
+@media (min-width:880px){
+  body{padding-bottom:0}
+  .callbar{display:none}
+  .bar{padding:16px 40px}
+  .bar-sub{display:block}
+  .hero{grid-template-columns:1.05fr 1fr;align-items:center;padding:var(--s6) 40px}
+  .bookwrap{padding:var(--s6) 40px}
+  .book-in{grid-template-columns:1fr auto;align-items:center}
+  .foot{padding:var(--s3) 40px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .rv{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a class="brand" href="#top">Sparkle<span class="spark">Home</span></a>
+  <span class="bar-sub">Pretoria &amp; Centurion · next-day available</span>
+  <a class="bar-cta" href="#book">Book now</a>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <span class="bubble b1" aria-hidden="true"></span>
+    <span class="bubble b2" aria-hidden="true"></span>
+    <div class="rv">
+      <span class="kick"><b>Next-day available</b> · vetted &amp; insured</span>
+      <h1>Spotless homes, booked in <span class="grad">90 seconds.</span></h1>
+      <p class="sub">Trusted, vetted cleaners across Pretoria and Centurion. Choose your package, pick a day, and we'll handle the rest.</p>
+      <div class="points">
+        <span>Vetted &amp; insured</span>
+        <span>Same cleaner every visit</span>
+        <span>Cash or EFT</span>
+      </div>
+    </div>
+    <div class="rv">
+      <div class="wipe" id="wipe" style="--cut:55%">
+        <img class="before" src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1000&q=70" alt="" aria-hidden="true">
+        <img class="after" src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1000&q=70" alt="Kitchen, before and after a Sparkle deep clean">
+        <span class="blade" aria-hidden="true"></span>
+        <span class="knob" aria-hidden="true">⇄</span>
+        <span class="tag l">Before</span>
+        <span class="tag r">After</span>
+        <input type="range" min="4" max="96" value="55" aria-label="Drag the squeegee to compare before and after">
+      </div>
+      <p class="wipe-note">Drag the squeegee — that's the Tuesday feeling.</p>
+    </div>
+  </section>
+
+  <section class="bookwrap" id="book">
+    <div class="book-in">
+      <div class="rv">
+        <h2>Pick your clean.</h2>
+        <p class="note">Flat rates by home size, agreed before anyone arrives. Supplies included, no surprises on the day.</p>
+      </div>
+      <div class="panel rv" role="group" aria-label="Get your exact price">
+        <span class="lbl">Package</span>
+        <div class="svcs" data-pick="package">
+          <button class="svc" type="button" aria-pressed="true" data-v="Deep clean">Deep clean<small>from R780</small></button>
+          <button class="svc" type="button" aria-pressed="false" data-v="Weekly visit">Weekly visit<small>from R380</small></button>
+          <button class="svc" type="button" aria-pressed="false" data-v="Move-out clean">Move-out<small>from R1,200</small></button>
+          <button class="svc" type="button" aria-pressed="false" data-v="Once-off clean">Once-off<small>from R520</small></button>
+        </div>
+        <span class="lbl">Day · week of 15 June</span>
+        <div class="days" data-pick="day">
+          <button class="day" type="button" aria-pressed="false" data-v="Mon 15"><small>Mon</small><b>15</b></button>
+          <button class="day" type="button" aria-pressed="true" data-v="Tue 16"><small>Tue</small><b>16</b></button>
+          <button class="day" type="button" aria-pressed="false" data-v="Wed 17"><small>Wed</small><b>17</b></button>
+          <button class="day" type="button" aria-pressed="false" data-v="Thu 18"><small>Thu</small><b>18</b></button>
+          <button class="day" type="button" aria-pressed="false" data-v="Fri 19"><small>Fri</small><b>19</b></button>
+        </div>
+        <a class="go" id="confirm" href="#" target="_blank" rel="noopener">See my exact price →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="compare rv">
+    <h2>What's in each clean</h2>
+    <div class="cmp">
+      <div class="cr th"><span></span><b>Deep</b><b>Weekly</b><b>Move-out</b></div>
+      <div class="cr"><span>Kitchen &amp; bathrooms</span><i>✓</i><i>✓</i><i>✓</i></div>
+      <div class="cr"><span>Inside cupboards &amp; oven</span><i>✓</i><i class="no">—</i><i>✓</i></div>
+      <div class="cr"><span>Windows &amp; skirtings</span><i>✓</i><i class="no">—</i><i>✓</i></div>
+      <div class="cr"><span>Same cleaner every visit</span><i class="no">—</i><i>✓</i><i class="no">—</i></div>
+      <div class="cr"><span>Deposit-back checklist</span><i class="no">—</i><i class="no">—</i><i>✓</i></div>
+      <div class="cr pr"><span>From</span><b>R780</b><b>R380</b><b>R1,200</b></div>
+    </div>
+    <p class="cmp-note">Flat rates by home size, agreed before anyone arrives. Supplies included.</p>
+  </section>
+
+  <section class="quote rv">
+    <p>“Same cleaner every Tuesday for a year now. My home has never looked better.”</p>
+    <footer>Annelie B. — Centurion</footer>
+  </section>
+
+  <section class="final rv">
+    <h2>Next-day slots across Pretoria &amp; Centurion.</h2>
+    <a class="bar-cta" style="font-size:16px;padding:15px 28px" href="#book">See your exact price →</a>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>Sparkle Home · Pretoria &amp; Centurion</span>
+  <span>Vetted · insured · cash or EFT</span>
+</footer>
+
+<nav class="callbar" aria-label="Quick contact">
+  <a class="c1" href="#book">Book a clean</a>
+  <a class="c2" href="https://wa.me/27730229988?text=Hi%20Sparkle%20Home!%20I%27d%20like%20a%20quote%20for%20a%20clean." target="_blank" rel="noopener">WhatsApp</a>
+</nav>
+
+<script>
+(function(){
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.15});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+
+  // squeegee slider
+  var wipe = document.getElementById('wipe');
+  wipe.querySelector('input').addEventListener('input', function(){
+    wipe.style.setProperty('--cut', this.value + '%');
+  });
+
+  // booking → WhatsApp
+  var confirmBtn = document.getElementById('confirm');
+  function picked(group){
+    var el = document.querySelector('[data-pick="'+group+'"] [aria-pressed="true"]');
+    return el ? el.getAttribute('data-v') : '';
+  }
+  function sync(){
+    var msg = 'Hi Sparkle Home! I’d like a ' + picked('package') + ' on ' + picked('day') +
+      '. My home is a ___ (e.g. 3-bed house) in ___ (suburb) — what’s my exact price?';
+    confirmBtn.href = 'https://wa.me/27730229988?text=' + encodeURIComponent(msg);
+  }
+  document.querySelectorAll('[data-pick]').forEach(function(group){
+    group.addEventListener('click', function(ev){
+      var b = ev.target.closest('[data-v]');
+      if(!b || b.disabled) return;
+      group.querySelectorAll('[data-v]').forEach(function(o){ o.setAttribute('aria-pressed','false'); });
+      b.setAttribute('aria-pressed','true');
+      sync();
+    });
+  });
+  sync();
+})();
+</script>
+</body>
+</html>

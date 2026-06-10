@@ -480,17 +480,16 @@ body.nav-open{overflow:hidden;position:fixed;width:100%}
   background:linear-gradient(180deg,rgba(40,70,255,.6),rgba(0,0,255,.30));
   border:1px solid rgba(120,150,255,.9);
   -webkit-backdrop-filter:blur(8px) saturate(180%);backdrop-filter:blur(8px) saturate(180%);
-  box-shadow:0 0 16px rgba(40,70,255,.9),0 0 5px rgba(0,0,255,.95),inset 0 1px 0 rgba(255,255,255,.55);
+  box-shadow:0 0 9px rgba(40,70,255,.6),inset 0 1px 0 rgba(255,255,255,.5);
 }
-/* Hero heading accent: electric blue (#0000FF) with a bright per-word glow that
-   carries the luminosity (cyan stays cyan elsewhere) */
+/* Hero heading accent: electric blue (#0000FF) with a subtle per-word glow
+   (cyan stays cyan elsewhere) */
 .hero .h1 .cyan{
   color:var(--accent-electric);
   text-shadow:
     0 2px 24px rgba(0,8,26,.5),
-    0 0 10px rgba(50,80,255,.95),
-    0 0 22px rgba(40,70,255,.65),
-    0 0 46px rgba(0,0,255,.5);
+    0 0 8px rgba(50,80,255,.55),
+    0 0 20px rgba(0,0,255,.35);
 }
 .hero .badge{
   display:inline-flex;align-items:center;gap:var(--space-2);

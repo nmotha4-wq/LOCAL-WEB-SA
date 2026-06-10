@@ -7,10 +7,11 @@
 /* ========== LOCAL WEB SA — Shared Styles ========== */
 :root{
   /* Brand Colors */
-  --brand-blue:#0011FF;
+  --brand-blue:#0315FF;       /* electric blue sampled from the Local Web SA logo */
   --brand-blue-deep:#0007A8;
   --brand-blue-mid:#0024F2;
   --accent-cyan:#00E5FF;
+  --accent-electric:#2A40FF;  /* brightened logo blue — hero heading accent + feature dots */
   --whatsapp-green:#00E676;
 
   /* Backgrounds — deep navy canvas + cyan accent (production direction) */
@@ -465,8 +466,17 @@ body.nav-open{overflow:hidden;position:fixed;width:100%}
   font-size:var(--text-sm);font-weight:600;color:rgba(255,255,255,0.95);
 }
 .hero.left .feats{justify-content:flex-start}
+/* Lock the left-anchored hero (home) so heading, paragraph, CTAs and feats
+   all begin at one shared left edge on desktop */
+.hero.left h1.h1,
+.hero.left .sub,
+.hero.left .ctas,
+.hero.left .feats{margin-left:0;padding-left:0}
+.hero.left .ctas{align-items:flex-start}
 .hero .feats .item{display:inline-flex;align-items:center;gap:var(--space-2)}
-.hero .feats .dot{width:8px;height:8px;border-radius:50%;background:var(--whatsapp-green);box-shadow:0 0 12px var(--whatsapp-green)}
+.hero .feats .dot{width:8px;height:8px;border-radius:0;background:var(--accent-electric);box-shadow:0 0 12px rgba(42,64,255,.75)}
+/* Hero heading accent uses the brightened logo electric blue (cyan stays cyan elsewhere) */
+.hero .h1 .cyan{color:var(--accent-electric)}
 .hero .badge{
   display:inline-flex;align-items:center;gap:var(--space-2);
   padding:var(--space-2) var(--space-4);border-radius:9999px;

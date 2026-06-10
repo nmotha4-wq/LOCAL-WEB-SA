@@ -7,11 +7,11 @@
 /* ========== LOCAL WEB SA — Shared Styles ========== */
 :root{
   /* Brand Colors */
-  --brand-blue:#0315FF;       /* electric blue sampled from the Local Web SA logo */
+  --brand-blue:#0000FF;       /* electric blue — brand reference (#0000FF) */
   --brand-blue-deep:#0007A8;
   --brand-blue-mid:#0024F2;
   --accent-cyan:#00E5FF;
-  --accent-electric:#4866FF;  /* bright electric blue — hero heading accent + feature dots */
+  --accent-electric:#0000FF;  /* electric blue — hero heading accent + feature dots (glow carries the brightness) */
   --whatsapp-green:#00E676;
 
   /* Backgrounds — deep navy canvas + cyan accent (production direction) */
@@ -477,18 +477,20 @@ body.nav-open{overflow:hidden;position:fixed;width:100%}
 /* Glass square chips — frosted electric-blue glass with a glow, like the hero buttons */
 .hero .feats .dot{
   width:11px;height:11px;border-radius:1px;
-  background:linear-gradient(180deg,rgba(72,102,255,.55),rgba(72,102,255,.20));
-  border:1px solid rgba(150,172,255,.85);
-  -webkit-backdrop-filter:blur(8px) saturate(170%);backdrop-filter:blur(8px) saturate(170%);
-  box-shadow:0 0 14px rgba(72,102,255,.85),0 0 4px rgba(72,102,255,.9),inset 0 1px 0 rgba(255,255,255,.5);
+  background:linear-gradient(180deg,rgba(40,70,255,.6),rgba(0,0,255,.30));
+  border:1px solid rgba(120,150,255,.9);
+  -webkit-backdrop-filter:blur(8px) saturate(180%);backdrop-filter:blur(8px) saturate(180%);
+  box-shadow:0 0 16px rgba(40,70,255,.9),0 0 5px rgba(0,0,255,.95),inset 0 1px 0 rgba(255,255,255,.55);
 }
-/* Hero heading accent: bright electric blue with a per-word glow (cyan stays cyan elsewhere) */
+/* Hero heading accent: electric blue (#0000FF) with a bright per-word glow that
+   carries the luminosity (cyan stays cyan elsewhere) */
 .hero .h1 .cyan{
   color:var(--accent-electric);
   text-shadow:
-    0 2px 26px rgba(0,8,26,.55),
-    0 0 14px rgba(72,102,255,.75),
-    0 0 34px rgba(72,102,255,.45);
+    0 2px 24px rgba(0,8,26,.5),
+    0 0 10px rgba(50,80,255,.95),
+    0 0 22px rgba(40,70,255,.65),
+    0 0 46px rgba(0,0,255,.5);
 }
 .hero .badge{
   display:inline-flex;align-items:center;gap:var(--space-2);

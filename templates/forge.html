@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>FORGE / Tshepo M. — Strength &amp; Conditioning Coach, Centurion</title>
+<meta name="description" content="Private strength coaching in Centurion. Twelve-week programmes, real results. Book a free intro session.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Barlow:wght@400;500;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* Hallmark · macrostructure: manifesto-poster · genre: editorial (gym poster)
+ * theme: custom (vibe: "boxing-gym poster, chalk and iron, ember red"
+ * · paper oklch(95% 0.01 90) · accent oklch(56% 0.19 32) ember-warm
+ * · Alfa Slab One + Barlow) · nav: brand + book slab · footer: Ft1 colophon
+ * signature: barbell loads plates as the creed reveals · drawn ember underline
+ * pre-emit critique: P5 H5 E4 S5 R4 V5 · contrast: pass · axes: light / display-heavy / warm-red
+ */
+:root{
+  --paper:#f4f1ea; --paper:oklch(95.5% 0.01 90);
+  --paper-2:#eae5d9; --paper-2:oklch(92% 0.015 90);
+  --ink:#17150f; --ink:oklch(18% 0.01 90);
+  --ink-soft:#56524a; --ink-soft:oklch(43% 0.01 90);
+  --ember:#cf3f22; --ember:oklch(56% 0.19 32);
+  --ember-deep:#a32f17; --ember-deep:oklch(46% 0.17 32);
+  --line:rgba(23,21,15,.16);
+  --font-display:'Alfa Slab One',Georgia,serif;
+  --font-body:'Barlow',system-ui,sans-serif;
+  --font-cond:'Barlow Condensed','Arial Narrow',sans-serif;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:96px;
+}
+*{box-sizing:border-box;margin:0}
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:var(--font-body);font-size:16.5px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:76px;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ember);outline-offset:3px}
+
+.bar{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s2);
+  padding:14px 20px;border-bottom:3px solid var(--ink);
+}
+.brand{font-family:var(--font-display);font-size:19px;text-decoration:none;letter-spacing:.01em}
+.brand small{font-family:var(--font-cond);font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-left:8px}
+.bar-cred{display:none;font-family:var(--font-cond);font-weight:600;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.bar-book{
+  font-family:var(--font-cond);font-weight:700;font-size:15px;letter-spacing:.1em;text-transform:uppercase;
+  text-decoration:none;background:var(--ink);color:var(--paper);padding:10px 16px;white-space:nowrap;
+  transition:background .2s var(--ease-out),transform .15s var(--ease-out);
+}
+.bar-book:hover{background:var(--ember)}
+.bar-book:active{transform:translateY(1px)}
+
+/* hero */
+.hero{padding:var(--s5) 20px var(--s4);max-width:1150px;margin:0 auto}
+.kick{
+  font-family:var(--font-cond);font-weight:700;font-size:14px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ember);display:block;margin-bottom:var(--s2);
+}
+h1{
+  font-family:var(--font-display);font-weight:400;text-transform:uppercase;
+  font-size:clamp(44px,12vw,118px);line-height:1.02;letter-spacing:0;
+  overflow-wrap:anywhere;min-width:0;
+}
+.uwrap{position:relative;display:inline-block;white-space:nowrap}
+.uwrap svg{position:absolute;left:-2%;bottom:-.18em;width:104%;height:.32em;overflow:visible}
+.uwrap path{
+  fill:none;stroke:var(--ember);stroke-width:7;stroke-linecap:round;
+  stroke-dasharray:320;stroke-dashoffset:320;
+}
+.in .uwrap path{transition:stroke-dashoffset 1s var(--ease-out) .4s;stroke-dashoffset:0}
+.sub{max-width:48ch;color:var(--ink-soft);font-size:18px;margin-top:var(--s3)}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:var(--s3)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:var(--font-cond);font-weight:700;font-size:18px;letter-spacing:.1em;text-transform:uppercase;
+  padding:15px 24px;text-decoration:none;min-height:52px;white-space:nowrap;
+  transition:background .2s var(--ease-out),color .2s var(--ease-out),transform .15s var(--ease-out);
+}
+.btn-main{background:var(--ember);color:#fff}
+.btn-main:hover{background:var(--ember-deep)}
+.btn-ghost{border:2px solid var(--ink);color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+.btn:active{transform:translateY(1px)}
+
+.stats{
+  max-width:1150px;margin:0 auto;padding:0 20px var(--s4);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:transparent;
+}
+.stats div{border-top:3px solid var(--ink);padding-top:12px}
+.stats b{font-family:var(--font-display);font-size:clamp(26px,6vw,44px);display:block;line-height:1}
+.stats span{font-family:var(--font-cond);font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+
+/* creed + barbell */
+.creed{background:var(--ink);color:var(--paper);padding:var(--s5) 20px var(--s5)}
+.creed-in{max-width:1150px;margin:0 auto}
+.creed .kick{color:var(--ember)}
+.creed h2{font-family:var(--font-display);text-transform:uppercase;font-size:clamp(34px,8vw,64px);line-height:1;margin-bottom:var(--s4)}
+.rule{
+  display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:baseline;
+  padding:var(--s3) 0;border-top:1px solid rgba(244,241,234,.2);
+}
+.rule .n{font-family:var(--font-display);font-size:clamp(28px,6vw,44px);color:var(--ember);line-height:1}
+.rule b{font-family:var(--font-cond);font-weight:700;font-size:clamp(22px,5vw,30px);letter-spacing:.06em;text-transform:uppercase}
+.rule p{grid-column:2;color:rgba(244,241,234,.72);max-width:52ch}
+/* barbell: plates slide on as rules reveal */
+.barbell{margin-top:var(--s4);display:block;width:100%;max-width:620px;height:64px;overflow:visible}
+.barbell .shaft{stroke:#8d877a;stroke-width:6;stroke-linecap:round}
+.barbell .collar{fill:#8d877a}
+.barbell .plate{fill:var(--ember);opacity:0;transform:translateY(-26px)}
+.barbell .plate.r{transform:translateY(26px)}
+.barbell .plate.on{opacity:1;transform:translateY(0);transition:opacity .5s var(--ease-out),transform .6s var(--ease-out)}
+.barbell .plate.p2{fill:#d6d1c4}
+.barbell .plate.p3{fill:#6e6a5f}
+
+/* programmes */
+.prog{max-width:1150px;margin:0 auto;padding:var(--s5) 20px}
+.prog h2{font-family:var(--font-display);text-transform:uppercase;font-size:clamp(34px,8vw,64px);line-height:1;margin-bottom:var(--s4)}
+.cards{display:grid;gap:14px}
+.card{
+  border:3px solid var(--ink);padding:var(--s3);
+  display:flex;flex-direction:column;gap:8px;background:var(--paper);
+  transition:transform .25s var(--ease-out),box-shadow .25s var(--ease-out);
+}
+.card:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--ember)}
+.card .tag{font-family:var(--font-cond);font-weight:700;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ember)}
+.card b{font-family:var(--font-display);font-size:23px;line-height:1.15}
+.card p{color:var(--ink-soft);font-size:15.5px;flex:1}
+.card .price{font-family:var(--font-cond);font-weight:700;font-size:24px;letter-spacing:.04em}
+.card .price small{font-size:15px;color:var(--ink-soft);letter-spacing:.06em}
+
+/* final */
+.final{background:var(--ember);color:#fff;padding:var(--s6) 20px}
+.final-in{max-width:1150px;margin:0 auto}
+.final h2{font-family:var(--font-display);text-transform:uppercase;font-size:clamp(40px,11vw,96px);line-height:.98}
+.final p{margin:var(--s3) 0;font-size:18px;max-width:46ch}
+.final .btn-main{background:#fff;color:var(--ember)}
+.final .btn-main:hover{background:var(--ink);color:#fff}
+
+.foot{
+  border-top:3px solid var(--ink);padding:var(--s3) 20px;
+  display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;
+  font-family:var(--font-cond);font-weight:600;font-size:13.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);
+}
+
+.callbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  display:grid;grid-template-columns:1fr 1fr;border-top:3px solid var(--ink);
+}
+.callbar a{
+  display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;
+  font-family:var(--font-cond);font-weight:700;font-size:17px;letter-spacing:.1em;text-transform:uppercase;
+  padding:16px 10px;min-height:56px;
+}
+.callbar .c1{background:var(--ember);color:#fff}
+.callbar .c2{background:var(--ink);color:var(--paper)}
+
+.rv{opacity:0;transform:translateY(14px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+.rv.in{opacity:1;transform:none}
+
+@media (min-width:760px){
+  body{padding-bottom:0}
+  .callbar{display:none}
+  .bar{padding:16px 40px}
+  .bar-cred{display:block}
+  .hero{padding:var(--s6) 40px var(--s4)}
+  .stats{padding:0 40px var(--s5)}
+  .creed,.prog{padding-left:40px;padding-right:40px}
+  .cards{grid-template-columns:repeat(3,1fr)}
+  .final{padding:calc(var(--s6) + 20px) 40px}
+  .foot{padding:var(--s3) 40px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .rv{opacity:1;transform:none}
+  .uwrap path{stroke-dashoffset:0}
+  .barbell .plate{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a class="brand" href="#top">FORGE<small>/ Tshepo M.</small></a>
+  <span class="bar-cred">Cert. coach · Centurion</span>
+  <a class="bar-book" href="https://wa.me/27820551448?text=Hi%20Tshepo!%20I%27d%20like%20to%20book%20a%20free%20intro%20session." target="_blank" rel="noopener">Book free intro</a>
+</header>
+
+<main id="top">
+  <section class="hero rv">
+    <span class="kick">Strength · Conditioning · Mindset</span>
+    <h1>Train like you<br><span class="uwrap">mean it.<svg viewBox="0 0 320 40" aria-hidden="true" preserveAspectRatio="none"><path d="M4 28 C 60 18, 150 14, 314 22"/></svg></span></h1>
+    <p class="sub">Private coaching in Centurion. Twelve-week programmes that fit around your life and produce results you can actually see.</p>
+    <div class="ctas">
+      <a class="btn btn-main" href="https://wa.me/27820551448?text=Hi%20Tshepo!%20I%27d%20like%20to%20book%20a%20free%20intro%20session." target="_blank" rel="noopener">Book a free intro</a>
+      <a class="btn btn-ghost" href="tel:+27820551448">Call Tshepo</a>
+    </div>
+  </section>
+
+  <div class="stats rv">
+    <div><b>120+</b><span>clients trained</span></div>
+    <div><b>12 wk</b><span>avg. programme</span></div>
+    <div><b>4.9★</b><span>Google rating</span></div>
+  </div>
+
+  <section class="creed">
+    <div class="creed-in">
+      <span class="kick">House rules</span>
+      <h2>Three rules.<br>No small print.</h2>
+      <div class="rule rv" data-plate="1"><span class="n">01</span><b>Show up.</b><p>Three sessions a week. Non-negotiable, even in July.</p></div>
+      <div class="rule rv" data-plate="2"><span class="n">02</span><b>Lift heavy.</b><p>Strength first. Everything else follows it.</p></div>
+      <div class="rule rv" data-plate="3"><span class="n">03</span><b>Keep score.</b><p>Every rep logged. Progress reviewed every Friday.</p></div>
+      <svg class="barbell" viewBox="0 0 620 64" aria-hidden="true">
+        <line class="shaft" x1="10" y1="32" x2="610" y2="32"/>
+        <rect class="collar" x="150" y="22" width="10" height="20" rx="2"/>
+        <rect class="collar" x="460" y="22" width="10" height="20" rx="2"/>
+        <rect class="plate p1 l" data-p="1" x="128" y="6" width="16" height="52" rx="4"/>
+        <rect class="plate p1 r" data-p="1" x="476" y="6" width="16" height="52" rx="4"/>
+        <rect class="plate p2 l" data-p="2" x="106" y="12" width="16" height="40" rx="4"/>
+        <rect class="plate p2 r" data-p="2" x="498" y="12" width="16" height="40" rx="4"/>
+        <rect class="plate p3 l" data-p="3" x="84" y="18" width="16" height="28" rx="4"/>
+        <rect class="plate p3 r" data-p="3" x="520" y="18" width="16" height="28" rx="4"/>
+      </svg>
+    </div>
+  </section>
+
+  <section class="prog">
+    <span class="kick">Programmes</span>
+    <h2>Pick your fight.</h2>
+    <div class="cards">
+      <article class="card rv">
+        <span class="tag">Most booked</span>
+        <b>12-Week Transformation</b>
+        <p>Three sessions a week, nutrition plan, weekly check-ins. The full rebuild.</p>
+        <span class="price">R3,600</span>
+      </article>
+      <article class="card rv">
+        <span class="tag">One on one</span>
+        <b>Private Coaching</b>
+        <p>Private sessions built around your schedule, in the gym or at home.</p>
+        <span class="price">R420 <small>/ session</small></span>
+      </article>
+      <article class="card rv">
+        <span class="tag">Anywhere</span>
+        <b>Online Programme</b>
+        <p>Custom plan, video form-checks, weekly adjustments. Coached from your phone.</p>
+        <span class="price">R890 <small>/ month</small></span>
+      </article>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="final-in rv">
+      <h2>First session is free.</h2>
+      <p>One hour. We test where you are, set the twelve-week target, and you decide if we're a fit. Weekdays 05:30–19:00.</p>
+      <div class="ctas">
+        <a class="btn btn-main" href="https://wa.me/27820551448?text=Hi%20Tshepo!%20I%27d%20like%20to%20book%20a%20free%20intro%20session." target="_blank" rel="noopener">Book on WhatsApp</a>
+        <a class="btn btn-ghost" style="border-color:#fff;color:#fff" href="tel:+27820551448">082 055 1448</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>FORGE / Tshepo M. · Centurion</span>
+  <span>05:30–19:00 weekdays</span>
+</footer>
+
+<nav class="callbar" aria-label="Quick contact">
+  <a class="c1" href="https://wa.me/27820551448?text=Hi%20Tshepo!%20I%27d%20like%20to%20book%20a%20free%20intro%20session." target="_blank" rel="noopener">Book free intro</a>
+  <a class="c2" href="tel:+27820551448">Call</a>
+</nav>
+
+<script>
+(function(){
+  var plates = document.querySelectorAll('.barbell .plate');
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add('in');
+      var p = e.target.getAttribute('data-plate');
+      if(p) plates.forEach(function(pl){ if(pl.getAttribute('data-p') === p) pl.classList.add('on'); });
+      io.unobserve(e.target);
+    });
+  },{threshold:.3});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>

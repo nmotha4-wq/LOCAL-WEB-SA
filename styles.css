@@ -361,17 +361,17 @@ body.nav-open{overflow:hidden;position:fixed;width:100%}
 }
 .btn-blue{
   color:#fff;
-  background:linear-gradient(180deg,rgba(60,96,255,.34),rgba(0,0,255,.18));
-  border:1px solid rgba(120,150,255,.50);
-  -webkit-backdrop-filter:blur(16px) saturate(170%);backdrop-filter:blur(16px) saturate(170%);
+  /* solid vivid electric blue (#0000FF) — not a washed glass tint */
+  background:linear-gradient(180deg,#2A3CFF,#0000FF);
+  border:1px solid rgba(140,160,255,.55);
   text-shadow:0 1px 8px rgba(0,8,40,.45);
-  box-shadow:0 8px 30px rgba(0,0,255,.34),inset 0 1px 0 rgba(255,255,255,.40),inset 0 -10px 20px rgba(0,0,255,.10);
+  box-shadow:0 8px 30px rgba(0,0,255,.45),inset 0 1px 0 rgba(255,255,255,.35);
 }
 .btn-blue:hover{
   color:#fff;
-  background:linear-gradient(180deg,rgba(80,116,255,.46),rgba(0,0,255,.26));
-  border-color:rgba(150,178,255,.70);
-  box-shadow:0 14px 40px rgba(0,0,255,.42),0 0 26px rgba(0,229,255,.20),inset 0 1px 0 rgba(255,255,255,.55),inset 0 -10px 20px rgba(0,0,255,.14);
+  background:linear-gradient(180deg,#3D4DFF,#0A18FF);
+  border-color:rgba(160,185,255,.75);
+  box-shadow:0 14px 40px rgba(0,0,255,.55),0 0 26px rgba(0,229,255,.20),inset 0 1px 0 rgba(255,255,255,.45);
 }
 .btn-ghost-dark{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.22)}
 .btn-ghost-dark:hover{border-color:var(--accent-cyan);color:var(--accent-cyan)}
@@ -705,7 +705,7 @@ body.nav-open{overflow:hidden;position:fixed;width:100%}
 .toggle::after{content:'';position:absolute;inset:-8px;border-radius:inherit}
 .toggle:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(0,229,255,.40)}
 .toggle.on{
-  background:linear-gradient(180deg,#2a55ff,var(--brand-blue));
+  background:linear-gradient(180deg,#2A3CFF,var(--brand-blue));
   border-color:rgba(120,150,255,.55);
   box-shadow:0 0 16px rgba(0,0,255,.40), inset 0 1px 0 rgba(255,255,255,.25);
 }
@@ -1202,8 +1202,8 @@ footer::after{
 .plan:hover{border-color:rgba(255,255,255,.14)}
 .plan .plan-tag{
   display:inline-flex;align-items:center;
-  background:rgba(0,0,255,0.18);
-  color:#7E8CFF;
+  background:#0000FF;
+  color:#fff;
   border-radius:9999px;
   padding:6px 14px;
   font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
@@ -1316,9 +1316,9 @@ footer::after{
 .calc-cta:hover{border-color:rgba(255,255,255,.16)}
 .calc-cta .calc-ico{
   width:54px;height:54px;border-radius:14px;
-  background:rgba(0,0,255,0.18);
-  display:grid;place-items:center;color:#7E8CFF;
-  border:1px solid rgba(0,0,255,0.28);
+  background:#0000FF;
+  display:grid;place-items:center;color:#fff;
+  border:1px solid rgba(140,160,255,.5);
 }
 .calc-cta .calc-ico svg{width:26px;height:26px}
 .calc-cta h3{font-size:24px;font-weight:800;color:#fff;margin:6px 0 0;letter-spacing:-0.01em}

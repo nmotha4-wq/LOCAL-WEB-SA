@@ -18,7 +18,7 @@
       <a href="chat.html">Chat</a>
     </nav>
     <a href="contact.html" class="btn btn-white sm nav-cta">Get a Quote</a>
-    <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
   </header>

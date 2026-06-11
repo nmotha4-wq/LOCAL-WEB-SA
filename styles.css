@@ -1798,6 +1798,16 @@ footer::after{
   to{transform:scale(1.12) translate3d(-1.5%,-1.5%,0)}
 }
 
+/* Mobile hero video: hidden on desktop, swapped in for the photo on phones.
+   Muted + autoplay + loop + playsinline so it behaves like ambient art. */
+.hero-art-video{display:none}
+.hero-art-video{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center 35%;
+  -webkit-mask-image:linear-gradient(180deg, #000 0%, #000 50%, rgba(0,0,0,.6) 76%, rgba(0,0,0,.18) 92%, transparent 100%);
+  mask-image:linear-gradient(180deg, #000 0%, #000 50%, rgba(0,0,0,.6) 76%, rgba(0,0,0,.18) 92%, transparent 100%);
+}
+
 /* Legibility scrim: darken top (under nav), keep the art's glow mid,
    fade hard into the black section that follows. Plus a soft vignette. */
 .hero-art-scrim{
@@ -1841,7 +1851,11 @@ footer::after{
 
 /* Stronger scrim on phones (busier vertical art) */
 @media (max-width:768px){
-  .hero-art img{
+  /* phones: swap the still photo for the ambient hero video */
+  .hero-art:not(.hero-art-video){display:none}
+  .hero-art-video{display:block}
+  .hero-art img,
+  .hero-art-video{
     object-position:center 28%;
     /* phones: start the dissolve a little higher so it clears the copy */
     -webkit-mask-image:linear-gradient(180deg, #000 0%, #000 44%, rgba(0,0,0,.55) 72%, rgba(0,0,0,.15) 90%, transparent 100%);

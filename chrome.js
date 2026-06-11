@@ -50,7 +50,10 @@
 
   const footerHTML = `
   <footer>
-    <img class="footer-art" src="assets/footer/footer-art.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true" />
+    <picture aria-hidden="true">
+      <source media="(max-width:768px)" srcset="assets/footer/flowers-mobile.png" />
+      <img class="footer-art" src="assets/footer/flowers-web.png" alt="" loading="lazy" decoding="async" />
+    </picture>
     <div class="footer-art-scrim" aria-hidden="true"></div>
     <svg class="constellation" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
@@ -110,7 +113,7 @@
             <div class="foot-statement">
         <a href="index.html" class="brand foot-brandmark" aria-label="Local Web SA">
           <span class="brand-mark" aria-hidden="true"></span>
-          <span class="brand-text"><b>LOCAL WEB</b><span>SA</span></span>
+          <img class="brand-wordmark" src="assets/logo-wordmark.png" alt="Local Web SA" width="847" height="135" />
         </a>
         <h2 class="foot-line">Where ideas <span class="cyan">go online.</span></h2>
         <p class="foot-tagline">Affordable, modern websites for South African small businesses. Built in Pretoria, shipped in days.</p>

@@ -35,8 +35,8 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero has-art left" data-screen-label="01 Home Hero">
-  <video id="heroVideoDesktop" class="hero-art hero-art-video hero-art-video--desktop" muted loop playsinline autoplay preload="auto" poster="assets/hero/showcase-d-web.jpg" data-src="assets/hero/hero-desktop.mp4" aria-hidden="true" disablepictureinpicture disableremoteplayback></video>
-  <video id="heroVideoMobile" class="hero-art hero-art-video hero-art-video--mobile" muted loop playsinline autoplay preload="auto" poster="assets/hero/showcase-a-mobile.jpg" data-src="assets/hero/hero-mobile.mp4" aria-hidden="true" disablepictureinpicture disableremoteplayback></video>
+  <video id="heroVideoDesktop" class="hero-art hero-art-video hero-art-video--desktop" muted loop playsinline preload="auto" poster="assets/hero/showcase-d-web.jpg" data-src="assets/hero/hero-desktop.mp4" aria-hidden="true" disablepictureinpicture disableremoteplayback></video>
+  <video id="heroVideoMobile" class="hero-art hero-art-video hero-art-video--mobile" muted loop playsinline preload="auto" poster="assets/hero/showcase-a-mobile.jpg" data-src="assets/hero/hero-mobile.mp4" aria-hidden="true" disablepictureinpicture disableremoteplayback></video>
   <div class="hero-art-scrim" aria-hidden="true"></div>
   <div class="wrap">
     <h1 class="h1 fade-in">Your Business<br/><span class="cyan">Deserves to Be Online</span></h1>
@@ -593,20 +593,22 @@
 })();
 </script>
 <script>
-/* Hero video loader + autoplay enforcer.
-   - Loads ONLY the clip that matches the viewport (desktop landscape vs
-     mobile portrait) so we never download both.
-   - Forces muted autoplay + loop: the autoplay attribute alone is unreliable
-     (iOS Low Power Mode, data-saver, tab restored from background), so we
-     explicitly mute + call play() and retry on canplay, on tab re-show, and
-     on the first user gesture.
-   - Re-evaluates on resize so switching between desktop/mobile widths works. */
+/* Hero video loader — "still until the first movement".
+   - On entry the hero shows a STILL frame (the video's poster); nothing plays.
+   - The first movement of any kind — scroll, touch, wheel, mouse-move, key,
+     tap — starts the video, which then loops forever. Because these are real
+     user gestures, playback also unlocks on iOS Low Power Mode (where pure
+     autoplay is blocked) — no play button or controls ever shown.
+   - Only the clip matching the viewport (desktop landscape vs mobile portrait)
+     is loaded, so neither view downloads the other's video. */
 (function () {
   var desktop = document.getElementById('heroVideoDesktop');
   var mobile = document.getElementById('heroVideoMobile');
   if (!desktop && !mobile) return;
   var mq = window.matchMedia('(max-width:768px)');
+  var started = false;
 
+  function current() { return mq.matches ? mobile : desktop; }
   function ensureSrc(v) {
     if (v && !v.getAttribute('src') && v.dataset.src) {
       v.setAttribute('src', v.dataset.src);
@@ -620,25 +622,38 @@
     var p = v.play();
     if (p && typeof p.catch === 'function') p.catch(function () {});
   }
-  function activate() {
-    var active = mq.matches ? mobile : desktop;
+
+  // Preload the matching clip so the first movement starts it instantly,
+  // but keep it PAUSED on its poster until then.
+  ensureSrc(current());
+
+  function start() {
+    if (started) return;
+    started = true;
+    var active = current();
     var other = mq.matches ? desktop : mobile;
     if (other) other.pause();
     ensureSrc(active);
     play(active);
   }
 
-  activate();
-  [desktop, mobile].forEach(function (v) {
-    if (v) v.addEventListener('canplay', function () { if (!v.paused) return; play(v); });
+  // First "movement" triggers playback (and unlocks iOS Low Power Mode).
+  var triggers = ['scroll', 'wheel', 'touchstart', 'touchmove', 'pointerdown', 'mousemove', 'keydown', 'click'];
+  triggers.forEach(function (evt) {
+    window.addEventListener(evt, start, { passive: true, once: true });
   });
-  (mq.addEventListener ? mq.addEventListener.bind(mq, 'change') : mq.addListener.bind(mq))(activate);
-  document.addEventListener('visibilitychange', function () { if (!document.hidden) activate(); });
-  ['touchstart', 'click', 'scroll'].forEach(function (evt) {
-    window.addEventListener(evt, function once() {
-      activate();
-      window.removeEventListener(evt, once);
-    }, { passive: true });
+
+  // Keep the right clip ready/playing when crossing the mobile breakpoint.
+  (mq.addEventListener ? mq.addEventListener.bind(mq, 'change') : mq.addListener.bind(mq))(function () {
+    var active = current();
+    var other = mq.matches ? desktop : mobile;
+    if (other) other.pause();
+    ensureSrc(active);
+    if (started) play(active);
+  });
+  // Resume after returning to the tab, but only once it's been started.
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden && started) play(current());
   });
 })();
 </script>

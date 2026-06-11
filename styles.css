@@ -384,10 +384,9 @@ body.nav-open{overflow:hidden;position:fixed;width:100%}
 /* Full-width buttons on mobile */
 @media (max-width: 480px){
   .btn.full-mobile{width:100%}
-  /* Stack hero CTAs so long labels (e.g. "Get Started — From R799") never overlap or clip */
-  /* Keep them left-aligned with the hero text and short enough to clear the chat bubble on the right */
+  /* Stack hero CTAs left-aligned; they hug their label instead of stretching */
   .hero .ctas{flex-direction:column;flex-wrap:nowrap;align-items:flex-start}
-  .hero .ctas .btn{width:100%;max-width:300px}
+  .hero .ctas .btn{width:auto;max-width:300px}
 }
 
 /* ====== HEROES ====== */
@@ -1923,6 +1922,14 @@ footer::after{
   border-color:rgba(0,230,118,.85);
   background:rgba(0,230,118,.10);
   box-shadow:0 12px 38px rgba(0,230,118,.30),0 0 26px rgba(0,230,118,.30);
+}
+
+/* Hero CTAs: compact rectangles anchored to the left edge of the copy */
+.btn-art-primary,
+.btn-art-wa{
+  border-radius:8px;
+  padding:var(--space-3) var(--space-5);
+  font-size:var(--text-sm);
 }
 
 /* ==========================================================================

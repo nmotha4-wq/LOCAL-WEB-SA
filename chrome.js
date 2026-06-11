@@ -50,8 +50,8 @@
 
   const footerHTML = `
   <footer>
-    <video id="footerVideoDesktop" class="footer-art footer-art-video footer-art-video--desktop" muted loop playsinline preload="auto" data-src="assets/footer/footer-desktop.mp4" aria-hidden="true" disablepictureinpicture disableremoteplayback></video>
-    <video id="footerVideoMobile" class="footer-art footer-art-video footer-art-video--mobile" muted loop playsinline preload="auto" data-src="assets/footer/footer-mobile.mp4" aria-hidden="true" disablepictureinpicture disableremoteplayback></video>
+    <video id="footerVideoDesktop" class="footer-art footer-art-video footer-art-video--desktop" muted loop playsinline preload="none" poster="assets/footer/footer-desktop-poster.jpg" data-src="assets/footer/footer-desktop.mp4" aria-hidden="true" disablepictureinpicture disableremoteplayback></video>
+    <video id="footerVideoMobile" class="footer-art footer-art-video footer-art-video--mobile" muted loop playsinline preload="none" poster="assets/footer/footer-mobile-poster.jpg" data-src="assets/footer/footer-mobile.mp4" aria-hidden="true" disablepictureinpicture disableremoteplayback></video>
     <div class="footer-art-scrim" aria-hidden="true"></div>
     <svg class="constellation" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
@@ -172,9 +172,23 @@
   const footMount = document.getElementById('footMount');
   if (footMount) footMount.outerHTML = footerHTML;
 
+  // Run a callback once the page is fully loaded and the browser is idle, so
+  // heavy work (video downloads) never competes with the initial page load.
+  function whenIdle(fn) {
+    const run = function () {
+      (window.requestIdleCallback || function (cb) { return setTimeout(cb, 1); })(fn, { timeout: 3000 });
+    };
+    if (document.readyState === 'complete') run();
+    else window.addEventListener('load', run, { once: true });
+  }
+
   /* ===== Ambient hero/footer video: "the paused video IS the waiting still".
+     - Each clip shows a poster that is its OWN first frame, so the still is
+       visible instantly with zero mismatch, and the clip itself is downloaded
+       only once the page is idle (preload="none") — so videos never slow the
+       initial page load.
      - Loads ONLY the clip matching the viewport (desktop landscape vs mobile
-       portrait) and shows its own first frame, paused — no poster image.
+       portrait).
      - First movement (scroll/touch/wheel/mouse/key/tap) starts it looping.
        A real user gesture also unlocks playback on iOS Low Power Mode; no
        play button or controls are ever shown.
@@ -214,8 +228,9 @@
       else v.addEventListener('loadeddata', nudge, { once: true });
     }
 
-    ensureSrc(current());
-    primeFrame(current());
+    // Poster already shows the still; quietly download + prime the matching
+    // clip once the page is idle so it's ready to play on the first movement.
+    whenIdle(function () { ensureSrc(current()); primeFrame(current()); });
 
     function start() {
       if (started) return;

@@ -53,59 +53,6 @@
     <video id="footerVideoDesktop" class="footer-art footer-art-video footer-art-video--desktop" muted loop playsinline preload="none" poster="assets/footer/footer-desktop-poster.jpg" data-src="assets/footer/footer-desktop.mp4" aria-hidden="true" disablepictureinpicture disableremoteplayback></video>
     <video id="footerVideoMobile" class="footer-art footer-art-video footer-art-video--mobile" muted loop playsinline preload="none" poster="assets/footer/footer-mobile-poster.jpg" data-src="assets/footer/footer-mobile.mp4" aria-hidden="true" disablepictureinpicture disableremoteplayback></video>
     <div class="footer-art-scrim" aria-hidden="true"></div>
-    <svg class="constellation" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <defs>
-        <filter id="cglow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="4" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
-      <g stroke="rgba(180,210,255,0.22)" stroke-width="0.6" fill="none">
-        <line x1="80" y1="80" x2="320" y2="160"/>
-        <line x1="320" y1="160" x2="540" y2="100"/>
-        <line x1="540" y1="100" x2="780" y2="180"/>
-        <line x1="780" y1="180" x2="1020" y2="120"/>
-        <line x1="1020" y1="120" x2="1140" y2="220"/>
-        <line x1="80" y1="80" x2="160" y2="260"/>
-        <line x1="160" y1="260" x2="380" y2="280"/>
-        <line x1="380" y1="280" x2="540" y2="100"/>
-        <line x1="380" y1="280" x2="620" y2="360"/>
-        <line x1="620" y1="360" x2="780" y2="180"/>
-        <line x1="620" y1="360" x2="840" y2="460"/>
-        <line x1="840" y1="460" x2="1080" y2="380"/>
-        <line x1="1080" y1="380" x2="1140" y2="220"/>
-        <line x1="160" y1="260" x2="220" y2="440"/>
-        <line x1="220" y1="440" x2="460" y2="500"/>
-        <line x1="460" y1="500" x2="620" y2="360"/>
-        <line x1="460" y1="500" x2="700" y2="540"/>
-        <line x1="700" y1="540" x2="840" y2="460"/>
-        <line x1="220" y1="440" x2="100" y2="540"/>
-        <line x1="700" y1="540" x2="980" y2="560"/>
-        <line x1="980" y1="560" x2="1080" y2="380"/>
-      </g>
-      <g fill="rgba(255,255,255,0.85)">
-        <circle cx="80" cy="80" r="1.5"/><circle cx="320" cy="160" r="1.8"/>
-        <circle cx="540" cy="100" r="1.2"/><circle cx="780" cy="180" r="1.6"/>
-        <circle cx="1020" cy="120" r="1.4"/><circle cx="1140" cy="220" r="1.2"/>
-        <circle cx="160" cy="260" r="1.4"/><circle cx="380" cy="280" r="1.6"/>
-        <circle cx="620" cy="360" r="2"/><circle cx="840" cy="460" r="1.4"/>
-        <circle cx="1080" cy="380" r="1.6"/><circle cx="220" cy="440" r="1.2"/>
-        <circle cx="460" cy="500" r="1.5"/><circle cx="700" cy="540" r="1.3"/>
-        <circle cx="100" cy="540" r="1.2"/><circle cx="980" cy="560" r="1.4"/>
-        <circle cx="60" cy="380" r="0.9"/><circle cx="900" cy="80" r="0.9"/>
-        <circle cx="500" cy="320" r="0.8"/><circle cx="280" cy="60" r="0.8"/>
-        <circle cx="1180" cy="440" r="0.9"/><circle cx="40" cy="200" r="0.7"/>
-        <circle cx="650" cy="220" r="0.8"/><circle cx="380" cy="120" r="0.7"/>
-      </g>
-      <g fill="#6F8AFF">
-        <circle cx="240" cy="200" r="3.4" filter="url(#cglow)" opacity="0.95"/>
-        <circle cx="600" cy="180" r="3" filter="url(#cglow)" opacity="0.9"/>
-        <circle cx="940" cy="280" r="3.2" filter="url(#cglow)" opacity="0.95"/>
-        <circle cx="320" cy="420" r="2.8" filter="url(#cglow)" opacity="0.9"/>
-        <circle cx="780" cy="420" r="3.4" filter="url(#cglow)" opacity="0.95"/>
-        <circle cx="1100" cy="500" r="2.8" filter="url(#cglow)" opacity="0.9"/>
-      </g>
-    </svg>
 
     <div class="wrap">
             <div class="foot-statement">

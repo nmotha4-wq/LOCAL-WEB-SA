@@ -50,10 +50,8 @@
 
   const footerHTML = `
   <footer>
-    <picture aria-hidden="true">
-      <source media="(max-width:768px)" srcset="assets/footer/flowers-mobile.png" />
-      <img class="footer-art" src="assets/footer/flowers-web.png" alt="" loading="lazy" decoding="async" />
-    </picture>
+    <video id="footerVideoDesktop" class="footer-art footer-art-video footer-art-video--desktop" muted loop playsinline preload="auto" data-src="assets/footer/footer-desktop.mp4" aria-hidden="true" disablepictureinpicture disableremoteplayback></video>
+    <video id="footerVideoMobile" class="footer-art footer-art-video footer-art-video--mobile" muted loop playsinline preload="auto" data-src="assets/footer/footer-mobile.mp4" aria-hidden="true" disablepictureinpicture disableremoteplayback></video>
     <div class="footer-art-scrim" aria-hidden="true"></div>
     <svg class="constellation" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
@@ -173,4 +171,77 @@
   if (navMount) navMount.outerHTML = navHTML;
   const footMount = document.getElementById('footMount');
   if (footMount) footMount.outerHTML = footerHTML;
+
+  /* ===== Ambient hero/footer video: "the paused video IS the waiting still".
+     - Loads ONLY the clip matching the viewport (desktop landscape vs mobile
+       portrait) and shows its own first frame, paused — no poster image.
+     - First movement (scroll/touch/wheel/mouse/key/tap) starts it looping.
+       A real user gesture also unlocks playback on iOS Low Power Mode; no
+       play button or controls are ever shown.
+     Shared by the home hero and the site-wide footer so behaviour is identical. */
+  function initAmbientVideo(desktop, mobile) {
+    if (!desktop && !mobile) return;
+    const mq = window.matchMedia('(max-width:768px)');
+    let started = false;
+    const current = () => (mq.matches ? mobile : desktop);
+    function ensureSrc(v) {
+      if (v && !v.getAttribute('src') && v.dataset.src) {
+        v.setAttribute('src', v.dataset.src);
+        v.load();
+      }
+    }
+    function play(v) {
+      if (!v) return;
+      v.muted = true;          // property, not just attribute — some browsers require it
+      v.defaultMuted = true;
+      const p = v.play();
+      if (p && typeof p.then === 'function') {
+        p.catch(function () {
+          // play() fired before the clip was ready: retry once it has data
+          // so it never gets stuck paused on the first frame.
+          const retry = function () { const r = v.play(); if (r && r.catch) r.catch(function () {}); };
+          v.addEventListener('canplay', retry, { once: true });
+          v.addEventListener('loadeddata', retry, { once: true });
+        });
+      }
+    }
+    // Paint the paused first frame. Must wait for HAVE_CURRENT_DATA — seeking
+    // before the first frame is buffered can leave iOS stuck mid-seek (frozen).
+    function primeFrame(v) {
+      if (!v) return;
+      const nudge = function () { try { if (v.paused && !v.currentTime) v.currentTime = 0.001; } catch (e) {} };
+      if (v.readyState >= 2) nudge();
+      else v.addEventListener('loadeddata', nudge, { once: true });
+    }
+
+    ensureSrc(current());
+    primeFrame(current());
+
+    function start() {
+      if (started) return;
+      started = true;
+      const active = current();
+      const other = mq.matches ? desktop : mobile;
+      if (other) other.pause();
+      ensureSrc(active);
+      play(active);
+    }
+    ['scroll', 'wheel', 'touchstart', 'touchmove', 'pointerdown', 'mousemove', 'keydown', 'click'].forEach(function (evt) {
+      window.addEventListener(evt, start, { passive: true, once: true });
+    });
+    (mq.addEventListener ? mq.addEventListener.bind(mq, 'change') : mq.addListener.bind(mq))(function () {
+      const active = current();
+      const other = mq.matches ? desktop : mobile;
+      if (other) other.pause();
+      ensureSrc(active);
+      if (started) play(active);
+      else primeFrame(active);
+    });
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden && started) play(current());
+    });
+  }
+
+  initAmbientVideo(document.getElementById('footerVideoDesktop'), document.getElementById('footerVideoMobile'));
+  initAmbientVideo(document.getElementById('heroVideoDesktop'), document.getElementById('heroVideoMobile'));
 })();

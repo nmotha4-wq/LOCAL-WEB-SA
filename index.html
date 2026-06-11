@@ -35,13 +35,8 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero has-art left" data-screen-label="01 Home Hero">
-  <picture class="hero-art" aria-hidden="true">
-    <source media="(max-width:768px)" srcset="assets/hero/showcase-a-mobile.jpg" />
-    <img src="assets/hero/showcase-d-web.jpg" alt="" fetchpriority="high" decoding="async" />
-  </picture>
-  <video id="heroVideo" class="hero-art hero-art-video" autoplay muted loop playsinline preload="auto" poster="assets/hero/showcase-a-mobile.jpg" aria-hidden="true" disablepictureinpicture disableremoteplayback>
-    <source src="assets/hero/hero-mobile.mp4" type="video/mp4" />
-  </video>
+  <video id="heroVideoDesktop" class="hero-art hero-art-video hero-art-video--desktop" muted loop playsinline autoplay preload="auto" poster="assets/hero/showcase-d-web.jpg" data-src="assets/hero/hero-desktop.mp4" aria-hidden="true" disablepictureinpicture disableremoteplayback></video>
+  <video id="heroVideoMobile" class="hero-art hero-art-video hero-art-video--mobile" muted loop playsinline autoplay preload="auto" poster="assets/hero/showcase-a-mobile.jpg" data-src="assets/hero/hero-mobile.mp4" aria-hidden="true" disablepictureinpicture disableremoteplayback></video>
   <div class="hero-art-scrim" aria-hidden="true"></div>
   <div class="wrap">
     <h1 class="h1 fade-in">Your Business<br/><span class="cyan">Deserves to Be Online</span></h1>
@@ -598,28 +593,50 @@
 })();
 </script>
 <script>
-/* Force the mobile hero video to autoplay + loop. The autoplay attribute
-   alone is unreliable (iOS Low Power Mode, some Android/data-saver modes,
-   tab restored from bg), so we explicitly mute + play and retry on the
-   first user gesture and whenever the tab becomes visible. */
+/* Hero video loader + autoplay enforcer.
+   - Loads ONLY the clip that matches the viewport (desktop landscape vs
+     mobile portrait) so we never download both.
+   - Forces muted autoplay + loop: the autoplay attribute alone is unreliable
+     (iOS Low Power Mode, data-saver, tab restored from background), so we
+     explicitly mute + call play() and retry on canplay, on tab re-show, and
+     on the first user gesture.
+   - Re-evaluates on resize so switching between desktop/mobile widths works. */
 (function () {
-  var v = document.getElementById('heroVideo');
-  if (!v) return;
-  v.muted = true;            // property, not just attribute — required by some browsers
-  v.defaultMuted = true;
-  function play() {
+  var desktop = document.getElementById('heroVideoDesktop');
+  var mobile = document.getElementById('heroVideoMobile');
+  if (!desktop && !mobile) return;
+  var mq = window.matchMedia('(max-width:768px)');
+
+  function ensureSrc(v) {
+    if (v && !v.getAttribute('src') && v.dataset.src) {
+      v.setAttribute('src', v.dataset.src);
+      v.load();
+    }
+  }
+  function play(v) {
+    if (!v) return;
+    v.muted = true;          // property, not just attribute — some browsers require it
+    v.defaultMuted = true;
     var p = v.play();
     if (p && typeof p.catch === 'function') p.catch(function () {});
   }
-  play();
-  v.addEventListener('canplay', play, { once: true });
-  document.addEventListener('visibilitychange', function () {
-    if (!document.hidden) play();
+  function activate() {
+    var active = mq.matches ? mobile : desktop;
+    var other = mq.matches ? desktop : mobile;
+    if (other) other.pause();
+    ensureSrc(active);
+    play(active);
+  }
+
+  activate();
+  [desktop, mobile].forEach(function (v) {
+    if (v) v.addEventListener('canplay', function () { if (!v.paused) return; play(v); });
   });
-  // Last resort: kick it off on the first interaction if autoplay was blocked.
+  (mq.addEventListener ? mq.addEventListener.bind(mq, 'change') : mq.addListener.bind(mq))(activate);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) activate(); });
   ['touchstart', 'click', 'scroll'].forEach(function (evt) {
     window.addEventListener(evt, function once() {
-      play();
+      activate();
       window.removeEventListener(evt, once);
     }, { passive: true });
   });

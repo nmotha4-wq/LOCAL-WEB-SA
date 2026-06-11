@@ -39,7 +39,7 @@
     <source media="(max-width:768px)" srcset="assets/hero/showcase-a-mobile.jpg" />
     <img src="assets/hero/showcase-d-web.jpg" alt="" fetchpriority="high" decoding="async" />
   </picture>
-  <video class="hero-art hero-art-video" autoplay muted loop playsinline preload="auto" poster="assets/hero/showcase-a-mobile.jpg" aria-hidden="true">
+  <video id="heroVideo" class="hero-art hero-art-video" autoplay muted loop playsinline preload="auto" poster="assets/hero/showcase-a-mobile.jpg" aria-hidden="true" disablepictureinpicture disableremoteplayback>
     <source src="assets/hero/hero-mobile.mp4" type="video/mp4" />
   </video>
   <div class="hero-art-scrim" aria-hidden="true"></div>
@@ -594,6 +594,34 @@
         try { io.contentWindow.scrollBy({top: e.key === 'ArrowDown' ? 240 : -240, behavior:'smooth'}); } catch(_){}
       }
     }
+  });
+})();
+</script>
+<script>
+/* Force the mobile hero video to autoplay + loop. The autoplay attribute
+   alone is unreliable (iOS Low Power Mode, some Android/data-saver modes,
+   tab restored from bg), so we explicitly mute + play and retry on the
+   first user gesture and whenever the tab becomes visible. */
+(function () {
+  var v = document.getElementById('heroVideo');
+  if (!v) return;
+  v.muted = true;            // property, not just attribute — required by some browsers
+  v.defaultMuted = true;
+  function play() {
+    var p = v.play();
+    if (p && typeof p.catch === 'function') p.catch(function () {});
+  }
+  play();
+  v.addEventListener('canplay', play, { once: true });
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) play();
+  });
+  // Last resort: kick it off on the first interaction if autoplay was blocked.
+  ['touchstart', 'click', 'scroll'].forEach(function (evt) {
+    window.addEventListener(evt, function once() {
+      play();
+      window.removeEventListener(evt, once);
+    }, { passive: true });
   });
 })();
 </script>

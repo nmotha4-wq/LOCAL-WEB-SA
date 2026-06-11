@@ -1057,9 +1057,9 @@ footer .footer-art{position:absolute;inset:0;width:100%;height:100%;object-fit:c
 footer .footer-art-scrim{
   position:absolute;inset:0;z-index:2;pointer-events:none;
   background:linear-gradient(180deg,
-    rgba(5,13,26,.74) 0%,
-    rgba(5,13,26,.86) 52%,
-    rgba(5,13,26,.95) 100%);
+    rgba(5,13,26,.58) 0%,
+    rgba(5,13,26,.74) 52%,
+    rgba(5,13,26,.90) 100%);
 }
 footer .constellation{position:absolute;inset:0;pointer-events:none;z-index:3;opacity:.6}
 footer .wrap{position:relative;z-index:4}

@@ -50,7 +50,10 @@
 
   const footerHTML = `
   <footer>
-    <img class="footer-art" src="assets/footer/footer-art.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true" />
+    <picture aria-hidden="true">
+      <source media="(max-width:768px)" srcset="assets/footer/flowers-mobile.png" />
+      <img class="footer-art" src="assets/footer/flowers-web.png" alt="" loading="lazy" decoding="async" />
+    </picture>
     <div class="footer-art-scrim" aria-hidden="true"></div>
     <svg class="constellation" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>

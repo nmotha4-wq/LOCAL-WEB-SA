@@ -621,18 +621,27 @@
     v.muted = true;          // property, not just attribute — some browsers require it
     v.defaultMuted = true;
     var p = v.play();
-    if (p && typeof p.catch === 'function') p.catch(function () {});
+    if (p && typeof p.then === 'function') {
+      p.catch(function () {
+        // play() fired before the clip was ready (common on mobile / slower
+        // networks): retry once it actually has data so it never gets stuck.
+        var retry = function () { var r = v.play(); if (r && r.catch) r.catch(function () {}); };
+        v.addEventListener('canplay', retry, { once: true });
+        v.addEventListener('loadeddata', retry, { once: true });
+      });
+    }
   }
   // Force the paused first frame to paint. iOS Safari shows black for a
-  // paused, never-played video until you nudge currentTime — seeking is
-  // allowed without a gesture, so this makes the still frame visible.
+  // paused, never-played video until you nudge currentTime. Crucially this
+  // must wait for HAVE_CURRENT_DATA (loadeddata) — seeking before the first
+  // frame is buffered can leave iOS stuck mid-seek (a frozen video).
   function primeFrame(v) {
     if (!v) return;
     function nudge() {
       try { if (v.paused && !v.currentTime) v.currentTime = 0.001; } catch (e) {}
     }
-    if (v.readyState >= 1) nudge();
-    else v.addEventListener('loadedmetadata', nudge, { once: true });
+    if (v.readyState >= 2) nudge();
+    else v.addEventListener('loadeddata', nudge, { once: true });
   }
 
   // Preload the matching clip and show its first frame, paused, until movement.

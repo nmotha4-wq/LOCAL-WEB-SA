@@ -35,8 +35,8 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero has-art left" data-screen-label="01 Home Hero">
-  <video id="heroVideoDesktop" class="hero-art hero-art-video hero-art-video--desktop" muted loop playsinline preload="auto" poster="assets/hero/showcase-d-web.jpg" data-src="assets/hero/hero-desktop.mp4" aria-hidden="true" disablepictureinpicture disableremoteplayback></video>
-  <video id="heroVideoMobile" class="hero-art hero-art-video hero-art-video--mobile" muted loop playsinline preload="auto" poster="assets/hero/showcase-a-mobile.jpg" data-src="assets/hero/hero-mobile.mp4" aria-hidden="true" disablepictureinpicture disableremoteplayback></video>
+  <video id="heroVideoDesktop" class="hero-art hero-art-video hero-art-video--desktop" muted loop playsinline preload="auto" data-src="assets/hero/hero-desktop.mp4" aria-hidden="true" disablepictureinpicture disableremoteplayback></video>
+  <video id="heroVideoMobile" class="hero-art hero-art-video hero-art-video--mobile" muted loop playsinline preload="auto" data-src="assets/hero/hero-mobile.mp4" aria-hidden="true" disablepictureinpicture disableremoteplayback></video>
   <div class="hero-art-scrim" aria-hidden="true"></div>
   <div class="wrap">
     <h1 class="h1 fade-in">Your Business<br/><span class="cyan">Deserves to Be Online</span></h1>
@@ -593,8 +593,9 @@
 })();
 </script>
 <script>
-/* Hero video loader — "still until the first movement".
-   - On entry the hero shows a STILL frame (the video's poster); nothing plays.
+/* Hero video loader — "the paused video IS the waiting hero".
+   - On entry the matching clip loads and sits PAUSED on its own first frame
+     (no separate poster image, so there's no mismatch/jump when it starts).
    - The first movement of any kind — scroll, touch, wheel, mouse-move, key,
      tap — starts the video, which then loops forever. Because these are real
      user gestures, playback also unlocks on iOS Low Power Mode (where pure
@@ -622,10 +623,21 @@
     var p = v.play();
     if (p && typeof p.catch === 'function') p.catch(function () {});
   }
+  // Force the paused first frame to paint. iOS Safari shows black for a
+  // paused, never-played video until you nudge currentTime — seeking is
+  // allowed without a gesture, so this makes the still frame visible.
+  function primeFrame(v) {
+    if (!v) return;
+    function nudge() {
+      try { if (v.paused && !v.currentTime) v.currentTime = 0.001; } catch (e) {}
+    }
+    if (v.readyState >= 1) nudge();
+    else v.addEventListener('loadedmetadata', nudge, { once: true });
+  }
 
-  // Preload the matching clip so the first movement starts it instantly,
-  // but keep it PAUSED on its poster until then.
+  // Preload the matching clip and show its first frame, paused, until movement.
   ensureSrc(current());
+  primeFrame(current());
 
   function start() {
     if (started) return;
@@ -650,6 +662,7 @@
     if (other) other.pause();
     ensureSrc(active);
     if (started) play(active);
+    else primeFrame(active);
   });
   // Resume after returning to the tab, but only once it's been started.
   document.addEventListener('visibilitychange', function () {

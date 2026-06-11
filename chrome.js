@@ -110,7 +110,7 @@
             <div class="foot-statement">
         <a href="index.html" class="brand foot-brandmark" aria-label="Local Web SA">
           <span class="brand-mark" aria-hidden="true"></span>
-          <span class="brand-text"><b>LOCAL WEB</b><span>SA</span></span>
+          <img class="brand-wordmark" src="assets/logo-wordmark.png" alt="Local Web SA" width="847" height="135" />
         </a>
         <h2 class="foot-line">Where ideas <span class="cyan">go online.</span></h2>
         <p class="foot-tagline">Affordable, modern websites for South African small businesses. Built in Pretoria, shipped in days.</p>

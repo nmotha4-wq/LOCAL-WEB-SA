@@ -80,6 +80,7 @@ body{
 
 /* ====== REDUCED MOTION ====== */
 @media (prefers-reduced-motion: reduce){
+  html,body{scroll-behavior:auto}
   *,*::before,*::after{
     animation-duration:0.01ms !important;
     transition-duration:0.01ms !important;
@@ -413,19 +414,6 @@ body.nav-open{overflow:hidden;position:fixed;width:100%}
   .hero{padding:var(--space-12) 0 var(--space-16)}
 }
 
-.orbit-canvas{
-  position:absolute;inset:0;width:100%;height:100%;
-  z-index:1;pointer-events:none;
-}
-.orbit-fallback{
-  position:absolute;inset:0;z-index:1;pointer-events:none;
-  background-image:
-    radial-gradient(rgba(255,255,255,.15) 1px, transparent 1.5px),
-    radial-gradient(rgba(0,229,255,.18) 1.5px, transparent 2px);
-  background-size:80px 80px, 140px 140px;
-  background-position:0 0, 40px 40px;
-  opacity:.45;
-}
 .hero::before{
   content:'';position:absolute;inset:0;
   background:
@@ -441,7 +429,7 @@ body.nav-open{overflow:hidden;position:fixed;width:100%}
   background-size:56px 56px;
   mask-image:radial-gradient(ellipse at center, black 25%, transparent 75%);
 }
-.hero.short{min-height:60dvb;padding:var(--space-14) 0 var(--space-10)}
+.hero.short{min-height:60dvb;padding:var(--space-12) 0 var(--space-10)}
 @media (max-width: 480px){
   .hero.short{min-height:auto;padding:var(--space-10) 0 var(--space-8)}
 }
@@ -1144,10 +1132,6 @@ footer::after{
 /* ====== FADE IN ====== */
 .fade-in{opacity:0;transform:translateY(20px);transition:opacity .7s ease, transform .7s ease}
 .fade-in.in{opacity:1;transform:none}
-@media (prefers-reduced-motion: reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
-  .fade-in{opacity:1;transform:none}
-}
 
 /* ====== FINAL CTA BLOCK ====== */
 .final-cta{
@@ -1562,7 +1546,6 @@ footer::after{
   animation:pulse 2s infinite;
   box-shadow:0 0 0 2px var(--bg-black),0 0 12px var(--accent-cyan);
 }
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
 
 .chat-window{
   position:absolute;bottom:72px;right:0;
@@ -1992,9 +1975,7 @@ footer .wrap{z-index:4}
   animation:artBlend 26s ease-in-out infinite alternate;
   will-change:transform;
 }
-/* keep the constellation dots + grid texture sparkling above the blend */
-.hero.blue .orbit-canvas,
-.hero.blue .orbit-fallback{z-index:1}
+/* keep the grid texture sparkling above the blend */
 .hero.blue .grid-overlay{z-index:2;opacity:.55}
 /* the cyan grid lines read better tinted toward the palette */
 .hero.blue .grid-overlay{

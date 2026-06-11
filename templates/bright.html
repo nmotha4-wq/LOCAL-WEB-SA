@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Bright Tutors — Maths, Science, English &amp; Afrikaans, Pretoria &amp; Online</title>
+<meta name="description" content="One-on-one lessons for Grade 4–12, in person and online. Verified tutors. Your first lesson is free.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+/* Hallmark · macrostructure: booking split + FAQ · genre: playful (exercise book)
+ * theme: custom (vibe: "exam pad, feint ruled lines, teacher's red pen"
+ * · paper oklch(98% 0.004 90) · accent oklch(52% 0.16 28) marking-red
+ * · Baloo 2 + Nunito Sans + Caveat hand-notes)
+ * nav: school bar · footer: colophon
+ * signature: red pen circles/ticks/A+ stamp, booking on a ruled exercise card
+ * pre-emit critique: P5 H4 E4 S5 R4 V5 · contrast: pass
+ * axes: light / rounded-sans / warm-red
+ */
+:root{
+  --paper:#fcfbf8; --paper:oklch(98.5% 0.003 90);
+  --rule:#d8e4ef; --rule:oklch(90% 0.02 240);
+  --ink:#21314d; --ink:oklch(30% 0.05 255);
+  --ink-soft:#5d6b83; --ink-soft:oklch(52% 0.03 255);
+  --red:#d23f2e; --red:oklch(55% 0.17 30);
+  --blue:#2d55c8; --blue:oklch(48% 0.17 265);
+  --line:rgba(33,49,77,.16);
+  --font-display:'Baloo 2',system-ui,sans-serif;
+  --font-body:'Nunito Sans',system-ui,sans-serif;
+  --font-hand:'Caveat',cursive;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:96px;
+}
+*{box-sizing:border-box;margin:0}
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:var(--font-body);font-size:16px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:72px;
+}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+
+.bar{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s2);
+  padding:14px 20px;border-bottom:2px solid var(--ink);
+}
+.brand{font-family:var(--font-display);font-weight:700;font-size:20px;text-decoration:none}
+.brand .dot{color:var(--red)}
+.bar-sub{display:none;font-size:13px;font-weight:600;color:var(--ink-soft)}
+.bar-cta{
+  font-family:var(--font-display);font-weight:600;font-size:14.5px;text-decoration:none;white-space:nowrap;
+  background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;
+  transition:background .2s var(--ease-out),transform .15s var(--ease-out);
+}
+.bar-cta:hover{background:var(--blue)}
+.bar-cta:active{transform:translateY(1px)}
+
+/* hero */
+.hero{max-width:1150px;margin:0 auto;padding:var(--s5) 20px;display:grid;gap:var(--s4)}
+.kick{font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:var(--s2)}
+h1{
+  font-family:var(--font-display);font-weight:700;
+  font-size:clamp(38px,9vw,76px);line-height:1.06;letter-spacing:-.01em;
+  overflow-wrap:anywhere;min-width:0;
+}
+/* red-pen circle */
+.pen{position:relative;display:inline-block;white-space:nowrap}
+.pen svg{position:absolute;left:-10%;top:-16%;width:120%;height:132%;overflow:visible;pointer-events:none}
+.pen path{fill:none;stroke:var(--red);stroke-width:4;stroke-linecap:round;stroke-dasharray:600;stroke-dashoffset:600}
+.in .pen path{transition:stroke-dashoffset 1.2s var(--ease-out) .5s;stroke-dashoffset:0}
+.sub{max-width:48ch;color:var(--ink-soft);font-size:17px;margin-top:var(--s3)}
+.ticks{display:grid;gap:8px;margin-top:var(--s3)}
+.ticks div{display:flex;align-items:baseline;gap:10px;font-weight:600;font-size:15.5px}
+.tick{
+  font-family:var(--font-hand);font-weight:600;font-size:24px;color:var(--red);line-height:1;
+  opacity:0;transform:scale(1.5) rotate(-10deg);
+}
+.in .tick{transition:opacity .25s ease,transform .3s cubic-bezier(.2,1.4,.4,1);opacity:1;transform:none}
+.in .tick:nth-child(1){transition-delay:.5s}
+.note-hand{font-family:var(--font-hand);font-weight:600;font-size:21px;color:var(--red);margin-top:var(--s3);transform:rotate(-1.5deg);display:inline-block}
+
+/* exercise-book booking card */
+.book{
+  position:relative;background:#fff;border:1.5px solid var(--line);border-radius:10px;
+  padding:24px 20px 24px 56px;max-width:440px;width:100%;margin:0 auto;
+  background-image:repeating-linear-gradient(to bottom, transparent 0 31px, var(--rule) 31px 32px);
+  box-shadow:0 18px 44px rgba(33,49,77,.12);
+}
+.book::before{ /* red margin line */
+  content:'';position:absolute;left:40px;top:0;bottom:0;width:1.5px;background:rgba(210,63,46,.55);
+}
+.book h3{font-family:var(--font-display);font-weight:700;font-size:20px}
+.book .bh-sub{font-size:13px;color:var(--ink-soft);margin-bottom:12px}
+.lbl{font-weight:800;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);display:block;margin:14px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  border:1.5px solid var(--line);border-radius:999px;padding:8px 14px;
+  font-weight:700;font-size:13.5px;background:#fff;
+  transition:border-color .15s var(--ease-out),background .15s var(--ease-out),color .15s var(--ease-out);
+}
+.chip small{font-weight:600;color:var(--ink-soft)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip[aria-pressed="true"] small{color:rgba(255,255,255,.7)}
+.days{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.day{
+  border:1.5px solid var(--line);border-radius:10px;padding:8px 2px;text-align:center;background:#fff;
+  transition:border-color .15s var(--ease-out),background .15s var(--ease-out),color .15s var(--ease-out);
+}
+.day small{display:block;font-size:11px;font-weight:700;color:var(--ink-soft)}
+.day b{font-family:var(--font-display);font-size:17px}
+.day[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.day[aria-pressed="true"] small{color:rgba(255,255,255,.75)}
+.go{
+  display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
+  margin-top:18px;background:var(--red);color:#fff;border-radius:999px;
+  font-family:var(--font-display);font-weight:700;font-size:16px;
+  padding:14px 18px;min-height:52px;text-decoration:none;
+  transition:background .2s var(--ease-out),transform .15s var(--ease-out);
+}
+.go:hover{background:#b5301f}
+.go:active{transform:translateY(1px)}
+.go-note{font-family:var(--font-hand);font-weight:500;font-size:19px;color:var(--ink-soft);text-align:center;margin-top:10px;transform:rotate(-1deg)}
+
+/* subjects */
+.subjects{background:var(--ink);color:#fff;padding:var(--s5) 20px}
+.subjects-in{max-width:1150px;margin:0 auto}
+h2{font-family:var(--font-display);font-weight:700;font-size:clamp(28px,6.5vw,50px);line-height:1.08;margin-bottom:var(--s3)}
+.srow{
+  display:grid;grid-template-columns:1fr auto;gap:2px 16px;
+  padding:15px 0;border-bottom:1px solid rgba(255,255,255,.18);
+}
+.srow b{font-family:var(--font-display);font-weight:600;font-size:18px}
+.srow .d{grid-column:1;color:rgba(255,255,255,.65);font-size:14px}
+.srow .p{grid-row:1 / span 2;align-self:center;font-family:var(--font-display);font-weight:700;font-size:16px;color:#ffd9a8;white-space:nowrap}
+
+/* testimonial with A+ */
+.quote{max-width:760px;margin:0 auto;padding:var(--s5) 20px;text-align:center;position:relative}
+.quote p{font-family:var(--font-display);font-weight:600;font-size:clamp(20px,4.5vw,28px);line-height:1.35;max-width:30ch;margin:0 auto}
+.quote footer{margin-top:12px;font-size:13.5px;font-weight:700;color:var(--ink-soft)}
+.aplus{
+  position:absolute;top:var(--s3);right:clamp(4px,6vw,80px);
+  font-family:var(--font-hand);font-weight:600;font-size:44px;color:var(--red);
+  border:3px solid var(--red);border-radius:50%;width:74px;height:74px;
+  display:grid;place-items:center;transform:rotate(12deg) scale(1.5);opacity:0;
+}
+.in .aplus{transition:opacity .25s ease .5s,transform .35s cubic-bezier(.2,1.4,.4,1) .5s;opacity:1;transform:rotate(12deg) scale(1)}
+
+/* FAQ */
+.faq{max-width:760px;margin:0 auto;padding:0 20px var(--s5)}
+.qa{border-top:1.5px solid var(--line);padding:18px 0}
+.qa b{font-family:var(--font-display);font-weight:600;font-size:17px;display:block;margin-bottom:6px}
+.qa p{color:var(--ink-soft);font-size:15.5px}
+
+.final{text-align:center;padding:0 20px var(--s6)}
+.final h2{max-width:20ch;margin:0 auto var(--s3)}
+.btn-big{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--red);color:#fff;border-radius:999px;text-decoration:none;
+  font-family:var(--font-display);font-weight:700;font-size:17px;
+  padding:16px 30px;min-height:54px;
+  transition:background .2s var(--ease-out),transform .15s var(--ease-out);
+}
+.btn-big:hover{background:#b5301f}
+.btn-big:active{transform:translateY(1px)}
+
+.foot{
+  border-top:2px solid var(--ink);padding:var(--s3) 20px;
+  display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;
+  font-size:13px;font-weight:700;color:var(--ink-soft);
+}
+
+.callbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  display:grid;grid-template-columns:1fr 1fr;border-top:2px solid var(--ink);
+}
+.callbar a{
+  display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;
+  font-family:var(--font-display);font-weight:700;font-size:15px;padding:15px 10px;min-height:54px;
+}
+.callbar .c1{background:var(--red);color:#fff}
+.callbar .c2{background:#fff;color:var(--ink)}
+
+.rv{opacity:0;transform:translateY(12px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+.rv.in{opacity:1;transform:none}
+
+@media (min-width:880px){
+  body{padding-bottom:0}
+  .callbar{display:none}
+  .bar{padding:16px 40px}
+  .bar-sub{display:block}
+  .hero{grid-template-columns:1.1fr 1fr;align-items:center;padding:var(--s6) 40px}
+  .subjects{padding:var(--s6) 40px}
+  .foot{padding:var(--s3) 40px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .rv{opacity:1;transform:none}
+  .pen path{stroke-dashoffset:0}
+  .tick,.aplus{opacity:1;transform:none}
+  .aplus{transform:rotate(12deg)}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a class="brand" href="#top">Bright Tutors<span class="dot">.</span></a>
+  <span class="bar-sub">Grade 4–12 · Pretoria &amp; online</span>
+  <a class="bar-cta" href="#book">Book a lesson</a>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="rv">
+      <span class="kick">Maths · Science · English · Afrikaans</span>
+      <h1>Brilliant tutors, booked in one click — and your <span class="pen">first lesson is free.<svg viewBox="0 0 320 60" aria-hidden="true" preserveAspectRatio="none"><path d="M24 10 C 140 -6, 330 4, 312 30 C 300 54, 60 60, 18 44 C -6 34, 60 12, 160 8"/></svg></span></h1>
+      <p class="sub">One-on-one online and in-person lessons for Grade 4–12. Pick your day, pick your tutor, done.</p>
+      <div class="ticks">
+        <div><span class="tick">✓</span>Verified tutors — background-checked and subject-tested</div>
+        <div><span class="tick">✓</span>In person across Pretoria, or online during exams</div>
+        <div><span class="tick">✓</span>Progress notes home after every lesson</div>
+      </div>
+      <span class="note-hand">— see you in class! Ms. R.</span>
+    </div>
+
+    <div class="book rv" id="book" role="group" aria-label="Book a lesson">
+      <h3>Book a lesson</h3>
+      <p class="bh-sub">Week of 15 June · Grade 11</p>
+      <span class="lbl">Subject</span>
+      <div class="chips" data-pick="subject">
+        <button class="chip" type="button" aria-pressed="true" data-v="Mathematics" data-r="R245">Maths <small>R245</small></button>
+        <button class="chip" type="button" aria-pressed="false" data-v="Physical Science" data-r="R245">Science <small>R245</small></button>
+        <button class="chip" type="button" aria-pressed="false" data-v="English" data-r="R220">English <small>R220</small></button>
+        <button class="chip" type="button" aria-pressed="false" data-v="Afrikaans" data-r="R220">Afrikaans <small>R220</small></button>
+      </div>
+      <span class="lbl">Day</span>
+      <div class="days" data-pick="day">
+        <button class="day" type="button" aria-pressed="false" data-v="Mon 15"><small>Mon</small><b>15</b></button>
+        <button class="day" type="button" aria-pressed="true" data-v="Tue 16"><small>Tue</small><b>16</b></button>
+        <button class="day" type="button" aria-pressed="false" data-v="Wed 17"><small>Wed</small><b>17</b></button>
+        <button class="day" type="button" aria-pressed="false" data-v="Thu 18"><small>Thu</small><b>18</b></button>
+        <button class="day" type="button" aria-pressed="false" data-v="Fri 19"><small>Fri</small><b>19</b></button>
+      </div>
+      <span class="lbl">Time</span>
+      <div class="chips" data-pick="time">
+        <button class="chip" type="button" aria-pressed="false" data-v="14:00">14:00</button>
+        <button class="chip" type="button" aria-pressed="true" data-v="15:30">15:30</button>
+        <button class="chip" type="button" aria-pressed="false" data-v="17:00">17:00</button>
+        <button class="chip" type="button" aria-pressed="false" data-v="18:30">18:30</button>
+      </div>
+      <a class="go" id="confirm" href="#" target="_blank" rel="noopener">Book free trial on WhatsApp</a>
+      <p class="go-note">first lesson free — promise!</p>
+    </div>
+  </section>
+
+  <section class="subjects">
+    <div class="subjects-in rv">
+      <h2>Subjects we tutor</h2>
+      <div class="srow"><b>Mathematics</b><span class="d">Grade 4–12 · exam-paper practice built in</span><span class="p">R245 / lesson</span></div>
+      <div class="srow"><b>Physical Science</b><span class="d">Grade 8–12 · physics and chemistry</span><span class="p">R245 / lesson</span></div>
+      <div class="srow"><b>English</b><span class="d">Grade 4–12 · comprehension, essays, orals</span><span class="p">R220 / lesson</span></div>
+      <div class="srow"><b>Afrikaans</b><span class="d">Grade 4–12 · huistaal en EAT</span><span class="p">R220 / lesson</span></div>
+    </div>
+  </section>
+
+  <section class="quote rv">
+    <span class="aplus" aria-hidden="true">A+</span>
+    <p>“From 43% to 68% in one term. Her maths tutor is now part of the family.”</p>
+    <footer>Parent of a Grade 11 learner — Faerie Glen</footer>
+  </section>
+
+  <section class="faq rv">
+    <h2>Questions parents ask</h2>
+    <div class="qa"><b>Is the first lesson really free?</b><p>Yes — and if it's not a fit, you owe nothing and we'll suggest a different tutor.</p></div>
+    <div class="qa"><b>Online or in person?</b><p>Both. Most families mix the two: in person to start, online during exams.</p></div>
+    <div class="qa"><b>How do you choose tutors?</b><p>Background checks, subject tests and a trial lesson with our own team before they meet a learner.</p></div>
+  </section>
+
+  <section class="final rv">
+    <h2>Your learner's tutor is in here.</h2>
+    <a class="btn-big" href="https://wa.me/27761102240?text=Hi%20Bright%20Tutors!%20I%27d%20like%20to%20find%20a%20tutor%20for%20my%20child." target="_blank" rel="noopener">Find your tutor</a>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>Bright Tutors · Pretoria &amp; online</span>
+  <span>hello@brighttutors.co.za</span>
+</footer>
+
+<nav class="callbar" aria-label="Quick contact">
+  <a class="c1" href="#book">Book a lesson</a>
+  <a class="c2" href="https://wa.me/27761102240?text=Hi%20Bright%20Tutors!%20I%27d%20like%20to%20find%20a%20tutor." target="_blank" rel="noopener">WhatsApp</a>
+</nav>
+
+<script>
+(function(){
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.15});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+
+  var confirmBtn = document.getElementById('confirm');
+  function picked(group){
+    var el = document.querySelector('[data-pick="'+group+'"] [aria-pressed="true"]');
+    return el ? el.getAttribute('data-v') : '';
+  }
+  function sync(){
+    var subjEl = document.querySelector('[data-pick="subject"] [aria-pressed="true"]');
+    var msg = 'Hi Bright Tutors! I’d like to book a free trial: ' + picked('subject') +
+      ' (Grade 11), ' + picked('day') + ' at ' + picked('time') +
+      (subjEl ? ' — ' + subjEl.getAttribute('data-r') + '/lesson after the trial.' : '.');
+    confirmBtn.href = 'https://wa.me/27761102240?text=' + encodeURIComponent(msg);
+  }
+  document.querySelectorAll('[data-pick]').forEach(function(group){
+    group.addEventListener('click', function(ev){
+      var b = ev.target.closest('[data-v]');
+      if(!b || b.disabled) return;
+      group.querySelectorAll('[data-v]').forEach(function(o){ o.setAttribute('aria-pressed','false'); });
+      b.setAttribute('aria-pressed','true');
+      sync();
+    });
+  });
+  sync();
+})();
+</script>
+</body>
+</html>

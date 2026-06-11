@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Crust &amp; Crumb — Sourdough Bakery, Hatfield, Pretoria</title>
+<meta name="description" content="A tiny bakery in Hatfield. Hand-shaped sourdough, butter croissants and filter coffee. Pre-order on WhatsApp before 8pm.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* Hallmark · macrostructure: menu-board document · genre: editorial (shopfront)
+ * theme: custom (vibe: "kraft paper bag, rye ink, butter yellow, 5am ovens"
+ * · paper oklch(88% 0.035 85) · accent oklch(80% 0.13 90) butter-warm
+ * · Yeseva One + Karla) · nav: shop-sign bar · footer: colophon
+ * signature: bake board w/ sold-out strikethroughs + rubber stamp thump +
+ * drawn butter ring around "5am" · critique: P5 H4 E4 S5 R4 V5 · contrast: pass
+ * axes: light-kraft / round-serif / butter-yellow
+ */
+:root{
+  --paper:#e9d9bb; --paper:oklch(88% 0.04 85);
+  --paper-2:#f2e7cf; --paper-2:oklch(92% 0.03 85);
+  --ink:#3a2a18; --ink:oklch(28% 0.04 60);
+  --ink-soft:#6f5b42; --ink-soft:oklch(47% 0.04 70);
+  --butter:#eebe3f; --butter:oklch(81% 0.13 90);
+  --rye:#7a4a22; --rye:oklch(43% 0.08 60);
+  --line:rgba(58,42,24,.25);
+  --font-display:'Yeseva One',Georgia,serif;
+  --font-body:'Karla',system-ui,sans-serif;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:96px;
+}
+*{box-sizing:border-box;margin:0}
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:var(--font-body);font-size:16.5px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:76px;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--rye);outline-offset:3px}
+
+.bar{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s2);
+  padding:14px 20px;border-bottom:2px solid var(--ink);
+}
+.brand{font-family:var(--font-display);font-size:20px;text-decoration:none;letter-spacing:.01em}
+.bar-hours{display:none;font-size:13.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.bar-order{
+  font-weight:700;font-size:14px;letter-spacing:.06em;text-decoration:none;
+  background:var(--ink);color:var(--paper-2);padding:10px 16px;border-radius:999px;white-space:nowrap;
+  transition:background .2s var(--ease-out),transform .15s var(--ease-out);
+}
+.bar-order:hover{background:var(--rye)}
+.bar-order:active{transform:translateY(1px)}
+
+/* hero */
+.hero{max-width:1050px;margin:0 auto;padding:var(--s5) 20px var(--s4)}
+.kick{
+  display:block;font-weight:700;font-size:13px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--rye);margin-bottom:var(--s2);
+}
+h1{
+  font-family:var(--font-display);font-weight:400;
+  font-size:clamp(40px,10vw,92px);line-height:1.04;letter-spacing:-.005em;
+  overflow-wrap:anywhere;min-width:0;
+}
+/* drawn butter ring around “5am” */
+.ring{position:relative;display:inline-block;white-space:nowrap}
+.ring svg{position:absolute;left:-12%;top:-14%;width:124%;height:130%;overflow:visible;pointer-events:none}
+.ring path{
+  fill:none;stroke:var(--butter);stroke-width:6;stroke-linecap:round;
+  stroke-dasharray:560;stroke-dashoffset:560;
+}
+.in .ring path{transition:stroke-dashoffset 1.3s var(--ease-out) .5s;stroke-dashoffset:0}
+.sub{max-width:46ch;color:var(--ink-soft);font-size:17.5px;margin-top:var(--s3)}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:var(--s3)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-weight:700;font-size:16px;letter-spacing:.02em;
+  padding:14px 24px;text-decoration:none;border-radius:999px;min-height:50px;white-space:nowrap;
+  transition:background .2s var(--ease-out),color .2s var(--ease-out),transform .15s var(--ease-out);
+}
+.btn-main{background:var(--ink);color:var(--paper-2)}
+.btn-main:hover{background:var(--rye)}
+.btn-ghost{border:2px solid var(--ink);color:var(--ink)}
+.btn-ghost:hover{background:var(--butter);border-color:var(--butter)}
+.btn:active{transform:translateY(1px)}
+
+/* scored-dough divider */
+.score{display:block;width:100%;height:26px;margin:var(--s3) 0 0}
+.score path{fill:none;stroke:var(--line);stroke-width:2;stroke-linecap:round}
+
+/* bake board */
+.board-wrap{max-width:760px;margin:0 auto;padding:var(--s4) 20px;position:relative}
+h2{font-family:var(--font-display);font-weight:400;font-size:clamp(30px,7vw,52px);line-height:1.05;margin-bottom:var(--s3)}
+.board{
+  background:var(--paper-2);border:2px solid var(--ink);border-radius:6px;
+  padding:clamp(20px,5vw,40px);position:relative;
+  box-shadow:5px 5px 0 rgba(58,42,24,.18);
+}
+.board header{
+  display:flex;justify-content:space-between;gap:10px;align-items:baseline;
+  border-bottom:2px solid var(--ink);padding-bottom:12px;margin-bottom:14px;
+}
+.board header b{font-family:var(--font-display);font-size:19px}
+.board header span{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.mi{
+  display:flex;align-items:baseline;gap:10px;padding:11px 0;
+  border-bottom:1px dashed var(--line);position:relative;
+}
+.mi:last-of-type{border-bottom:0}
+.mi b{font-weight:700;font-size:16.5px}
+.mi .dots{flex:1;border-bottom:2px dotted var(--line);transform:translateY(-4px)}
+.mi .p{font-family:var(--font-display);font-size:16px;white-space:nowrap}
+/* sold-out strike: hand-drawn line + faded item */
+.mi.gone b,.mi.gone .p{color:var(--ink-soft);opacity:.55}
+.mi.gone .strike{
+  position:absolute;left:-1%;top:50%;width:0;height:4px;border-radius:99px;
+  background:var(--rye);transform:rotate(-1.2deg);transition:width .5s var(--ease-out) .6s;
+}
+.in .mi.gone .strike{width:54%}
+.mi.gone::after{
+  content:'sold out';font-style:italic;font-size:13px;color:var(--rye);white-space:nowrap;
+}
+/* rubber stamp */
+.stamp{
+  position:absolute;right:clamp(8px,4vw,32px);bottom:-26px;
+  font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--rye);border:3px solid var(--rye);border-radius:8px;
+  padding:10px 14px;background:var(--paper);
+  transform:rotate(-7deg) scale(1.6);opacity:0;
+}
+.in .stamp{transition:transform .35s cubic-bezier(.2,1.4,.4,1) .9s,opacity .25s ease .9s;transform:rotate(-7deg) scale(1);opacity:1}
+.board-note{margin-top:var(--s4);font-style:italic;color:var(--ink-soft);max-width:46ch}
+
+/* morning timeline */
+.morning{background:var(--ink);color:var(--paper-2);padding:var(--s5) 20px}
+.morning-in{max-width:760px;margin:0 auto}
+.morning h2{color:var(--butter)}
+.t{
+  display:grid;grid-template-columns:auto 1fr;gap:4px 18px;align-items:baseline;
+  padding:14px 0;border-top:1px solid rgba(242,231,207,.22);
+}
+.t .h{font-family:var(--font-display);font-size:21px;color:var(--butter);white-space:nowrap}
+.t b{font-weight:700}
+.t p{grid-column:2;color:rgba(242,231,207,.72);font-size:15.5px}
+
+/* find us + final */
+.find{max-width:760px;margin:0 auto;padding:var(--s5) 20px;text-align:center}
+.find p{max-width:44ch;margin:0 auto var(--s3);color:var(--ink-soft)}
+.find .big{font-family:var(--font-display);font-size:clamp(26px,6vw,40px);color:var(--ink);line-height:1.15;margin-bottom:var(--s3)}
+.foot{
+  border-top:2px solid var(--ink);padding:var(--s3) 20px;
+  display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;
+  font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);
+}
+
+.callbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  display:grid;grid-template-columns:1fr 1fr;border-top:2px solid var(--ink);
+}
+.callbar a{
+  display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;
+  font-weight:700;font-size:15.5px;padding:16px 10px;min-height:56px;
+}
+.callbar .c1{background:var(--ink);color:var(--paper-2)}
+.callbar .c2{background:var(--butter);color:var(--ink)}
+
+.rv{opacity:0;transform:translateY(12px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+.rv.in{opacity:1;transform:none}
+
+@media (min-width:760px){
+  body{padding-bottom:0}
+  .callbar{display:none}
+  .bar{padding:16px 40px}
+  .bar-hours{display:block}
+  .hero{padding:var(--s6) 40px var(--s4)}
+  .morning,.find{padding-left:40px;padding-right:40px}
+  .foot{padding:var(--s3) 40px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .rv{opacity:1;transform:none}
+  .ring path{stroke-dashoffset:0}
+  .in .mi.gone .strike,.mi.gone .strike{width:54%}
+  .stamp{transform:rotate(-7deg) scale(1);opacity:1}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a class="brand" href="#top">Crust &amp; Crumb</a>
+  <span class="bar-hours">Tue–Sun · 07:00 until sold out</span>
+  <a class="bar-order" href="https://wa.me/27713308857?text=Hi%20Crust%20%26%20Crumb!%20I%27d%20like%20to%20pre-order%20for%20tomorrow%3A" target="_blank" rel="noopener">Order on WhatsApp</a>
+</header>
+
+<main id="top">
+  <section class="hero rv">
+    <span class="kick">Sourdough · Pastries · Coffee · Hatfield</span>
+    <h1>Baked at <span class="ring">5am<svg viewBox="0 0 200 100" aria-hidden="true" preserveAspectRatio="none"><path d="M30 18 C 110 -6, 206 16, 190 52 C 178 88, 38 96, 14 62 C -2 38, 44 16, 96 12"/></svg></span>,<br>gone by lunchtime.</h1>
+    <p class="sub">A tiny bakery in Hatfield. Hand-shaped loaves, butter croissants, and the best filter coffee within walking distance.</p>
+    <div class="ctas">
+      <a class="btn btn-main" href="https://wa.me/27713308857?text=Hi%20Crust%20%26%20Crumb!%20I%27d%20like%20to%20pre-order%20for%20tomorrow%3A" target="_blank" rel="noopener">Order on WhatsApp</a>
+      <a class="btn btn-ghost" href="#board">Today's bake</a>
+    </div>
+    <svg class="score" viewBox="0 0 800 26" preserveAspectRatio="none" aria-hidden="true"><path d="M0 18 Q 50 4 100 16 T 200 14 T 300 18 T 400 12 T 500 17 T 600 13 T 700 18 T 800 14"/></svg>
+  </section>
+
+  <section class="board-wrap rv" id="board">
+    <h2>Today's bake</h2>
+    <div class="board">
+      <header><b>The board</b><span>Tuesday · baked fresh</span></header>
+      <div class="mi"><b>Country sourdough</b><span class="dots"></span><span class="p">R55</span></div>
+      <div class="mi gone"><b>Seeded rye</b><span class="dots"></span><span class="p">R62</span><span class="strike" aria-hidden="true"></span></div>
+      <div class="mi"><b>Butter croissant</b><span class="dots"></span><span class="p">R28</span></div>
+      <div class="mi"><b>Pain au chocolat</b><span class="dots"></span><span class="p">R34</span></div>
+      <div class="mi gone"><b>Cheese &amp; herb scone</b><span class="dots"></span><span class="p">R32</span><span class="strike" aria-hidden="true"></span></div>
+      <div class="mi"><b>Filter coffee</b><span class="dots"></span><span class="p">R28</span></div>
+      <span class="stamp" aria-hidden="true">Sold out ±11:30</span>
+    </div>
+    <p class="board-note">When the shelf is empty, that's it until tomorrow. Pre-order on WhatsApp before 8pm and yours is set aside.</p>
+  </section>
+
+  <section class="morning">
+    <div class="morning-in rv">
+      <h2>How the morning goes</h2>
+      <div class="t"><span class="h">05:00</span><b>The dough</b><p>Shaped by hand, proofed overnight.</p></div>
+      <div class="t"><span class="h">06:30</span><b>First bake</b><p>The ovens run until the racks are full.</p></div>
+      <div class="t"><span class="h">07:00</span><b>Doors open</b><p>Coffee on. The regulars know.</p></div>
+      <div class="t"><span class="h">±11:30</span><b>Sold out</b><p>Most days. We're sorry, and also not.</p></div>
+    </div>
+  </section>
+
+  <section class="find rv">
+    <h2>Order tonight, collect at seven.</h2>
+    <p>Find us just off Burnett Street, Hatfield — follow the smell. Cash, card or SnapScan at the counter.</p>
+    <p class="big">Tue–Sun · 07:00 until sold out</p>
+    <div class="ctas" style="justify-content:center">
+      <a class="btn btn-main" href="https://wa.me/27713308857?text=Hi%20Crust%20%26%20Crumb!%20I%27d%20like%20to%20pre-order%20for%20tomorrow%3A" target="_blank" rel="noopener">Pre-order on WhatsApp</a>
+      <a class="btn btn-ghost" href="tel:+27713308857">Call the bakery</a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>※ Crust &amp; Crumb · Hatfield, Pretoria</span>
+  <span>Tue–Sun · 07:00 until sold out</span>
+</footer>
+
+<nav class="callbar" aria-label="Quick contact">
+  <a class="c1" href="https://wa.me/27713308857?text=Hi%20Crust%20%26%20Crumb!%20I%27d%20like%20to%20pre-order%20for%20tomorrow%3A" target="_blank" rel="noopener">Order on WhatsApp</a>
+  <a class="c2" href="tel:+27713308857">Call us</a>
+</nav>
+
+<script>
+(function(){
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.2});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>

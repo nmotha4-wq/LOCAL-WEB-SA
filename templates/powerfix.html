@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>PowerFix Motors — Service &amp; Repairs, Lyttelton, Centurion</title>
+<meta name="description" content="A real workshop with real mechanics in Lyttelton. Fixed prices, 12-month workmanship guarantee. Book your service in 60 seconds.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Saira:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Hallmark · macrostructure: booking split + price list · genre: modern-minimal (instrument)
+ * theme: custom (vibe: "gunmetal workshop, instrument-cluster amber, gauge needle"
+ * · paper oklch(20% 0.008 250) · accent oklch(76% 0.14 75) amber-warm
+ * · Chakra Petch + Saira) · nav: workshop bar · footer: colophon
+ * signature: rev-counter price gauge — needle sweeps to the booked price
+ * pre-emit critique: P5 H4 E5 S5 R4 V5 · contrast: pass
+ * axes: dark-gunmetal / techno-sans / amber
+ */
+:root{
+  --paper:#14181d; --paper:oklch(20% 0.01 250);
+  --paper-2:#1b2128; --paper-2:oklch(24% 0.012 250);
+  --ink:#eef0f2; --ink:oklch(95% 0.003 250);
+  --ink-dim:#9aa1a9; --ink-dim:oklch(70% 0.008 250);
+  --amber:#f0a93c; --amber:oklch(78% 0.13 75);
+  --amber-deep:#b97a1d; --amber-deep:oklch(62% 0.12 70);
+  --line:rgba(238,240,242,.13);
+  --font-display:'Chakra Petch',system-ui,sans-serif;
+  --font-body:'Saira',system-ui,sans-serif;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:96px;
+}
+*{box-sizing:border-box;margin:0}
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:var(--font-body);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:72px;
+}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+.bar{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s2);
+  padding:14px 20px;border-bottom:1px solid var(--line);
+}
+.brand{font-family:var(--font-display);font-weight:700;font-size:17px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:10px}
+.brand::before{content:'';width:10px;height:18px;background:var(--amber);clip-path:polygon(0 0,100% 0,60% 100%,0 100%)}
+.bar-hours{display:none;font-size:12.5px;letter-spacing:.08em;color:var(--ink-dim)}
+.bar-call{
+  font-family:var(--font-display);font-weight:600;font-size:13.5px;text-decoration:none;white-space:nowrap;
+  background:var(--amber);color:#1d1305;padding:10px 16px;
+  transition:background .2s var(--ease-out),transform .15s var(--ease-out);
+}
+.bar-call:hover{background:#f7bd62}
+.bar-call:active{transform:translateY(1px)}
+
+/* hero */
+.hero{max-width:1180px;margin:0 auto;padding:var(--s5) 20px;display:grid;gap:var(--s4)}
+.kick{font-family:var(--font-display);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:var(--s2)}
+h1{
+  font-family:var(--font-display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(36px,9vw,76px);line-height:1.0;letter-spacing:.005em;
+  overflow-wrap:anywhere;min-width:0;
+}
+h1 .a{color:var(--amber)}
+.sub{max-width:46ch;color:var(--ink-dim);font-size:17px;margin-top:var(--s3)}
+.trust{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:var(--s3)}
+.trust div{border-top:2px solid var(--line);padding-top:8px}
+.trust b{font-family:var(--font-display);font-weight:700;font-size:22px;display:block}
+.trust span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim)}
+
+/* booking console */
+.console{
+  background:var(--paper-2);border:1px solid var(--line);border-radius:14px;
+  padding:clamp(20px,4vw,30px);max-width:480px;width:100%;margin:0 auto;
+}
+.console h3{
+  font-family:var(--font-display);font-weight:600;font-size:17px;letter-spacing:.04em;text-transform:uppercase;
+  display:flex;justify-content:space-between;gap:10px;align-items:baseline;
+}
+.console h3 small{font-size:11px;color:var(--ink-dim);letter-spacing:.1em}
+/* the gauge */
+.gauge{display:block;width:min(240px,70%);margin:14px auto 4px;overflow:visible}
+.gauge .arc{fill:none;stroke:var(--line);stroke-width:10;stroke-linecap:round}
+.gauge .arc-fill{fill:none;stroke:var(--amber);stroke-width:10;stroke-linecap:round;stroke-dasharray:264;stroke-dashoffset:264;transition:stroke-dashoffset .8s var(--ease-out)}
+.gauge .tick{stroke:var(--ink-dim);stroke-width:2}
+.needle-g{transform-origin:100px 92px;transform:rotate(-90deg);transition:transform .8s cubic-bezier(.34,1.3,.5,1)}
+.gauge .needle{stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.gauge .hub{fill:var(--amber)}
+.readout{
+  text-align:center;font-family:'Chakra Petch',monospace;margin-bottom:14px;
+}
+.readout b{font-size:30px;font-weight:700;letter-spacing:.02em}
+.readout span{display:block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim)}
+.lbl{font-family:var(--font-display);font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);display:block;margin:14px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  border:1px solid var(--line);border-radius:8px;padding:9px 13px;
+  font-size:13.5px;font-weight:500;
+  transition:border-color .15s var(--ease-out),background .15s var(--ease-out),color .15s var(--ease-out);
+}
+.chip[aria-pressed="true"]{background:var(--amber);border-color:var(--amber);color:#1d1305;font-weight:600}
+.chip.off{opacity:.35;text-decoration:line-through;pointer-events:none}
+.go{
+  display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
+  margin-top:18px;background:var(--amber);color:#1d1305;border-radius:8px;
+  font-family:var(--font-display);font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:uppercase;
+  padding:15px 18px;min-height:52px;text-decoration:none;
+  transition:background .2s var(--ease-out),transform .15s var(--ease-out);
+}
+.go:hover{background:#f7bd62}
+.go:active{transform:translateY(1px)}
+
+/* price list */
+.prices{max-width:1180px;margin:0 auto;padding:var(--s4) 20px var(--s5)}
+h2{
+  font-family:var(--font-display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(28px,6.5vw,52px);line-height:1.02;margin-bottom:var(--s2);
+}
+.note{color:var(--ink-dim);max-width:48ch;margin-bottom:var(--s3)}
+.row{
+  display:grid;grid-template-columns:1fr auto;gap:4px 16px;
+  padding:16px 0;border-bottom:1px solid var(--line);
+}
+.row b{font-family:var(--font-display);font-weight:600;font-size:17px}
+.row .d{grid-column:1;color:var(--ink-dim);font-size:14.5px;max-width:46ch}
+.row .p{grid-row:1 / span 2;align-self:center;font-family:'Chakra Petch',monospace;font-weight:600;font-size:17px;color:var(--amber);white-space:nowrap}
+
+/* day timeline */
+.day{background:var(--paper-2);padding:var(--s5) 20px}
+.day-in{max-width:1180px;margin:0 auto}
+.t{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;align-items:baseline;padding:14px 0;border-top:1px solid var(--line)}
+.t .h{font-family:'Chakra Petch',monospace;font-weight:600;font-size:16px;color:var(--amber);white-space:nowrap}
+.t b{font-weight:600}
+.t p{grid-column:2;color:var(--ink-dim);font-size:15px}
+
+/* guarantee band */
+.band{background:var(--amber);color:#1d1305;padding:var(--s4) 20px}
+.band-in{max-width:1180px;margin:0 auto;display:grid;gap:6px}
+.band b{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:clamp(24px,5.5vw,40px);line-height:1.05}
+.band span{font-size:15.5px;max-width:50ch}
+.band a{font-family:'Chakra Petch',monospace;font-weight:700;font-size:clamp(20px,4.5vw,26px);text-decoration:none;border-bottom:3px solid #1d1305;width:fit-content;padding-bottom:2px;margin-top:8px}
+
+.foot{
+  border-top:1px solid var(--line);padding:var(--s3) 20px;
+  display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;
+  font-size:12.5px;letter-spacing:.06em;color:var(--ink-dim);
+}
+
+.callbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);
+}
+.callbar a{
+  display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;
+  font-family:var(--font-display);font-weight:700;font-size:14px;letter-spacing:.04em;text-transform:uppercase;
+  padding:15px 10px;min-height:54px;
+}
+.callbar .c1{background:var(--amber);color:#1d1305}
+.callbar .c2{background:var(--paper-2);color:var(--ink)}
+
+.rv{opacity:0;transform:translateY(12px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+.rv.in{opacity:1;transform:none}
+
+@media (min-width:920px){
+  body{padding-bottom:0}
+  .callbar{display:none}
+  .bar{padding:16px 40px}
+  .bar-hours{display:block}
+  .hero{grid-template-columns:1.05fr 1fr;align-items:center;padding:var(--s6) 40px}
+  .prices{padding-left:40px;padding-right:40px}
+  .day{padding:var(--s6) 40px}
+  .band{padding:var(--s5) 40px}
+  .band-in{grid-template-columns:1fr auto;align-items:center}
+  .band a{grid-column:2;grid-row:1 / span 2}
+  .foot{padding:var(--s3) 40px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .rv{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a class="brand" href="#top">PowerFix Motors</a>
+  <span class="bar-hours">Mon–Fri 07:00–17:30 · Sat 08:00–13:00 · Lyttelton</span>
+  <a class="bar-call" href="tel:+27125550119">012 555 0119</a>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="rv">
+      <span class="kick">Service · Repair · Diagnostics — Lyttelton</span>
+      <h1>Book your service <span class="a">in 60 seconds.</span></h1>
+      <p class="sub">A real workshop with real mechanics. Skip the phone tag: pick your vehicle, pick a slot, drop the car.</p>
+      <div class="trust">
+        <div><b>14yrs</b><span>in business</span></div>
+        <div><b>2,400+</b><span>cars serviced</span></div>
+        <div><b>4.8★</b><span>Google</span></div>
+      </div>
+    </div>
+
+    <div class="console rv" id="book" role="group" aria-label="Book a service">
+      <h3>Book a service <small>Mon 15 June</small></h3>
+      <svg class="gauge" viewBox="0 0 200 110" aria-hidden="true">
+        <path class="arc" d="M16 92 A 84 84 0 0 1 184 92"/>
+        <path class="arc-fill" id="arcFill" d="M16 92 A 84 84 0 0 1 184 92"/>
+        <line class="tick" x1="16" y1="92" x2="26" y2="92"/>
+        <line class="tick" x1="100" y1="8" x2="100" y2="18"/>
+        <line class="tick" x1="184" y1="92" x2="174" y2="92"/>
+        <g class="needle-g" id="needle"><line class="needle" x1="100" y1="92" x2="100" y2="22"/></g>
+        <circle class="hub" cx="100" cy="92" r="7"/>
+      </svg>
+      <div class="readout"><b id="price">R1,180</b><span>fixed price · parts &amp; labour</span></div>
+      <span class="lbl">Vehicle</span>
+      <div class="chips" data-pick="vehicle">
+        <button class="chip" type="button" aria-pressed="true" data-v="Sedan">Sedan</button>
+        <button class="chip" type="button" aria-pressed="false" data-v="SUV">SUV</button>
+        <button class="chip" type="button" aria-pressed="false" data-v="Bakkie">Bakkie</button>
+        <button class="chip" type="button" aria-pressed="false" data-v="Hybrid">Hybrid</button>
+      </div>
+      <span class="lbl">Service</span>
+      <div class="chips" data-pick="service">
+        <button class="chip" type="button" aria-pressed="false" data-v="Minor service" data-price="980">Minor · R980</button>
+        <button class="chip" type="button" aria-pressed="true" data-v="Major service" data-price="1180">Major · R1,180</button>
+        <button class="chip" type="button" aria-pressed="false" data-v="Diagnostic" data-price="450">Diagnostic · R450</button>
+      </div>
+      <span class="lbl">Slot · Mon 15 June</span>
+      <div class="chips" data-pick="slot">
+        <button class="chip off" type="button" aria-pressed="false" data-v="07:30" disabled>07:30</button>
+        <button class="chip" type="button" aria-pressed="false" data-v="09:00">09:00</button>
+        <button class="chip" type="button" aria-pressed="true" data-v="10:30">10:30</button>
+        <button class="chip" type="button" aria-pressed="false" data-v="13:00">13:00</button>
+        <button class="chip off" type="button" aria-pressed="false" data-v="15:00" disabled>15:00</button>
+      </div>
+      <a class="go" id="confirm" href="#" target="_blank" rel="noopener">Confirm on WhatsApp</a>
+    </div>
+  </section>
+
+  <section class="prices rv">
+    <h2>Fixed prices</h2>
+    <p class="note">The price you book is the price you pay. Anything extra gets a phone call first.</p>
+    <div class="row"><b>Minor service</b><span class="d">Oil, filters, fluids, 40-point check.</span><span class="p">R980</span></div>
+    <div class="row"><b>Major service</b><span class="d">Plugs, belts, brake check included.</span><span class="p">R1,180</span></div>
+    <div class="row"><b>Diagnostics</b><span class="d">Computerised fault-finding, written report.</span><span class="p">R450</span></div>
+    <div class="row"><b>Brakes, front</b><span class="d">Pads and skim, fitted while you wait.</span><span class="p">from R1,450</span></div>
+  </section>
+
+  <section class="day">
+    <div class="day-in rv">
+      <h2>The day of your service</h2>
+      <div class="t"><span class="h">07:30</span><b>Drop off</b><p>Keys in, coffee from the machine, out the door.</p></div>
+      <div class="t"><span class="h">08:15</span><b>On the ramp</b><p>Your mechanic messages if anything extra comes up.</p></div>
+      <div class="t"><span class="h">14:00</span><b>Wash &amp; collect</b><p>Done by two on most jobs, washed and ready.</p></div>
+    </div>
+  </section>
+
+  <div class="band rv">
+    <div class="band-in">
+      <b>12-month workmanship guarantee</b>
+      <span>On every job that leaves the floor. In writing, on your invoice.</span>
+      <a href="tel:+27125550119">012 555 0119</a>
+    </div>
+  </div>
+</main>
+
+<footer class="foot">
+  <span>PowerFix Motors · Lyttelton, Centurion</span>
+  <span>Mon–Fri 07:00–17:30 · Sat 08:00–13:00</span>
+</footer>
+
+<nav class="callbar" aria-label="Quick contact">
+  <a class="c1" href="#book">Book a service</a>
+  <a class="c2" href="tel:+27125550119">Call workshop</a>
+</nav>
+
+<script>
+(function(){
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.15});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+
+  var needle = document.getElementById('needle');
+  var arcFill = document.getElementById('arcFill');
+  var priceEl = document.getElementById('price');
+  var confirmBtn = document.getElementById('confirm');
+  var MAX = 1500; // gauge full-scale
+
+  function picked(group){
+    var el = document.querySelector('[data-pick="'+group+'"] .chip[aria-pressed="true"]');
+    return el || null;
+  }
+  function sync(){
+    var svc = picked('service');
+    var rands = svc ? parseInt(svc.getAttribute('data-price'),10) : 0;
+    var frac = Math.min(rands / MAX, 1);
+    needle.style.transform = 'rotate(' + (-90 + frac*180) + 'deg)';
+    arcFill.style.strokeDashoffset = 264 - 264*frac;
+    priceEl.textContent = 'R' + rands.toLocaleString('en-ZA').replace(/\s/g,',');
+    var msg = 'Hi PowerFix! I’d like to book a ' + (svc ? svc.getAttribute('data-v') : 'service') +
+      ' for my ' + (picked('vehicle') ? picked('vehicle').getAttribute('data-v') : 'car') +
+      ' on Mon 15 June at ' + (picked('slot') ? picked('slot').getAttribute('data-v') : '') +
+      ' (' + priceEl.textContent + ').';
+    confirmBtn.href = 'https://wa.me/27825550119?text=' + encodeURIComponent(msg);
+  }
+  document.querySelectorAll('[data-pick]').forEach(function(group){
+    group.addEventListener('click', function(ev){
+      var b = ev.target.closest('.chip');
+      if(!b || b.disabled) return;
+      group.querySelectorAll('.chip').forEach(function(o){ o.setAttribute('aria-pressed','false'); });
+      b.setAttribute('aria-pressed','true');
+      sync();
+    });
+  });
+  // sweep in on first view
+  var gauge = document.querySelector('.console');
+  var gio = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ sync(); gio.unobserve(e.target); } });
+  },{threshold:.4});
+  gio.observe(gauge);
+  confirmBtn.href = '#'; sync();
+})();
+</script>
+</body>
+</html>

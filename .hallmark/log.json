@@ -1,3 +1,18 @@
 [
-  { "date": "2026-06-10", "macrostructure": "12 distinct (index, menu-document, price-list, bold-rows, manifesto-creed, letter, catalogue+timeline, tenets+colophon, swiss-index, price-table, rows+faq, comparison-table)", "theme": "per-template --mx* token palettes (12)", "enrichment": "photography figures on A/G/I only", "brief": "Local Web SA · View Templates modal · 12 mini-site demo pages, one structural fingerprint each", "scope": "template-gallery" }
+  {
+    "date": "2026-06-10",
+    "macrostructure": "12 standalone demo pages (poster one-pager, manifesto-poster, letter, menu-board, gallery index, evening-menu, law-library tenets, drawing-set index, 4x booking splits)",
+    "theme": "12 custom per-trade palettes + type pairings (copper/Big Shoulders, ember/Alfa Slab, green/Fraunces, kraft/Yeseva, IKB/Marcellus, amber/Prata, gilt/Cinzel, ochre/Schibsted, plum/Bodoni, amber/Chakra Petch, red-pen/Baloo, lilac/Bricolage)",
+    "enrichment": "signature elements: pipe rail, barbell loader, drawn sign-off, sold-out stamp, museum placards, A5 menu card, book spines, dimension lines, vanity mirror, price gauge, red pen, squeegee wipe",
+    "brief": "Local Web SA \u00b7 portfolio-grade redesign of the 12 demo templates as standalone pages, modal loads them in iframes",
+    "scope": "template-gallery"
+  },
+  {
+    "date": "2026-06-10",
+    "macrostructure": "12 distinct (index, menu-document, price-list, bold-rows, manifesto-creed, letter, catalogue+timeline, tenets+colophon, swiss-index, price-table, rows+faq, comparison-table)",
+    "theme": "per-template --mx* token palettes (12)",
+    "enrichment": "photography figures on A/G/I only",
+    "brief": "Local Web SA \u00b7 View Templates modal \u00b7 12 mini-site demo pages, one structural fingerprint each",
+    "scope": "template-gallery"
+  }
 ]

@@ -24,21 +24,19 @@
     };
   }
 
-  window.LWSA_makeCover = function (seed, opts) {
-    opts = opts || {};
-    const w = opts.w || 1600;
-    const h = opts.h || 900;
+  function escTxt(s) {
+    return String(s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  /* ---- Original striped art, kept as the fallback for unknown seeds ---- */
+  function stripeCover(seed, w, h) {
     const sid = hashStr(seed || 'default');
     const rng = mulberry32(sid);
 
     const palette = [
-      '#0A0A0F', // deep navy
-      '#023E8A', // dark teal
-      '#0077B6', // electric blue
-      '#00B4D8', // cyan
-      '#0A0A0F',
-      '#023E8A',
-      '#03335E'
+      '#0A0A0F', '#023E8A', '#0077B6', '#00B4D8',
+      '#0A0A0F', '#023E8A', '#03335E'
     ];
     const accents = ['#FFFFFF', '#2A2D34'];
 
@@ -88,6 +86,125 @@
   <rect width="${w}" height="${h}" fill="url(#v_${sid})"/>
   <rect width="${w}" height="${h}" filter="url(#n_${sid})" opacity="0.55"/>
 </svg>`;
+  }
+
+  /* ---- Bespoke editorial covers, one concept per published essay ----
+     Each design pairs an on-brand line-art motif (drawn in a 0–100 box)
+     with a short, descriptive headline baked into the artwork. Use the
+     token __A__ inside a motif to paint with the design's accent colour. */
+  const DESIGNS = {
+    'your-google-maps-pin-needs-a-website': {
+      accent: '#00E5FF', bg1: '#07112B', bg2: '#03040C',
+      head: ['Get found.', 'Get hired.'],
+      motif: '<path d="M50 6 C31 6 17 20 17 39 C17 63 50 94 50 94 C50 94 83 63 83 39 C83 20 69 6 50 6Z"/><circle cx="50" cy="38" r="13"/>'
+    },
+    'the-invisible-business': {
+      accent: '#7C8CFF', bg1: '#0A0A18', bg2: '#050507',
+      head: ['Invisible to', 'every search.'],
+      motif: '<circle cx="42" cy="42" r="27" stroke-dasharray="4 9"/><line x1="61" y1="61" x2="86" y2="86" stroke-width="6"/>'
+    },
+    'what-customers-do-at-11pm': {
+      accent: '#2BD4FF', bg1: '#060A1C', bg2: '#02030A',
+      head: ['They decide', 'at 11 p.m.'],
+      motif: '<path d="M70 14 A37 37 0 1 0 70 88 A28 28 0 1 1 70 14Z"/><circle cx="28" cy="24" r="2.6" fill="__A__" stroke="none"/><circle cx="20" cy="44" r="1.8" fill="__A__" stroke="none"/><circle cx="33" cy="62" r="2.1" fill="__A__" stroke="none"/>'
+    },
+    'why-a-facebook-page-isnt-enough': {
+      accent: '#4F8BFF', bg1: '#0B1226', bg2: '#04060F',
+      head: ["You're renting", 'the shop floor.'],
+      motif: '<rect x="24" y="44" width="52" height="40" rx="7"/><path d="M33 44 V35 a17 17 0 0 1 34 0 V44"/><line x1="50" y1="59" x2="50" y2="70" stroke-width="5"/>'
+    },
+    'the-247-shopfront': {
+      accent: '#00E5FF', bg1: '#051826', bg2: '#02060C',
+      head: ['Open while', 'you sleep.'],
+      motif: '<circle cx="50" cy="52" r="34"/><path d="M50 30 V52 L67 62"/>'
+    },
+    'the-trust-gap': {
+      accent: '#5AD1FF', bg1: '#081428', bg2: '#03060E',
+      head: ['“Do they have', 'a website?”'],
+      motif: '<path d="M50 12 L82 25 V49 C82 70 68 84 50 90 C32 84 18 70 18 49 V25Z"/><path d="M37 50 L47 60 L65 38"/>'
+    },
+    'word-of-mouth-has-a-url': {
+      accent: '#00E5FF', bg1: '#0A1024', bg2: '#04050C',
+      head: ['Word of mouth', 'is a link now.'],
+      motif: '<path d="M20 26 H72 a8 8 0 0 1 8 8 V58 a8 8 0 0 1 -8 8 H44 L30 80 V66 H20 a8 8 0 0 1 -8 -8 V34 a8 8 0 0 1 8 -8Z"/><rect x="33" y="40" width="19" height="12" rx="6"/><rect x="48" y="40" width="19" height="12" rx="6"/>'
+    },
+    'what-youre-losing-each-month': {
+      accent: '#34E3C4', bg1: '#07142A', bg2: '#03050C',
+      head: ['Every month', 'costs you leads.'],
+      motif: '<circle cx="50" cy="50" r="32"/><text x="50" y="51" font-family="Inter, sans-serif" font-weight="800" font-size="40" fill="__A__" stroke="none" text-anchor="middle" dominant-baseline="central">R</text>'
+    },
+    'first-impressions-are-now-first-scrolls': {
+      accent: '#8AA4FF', bg1: '#0A0E22', bg2: '#04050D',
+      head: ['Priced in the', 'first scroll.'],
+      motif: '<rect x="36" y="18" width="28" height="46" rx="14"/><line x1="50" y1="26" x2="50" y2="37" stroke-width="5"/><path d="M40 74 L50 84 L60 74"/><path d="M40 86 L50 96 L60 86" opacity="0.45"/>'
+    }
+  };
+
+  function editorialCover(seed, d, w, h) {
+    const sid = hashStr(seed) % 100000;
+    const a = d.accent;
+
+    // Motif sits to the right; headline reads from the lower left.
+    const box = Math.round(Math.min(h * 0.56, w * 0.36));
+    const mx = Math.round(w * 0.80 - box / 2);
+    const my = Math.round(h * 0.36 - box / 2);
+    const ms = (box / 100).toFixed(3);
+    const gw = Math.max(40, Math.round(w / 16));
+
+    const fs = Math.round(h * 0.125);
+    const lh = Math.round(fs * 1.05);
+    const lx = Math.round(w * 0.06);
+    const y2 = Math.round(h * 0.86);
+    const y1 = y2 - lh;
+    const ruleY = y1 - Math.round(fs * 0.82);
+    const ruleW = Math.round(fs * 1.4);
+    const foot = Math.round(h * 0.026);
+
+    const motif = d.motif.replace(/__A__/g, a);
+
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg_${sid}" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="${d.bg1}"/>
+      <stop offset="1" stop-color="${d.bg2}"/>
+    </linearGradient>
+    <radialGradient id="gl_${sid}" cx="80%" cy="36%" r="44%">
+      <stop offset="0" stop-color="${a}" stop-opacity="0.32"/>
+      <stop offset="60%" stop-color="${a}" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="${a}" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vg_${sid}" cx="50%" cy="46%" r="80%">
+      <stop offset="42%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.55"/>
+    </radialGradient>
+    <pattern id="gr_${sid}" width="${gw}" height="${gw}" patternUnits="userSpaceOnUse">
+      <path d="M ${gw} 0 L 0 0 0 ${gw}" fill="none" stroke="${a}" stroke-width="1" opacity="0.08"/>
+    </pattern>
+    <filter id="nz_${sid}" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="${sid % 1000}"/>
+      <feColorMatrix values="0 0 0 0 0.65  0 0 0 0 0.82  0 0 0 0 1  0 0 0 0.10 0"/>
+    </filter>
+  </defs>
+  <rect width="${w}" height="${h}" fill="url(#bg_${sid})"/>
+  <rect width="${w}" height="${h}" fill="url(#gr_${sid})"/>
+  <rect width="${w}" height="${h}" fill="url(#gl_${sid})" style="mix-blend-mode:screen"/>
+  <g transform="translate(${mx},${my}) scale(${ms})" fill="none" stroke="${a}" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.92">${motif}</g>
+  <rect x="${lx}" y="${ruleY}" width="${ruleW}" height="4" rx="2" fill="${a}"/>
+  <text x="${lx}" y="${y1}" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="800" font-size="${fs}" letter-spacing="-0.02em" fill="#FFFFFF">${escTxt(d.head[0])}</text>
+  <text x="${lx}" y="${y2}" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="800" font-size="${fs}" letter-spacing="-0.02em" fill="${a}">${escTxt(d.head[1])}</text>
+  <text x="${w - Math.round(w * 0.05)}" y="${h - Math.round(h * 0.055)}" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="${foot}" letter-spacing="0.14em" fill="#FFFFFF" opacity="0.45">LOCALWEBSA.ORG</text>
+  <rect width="${w}" height="${h}" fill="url(#vg_${sid})"/>
+  <rect width="${w}" height="${h}" filter="url(#nz_${sid})" opacity="0.5"/>
+</svg>`;
+  }
+
+  window.LWSA_makeCover = function (seed, opts) {
+    opts = opts || {};
+    const w = opts.w || 1600;
+    const h = opts.h || 900;
+    const design = DESIGNS[seed];
+    if (design) return editorialCover(seed, design, w, h);
+    return stripeCover(seed, w, h);
   };
 })();
 

@@ -88,57 +88,97 @@
 </svg>`;
   }
 
-  /* ---- Bespoke editorial covers, one concept per published essay ----
-     Each design pairs an on-brand line-art motif (drawn in a 0–100 box)
-     with a short, descriptive headline baked into the artwork. Use the
-     token __A__ inside a motif to paint with the design's accent colour. */
-  const DESIGNS = {
-    'your-google-maps-pin-needs-a-website': {
-      accent: '#00E5FF', bg1: '#07112B', bg2: '#03040C',
-      head: ['Get found.', 'Get hired.'],
-      motif: '<path d="M50 6 C31 6 17 20 17 39 C17 63 50 94 50 94 C50 94 83 63 83 39 C83 20 69 6 50 6Z"/><circle cx="50" cy="38" r="13"/>'
-    },
-    'the-invisible-business': {
-      accent: '#7C8CFF', bg1: '#0A0A18', bg2: '#050507',
-      head: ['Invisible to', 'every search.'],
-      motif: '<circle cx="42" cy="42" r="27" stroke-dasharray="4 9"/><line x1="61" y1="61" x2="86" y2="86" stroke-width="6"/>'
-    },
-    'what-customers-do-at-11pm': {
-      accent: '#2BD4FF', bg1: '#060A1C', bg2: '#02030A',
-      head: ['They decide', 'at 11 p.m.'],
-      motif: '<path d="M70 14 A37 37 0 1 0 70 88 A28 28 0 1 1 70 14Z"/><circle cx="28" cy="24" r="2.6" fill="__A__" stroke="none"/><circle cx="20" cy="44" r="1.8" fill="__A__" stroke="none"/><circle cx="33" cy="62" r="2.1" fill="__A__" stroke="none"/>'
-    },
-    'why-a-facebook-page-isnt-enough': {
-      accent: '#4F8BFF', bg1: '#0B1226', bg2: '#04060F',
-      head: ["You're renting", 'the shop floor.'],
-      motif: '<rect x="24" y="44" width="52" height="40" rx="7"/><path d="M33 44 V35 a17 17 0 0 1 34 0 V44"/><line x1="50" y1="59" x2="50" y2="70" stroke-width="5"/>'
-    },
-    'the-247-shopfront': {
-      accent: '#00E5FF', bg1: '#051826', bg2: '#02060C',
-      head: ['Open while', 'you sleep.'],
-      motif: '<circle cx="50" cy="52" r="34"/><path d="M50 30 V52 L67 62"/>'
-    },
-    'the-trust-gap': {
-      accent: '#5AD1FF', bg1: '#081428', bg2: '#03060E',
-      head: ['“Do they have', 'a website?”'],
-      motif: '<path d="M50 12 L82 25 V49 C82 70 68 84 50 90 C32 84 18 70 18 49 V25Z"/><path d="M37 50 L47 60 L65 38"/>'
-    },
-    'word-of-mouth-has-a-url': {
-      accent: '#00E5FF', bg1: '#0A1024', bg2: '#04050C',
-      head: ['Word of mouth', 'is a link now.'],
-      motif: '<path d="M20 26 H72 a8 8 0 0 1 8 8 V58 a8 8 0 0 1 -8 8 H44 L30 80 V66 H20 a8 8 0 0 1 -8 -8 V34 a8 8 0 0 1 8 -8Z"/><rect x="33" y="40" width="19" height="12" rx="6"/><rect x="48" y="40" width="19" height="12" rx="6"/>'
-    },
-    'what-youre-losing-each-month': {
-      accent: '#34E3C4', bg1: '#07142A', bg2: '#03050C',
-      head: ['Every month', 'costs you leads.'],
-      motif: '<circle cx="50" cy="50" r="32"/><text x="50" y="51" font-family="Inter, sans-serif" font-weight="800" font-size="40" fill="__A__" stroke="none" text-anchor="middle" dominant-baseline="central">R</text>'
-    },
-    'first-impressions-are-now-first-scrolls': {
-      accent: '#8AA4FF', bg1: '#0A0E22', bg2: '#04050D',
-      head: ['Priced in the', 'first scroll.'],
-      motif: '<rect x="36" y="18" width="28" height="46" rx="14"/><line x1="50" y1="26" x2="50" y2="37" stroke-width="5"/><path d="M40 74 L50 84 L60 74"/><path d="M40 86 L50 96 L60 86" opacity="0.45"/>'
-    }
+  /* ---- Reusable line-art motifs (drawn in a 0–100 box). Use the token
+     __A__ inside a motif to paint with the design's accent colour. ---- */
+  const MOTIFS = {
+    pin: '<path d="M50 6 C31 6 17 20 17 39 C17 63 50 94 50 94 C50 94 83 63 83 39 C83 20 69 6 50 6Z"/><circle cx="50" cy="38" r="13"/>',
+    magnifier: '<circle cx="42" cy="42" r="27" stroke-dasharray="4 9"/><line x1="61" y1="61" x2="86" y2="86" stroke-width="6"/>',
+    moon: '<path d="M70 14 A37 37 0 1 0 70 88 A28 28 0 1 1 70 14Z"/><circle cx="28" cy="24" r="2.6" fill="__A__" stroke="none"/><circle cx="20" cy="44" r="1.8" fill="__A__" stroke="none"/><circle cx="33" cy="62" r="2.1" fill="__A__" stroke="none"/>',
+    lock: '<rect x="24" y="44" width="52" height="40" rx="7"/><path d="M33 44 V35 a17 17 0 0 1 34 0 V44"/><line x1="50" y1="59" x2="50" y2="70" stroke-width="5"/>',
+    clock: '<circle cx="50" cy="52" r="34"/><path d="M50 30 V52 L67 62"/>',
+    shield: '<path d="M50 12 L82 25 V49 C82 70 68 84 50 90 C32 84 18 70 18 49 V25Z"/><path d="M37 50 L47 60 L65 38"/>',
+    bubble: '<path d="M20 26 H72 a8 8 0 0 1 8 8 V58 a8 8 0 0 1 -8 8 H44 L30 80 V66 H20 a8 8 0 0 1 -8 -8 V34 a8 8 0 0 1 8 -8Z"/><rect x="33" y="40" width="19" height="12" rx="6"/><rect x="48" y="40" width="19" height="12" rx="6"/>',
+    coin: '<circle cx="50" cy="50" r="32"/><text x="50" y="51" font-family="Inter, sans-serif" font-weight="800" font-size="40" fill="__A__" stroke="none" text-anchor="middle" dominant-baseline="central">R</text>',
+    mouse: '<rect x="36" y="18" width="28" height="46" rx="14"/><line x1="50" y1="26" x2="50" y2="37" stroke-width="5"/><path d="M40 74 L50 84 L60 74"/><path d="M40 86 L50 96 L60 86" opacity="0.45"/>',
+    globe: '<circle cx="50" cy="50" r="34"/><ellipse cx="50" cy="50" rx="14" ry="34"/><line x1="16" y1="50" x2="84" y2="50"/><path d="M23 31 H77"/><path d="M23 69 H77"/>'
   };
+
+  /* On-brand colour combos used to auto-style any post without a hand-picked
+     palette (e.g. next Monday's essay). Chosen deterministically by slug. */
+  const PALETTES = [
+    { accent: '#00E5FF', bg1: '#07112B', bg2: '#03040C' },
+    { accent: '#4F8BFF', bg1: '#0B1226', bg2: '#04060F' },
+    { accent: '#5AD1FF', bg1: '#081428', bg2: '#03060E' },
+    { accent: '#7C8CFF', bg1: '#0A0A18', bg2: '#050507' },
+    { accent: '#34E3C4', bg1: '#07142A', bg2: '#03050C' },
+    { accent: '#8AA4FF', bg1: '#0A0E22', bg2: '#04050D' }
+  ];
+
+  /* A new post's motif is picked from its tag; unknown tags fall back to a
+     globe. Add a tag here when you introduce a new category. */
+  const TAG_MOTIF = {
+    'Local Search': 'pin',
+    'Visibility': 'magnifier',
+    'Behaviour': 'moon',
+    'Platform Risk': 'lock',
+    'Always Open': 'clock',
+    'Trust': 'shield',
+    'Referrals': 'bubble',
+    'Economics': 'coin',
+    'Perception': 'mouse'
+  };
+
+  /* Hand-tuned covers for the launch essays. Each references a motif by key
+     and supplies a short, descriptive two-line headline. New posts don't need
+     an entry here — they inherit a cover automatically (see resolveDesign). */
+  const DESIGNS = {
+    'your-google-maps-pin-needs-a-website': { accent: '#00E5FF', bg1: '#07112B', bg2: '#03040C', head: ['Get found.', 'Get hired.'], motif: 'pin' },
+    'the-invisible-business': { accent: '#7C8CFF', bg1: '#0A0A18', bg2: '#050507', head: ['Invisible to', 'every search.'], motif: 'magnifier' },
+    'what-customers-do-at-11pm': { accent: '#2BD4FF', bg1: '#060A1C', bg2: '#02030A', head: ['They decide', 'at 11 p.m.'], motif: 'moon' },
+    'why-a-facebook-page-isnt-enough': { accent: '#4F8BFF', bg1: '#0B1226', bg2: '#04060F', head: ["You're renting", 'the shop floor.'], motif: 'lock' },
+    'the-247-shopfront': { accent: '#00E5FF', bg1: '#051826', bg2: '#02060C', head: ['Open while', 'you sleep.'], motif: 'clock' },
+    'the-trust-gap': { accent: '#5AD1FF', bg1: '#081428', bg2: '#03060E', head: ['“Do they have', 'a website?”'], motif: 'shield' },
+    'word-of-mouth-has-a-url': { accent: '#00E5FF', bg1: '#0A1024', bg2: '#04050C', head: ['Word of mouth', 'is a link now.'], motif: 'bubble' },
+    'what-youre-losing-each-month': { accent: '#34E3C4', bg1: '#07142A', bg2: '#03050C', head: ['Every month', 'costs you leads.'], motif: 'coin' },
+    'first-impressions-are-now-first-scrolls': { accent: '#8AA4FF', bg1: '#0A0E22', bg2: '#04050D', head: ['Priced in the', 'first scroll.'], motif: 'mouse' }
+  };
+
+  /* Split a title into two balanced lines for an auto-generated headline. */
+  function deriveHead(title) {
+    const words = String(title).replace(/\s+/g, ' ').trim().split(' ');
+    if (words.length < 2) return [words[0] || 'Local Web SA', ''];
+    let best = 1, bestDiff = Infinity;
+    for (let i = 1; i < words.length; i++) {
+      const diff = Math.abs(words.slice(0, i).join(' ').length - words.slice(i).join(' ').length);
+      if (diff < bestDiff) { bestDiff = diff; best = i; }
+    }
+    return [words.slice(0, best).join(' '), words.slice(best).join(' ')];
+  }
+
+  /* Resolve a finished design (accent, bg, headline, motif markup) for a slug.
+     Order of preference: a hand-tuned DESIGNS entry → the post's own data
+     (tag + title, plus an optional `cover` override) → null, which lets
+     unknown seeds fall back to the striped art used by the tests. */
+  function resolveDesign(seed) {
+    const base = DESIGNS[seed];
+    if (base) {
+      return { accent: base.accent, bg1: base.bg1, bg2: base.bg2, head: base.head, motif: MOTIFS[base.motif] || MOTIFS.globe };
+    }
+    const post = (typeof window !== 'undefined' && window.LWSA_findPost) ? window.LWSA_findPost(seed) : null;
+    if (post) {
+      const cov = post.cover || {};
+      const pal = PALETTES[hashStr(seed) % PALETTES.length];
+      const motifKey = cov.motif || TAG_MOTIF[post.tag] || 'globe';
+      return {
+        accent: cov.accent || pal.accent,
+        bg1: cov.bg1 || pal.bg1,
+        bg2: cov.bg2 || pal.bg2,
+        head: cov.head || deriveHead(post.title),
+        motif: MOTIFS[motifKey] || MOTIFS.globe
+      };
+    }
+    return null;
+  }
 
   function editorialCover(seed, d, w, h) {
     const sid = hashStr(seed) % 100000;
@@ -151,7 +191,10 @@
     const my = Math.round(h * 0.34 - box / 2);
     const ms = (box / 100).toFixed(3);
 
-    const fs = Math.round(h * 0.125);
+    // Shrink the headline when its longest line would otherwise overflow,
+    // so auto-generated covers from longer titles still fit cleanly.
+    const maxChars = Math.max(String(d.head[0]).length, String(d.head[1] || '').length, 1);
+    const fs = Math.round(Math.min(h * 0.125, (w * 0.86) / (maxChars * 0.62)));
     const lh = Math.round(fs * 1.05);
     const lx = Math.round(w * 0.06);
     const y2 = Math.round(h * 0.86);
@@ -163,14 +206,15 @@
     const motif = d.motif.replace(/__A__/g, a);
 
     // --- Giant tiled watermark of the headline words, bleeding off-frame ---
-    const words = d.head.map(t => t.replace(/[.,“”"'’?!]/g, '').trim().toUpperCase());
+    const words = d.head.map(t => t.replace(/[.,“”"'’?!]/g, '').trim().toUpperCase()).filter(Boolean);
+    if (!words.length) words.push('LOCAL WEB SA');
     const bgFS = Math.round(h * 0.27);
     const bgLH = Math.round(bgFS * 0.9);
     let watermark = '';
     let ry = Math.round(bgFS * 0.72);
     let wi = 0;
     while (ry < h + bgLH) {
-      const word = words[wi % words.length] || 'LOCAL WEB SA';
+      const word = words[wi % words.length];
       const ox = -Math.round(w * (0.05 + (wi % 2) * 0.11));
       watermark += `<text x="${ox}" y="${ry}" font-family="Inter, system-ui, sans-serif" font-weight="800" font-size="${bgFS}" letter-spacing="-0.03em" fill="url(#bt_${sid})">${escTxt(word)}</text>`;
       ry += bgLH; wi++;
@@ -183,10 +227,14 @@
     let highlights = '';
     for (let hx = 0; hx < w; hx += slatW) {
       if (rng() < 0.13) {
-        highlights += `<rect x="${hx}" y="0" width="${slatW}" height="${h}" fill="${a}" opacity="${(0.05 + rng() * 0.1).toFixed(3)}" style="mix-blend-mode:screen"/>`;
+        highlights += `<rect x="${hx}" y="0" width="${slatW}" height="${h}" fill="${a}" opacity="${(0.04 + rng() * 0.07).toFixed(3)}"/>`;
       }
     }
 
+    // No SVG filters or blend modes here on purpose: feTurbulence/feDropShadow
+    // and mix-blend-mode force the layer to re-rasterise while scrolling, which
+    // shows up as flicker/"glitch" on mobile. Contrast for the headline comes
+    // from the bottom scrim + vignette instead.
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
   <defs>
     <linearGradient id="bg_${sid}" x1="0" y1="0" x2="1" y2="1">
@@ -209,41 +257,31 @@
       <rect width="${sepW}" height="${h}" fill="#000" opacity="0.5"/>
     </pattern>
     <radialGradient id="gl_${sid}" cx="81%" cy="34%" r="46%">
-      <stop offset="0" stop-color="${a}" stop-opacity="0.34"/>
-      <stop offset="60%" stop-color="${a}" stop-opacity="0.06"/>
+      <stop offset="0" stop-color="${a}" stop-opacity="0.28"/>
+      <stop offset="60%" stop-color="${a}" stop-opacity="0.05"/>
       <stop offset="100%" stop-color="${a}" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="sc_${sid}" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="45%" stop-color="#000" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#000" stop-opacity="0.62"/>
+      <stop offset="40%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.66"/>
     </linearGradient>
     <radialGradient id="vg_${sid}" cx="50%" cy="46%" r="80%">
       <stop offset="40%" stop-color="#000" stop-opacity="0"/>
       <stop offset="100%" stop-color="#000" stop-opacity="0.5"/>
     </radialGradient>
-    <filter id="sh_${sid}" x="-25%" y="-25%" width="150%" height="150%">
-      <feDropShadow dx="0" dy="${Math.round(h * 0.006)}" stdDeviation="${Math.round(h * 0.012)}" flood-color="#000" flood-opacity="0.55"/>
-    </filter>
-    <filter id="nz_${sid}" x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="${sid % 1000}"/>
-      <feColorMatrix values="0 0 0 0 0.65  0 0 0 0 0.82  0 0 0 0 1  0 0 0 0.10 0"/>
-    </filter>
   </defs>
   <rect width="${w}" height="${h}" fill="url(#bg_${sid})"/>
   <g opacity="0.18">${watermark}</g>
   <rect width="${w}" height="${h}" fill="url(#bl_${sid})"/>
   ${highlights}
-  <rect width="${w}" height="${h}" fill="url(#gl_${sid})" style="mix-blend-mode:screen"/>
-  <g transform="translate(${mx},${my}) scale(${ms})" fill="none" stroke="${a}" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" filter="url(#sh_${sid})">${motif}</g>
+  <rect width="${w}" height="${h}" fill="url(#gl_${sid})"/>
+  <g transform="translate(${mx},${my}) scale(${ms})" fill="none" stroke="${a}" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">${motif}</g>
   <rect width="${w}" height="${h}" fill="url(#sc_${sid})"/>
-  <g filter="url(#sh_${sid})">
-    <rect x="${lx}" y="${ruleY}" width="${ruleW}" height="4" rx="2" fill="${a}"/>
-    <text x="${lx}" y="${y1}" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="800" font-size="${fs}" letter-spacing="-0.02em" fill="#FFFFFF">${escTxt(d.head[0])}</text>
-    <text x="${lx}" y="${y2}" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="800" font-size="${fs}" letter-spacing="-0.02em" fill="${a}">${escTxt(d.head[1])}</text>
-  </g>
+  <rect x="${lx}" y="${ruleY}" width="${ruleW}" height="4" rx="2" fill="${a}"/>
+  <text x="${lx}" y="${y1}" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="800" font-size="${fs}" letter-spacing="-0.02em" fill="#FFFFFF">${escTxt(d.head[0])}</text>
+  <text x="${lx}" y="${y2}" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="800" font-size="${fs}" letter-spacing="-0.02em" fill="${a}">${escTxt(d.head[1] || '')}</text>
   <text x="${w - Math.round(w * 0.05)}" y="${h - Math.round(h * 0.055)}" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="${foot}" letter-spacing="0.14em" fill="#FFFFFF" opacity="0.5">LOCALWEBSA.ORG</text>
   <rect width="${w}" height="${h}" fill="url(#vg_${sid})"/>
-  <rect width="${w}" height="${h}" filter="url(#nz_${sid})" opacity="0.45"/>
 </svg>`;
   }
 
@@ -251,7 +289,7 @@
     opts = opts || {};
     const w = opts.w || 1600;
     const h = opts.h || 900;
-    const design = DESIGNS[seed];
+    const design = resolveDesign(seed);
     if (design) return editorialCover(seed, design, w, h);
     return stripeCover(seed, w, h);
   };

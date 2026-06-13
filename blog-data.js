@@ -176,18 +176,15 @@
       ry += bgLH; wi++;
     }
 
-    // --- Vertical "venetian blind" bars that slice the watermark ---
-    let blinds = '';
-    let bx = 0;
-    const base = w / 22;
-    while (bx < w) {
-      const bw = base * (0.6 + rng() * 0.85);
-      const op = (rng() * rng()) * 0.34;
-      blinds += `<rect x="${bx.toFixed(1)}" y="0" width="${(bw + 0.6).toFixed(1)}" height="${h}" fill="${d.bg2}" opacity="${op.toFixed(3)}"/>`;
-      if (rng() < 0.16) {
-        blinds += `<rect x="${bx.toFixed(1)}" y="0" width="${Math.max(2, w / 640).toFixed(1)}" height="${h}" fill="${a}" opacity="${(0.1 + rng() * 0.16).toFixed(3)}"/>`;
+    // --- Regular vertical "venetian blind" slats with hard separation seams.
+    // Shaded edges + a dark seam per slat make the dividers clearly visible. ---
+    const slatW = Math.max(7, Math.round(w / 52));
+    const sepW = Math.max(1.5, w / 760).toFixed(2);
+    let highlights = '';
+    for (let hx = 0; hx < w; hx += slatW) {
+      if (rng() < 0.13) {
+        highlights += `<rect x="${hx}" y="0" width="${slatW}" height="${h}" fill="${a}" opacity="${(0.05 + rng() * 0.1).toFixed(3)}" style="mix-blend-mode:screen"/>`;
       }
-      bx += bw;
     }
 
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -202,6 +199,15 @@
       <stop offset="58%" stop-color="#FFFFFF"/>
       <stop offset="100%" stop-color="${a}"/>
     </linearGradient>
+    <linearGradient id="sl_${sid}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000" stop-opacity="0.44"/>
+      <stop offset="50%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.44"/>
+    </linearGradient>
+    <pattern id="bl_${sid}" width="${slatW}" height="${h}" patternUnits="userSpaceOnUse">
+      <rect width="${slatW}" height="${h}" fill="url(#sl_${sid})"/>
+      <rect width="${sepW}" height="${h}" fill="#000" opacity="0.5"/>
+    </pattern>
     <radialGradient id="gl_${sid}" cx="81%" cy="34%" r="46%">
       <stop offset="0" stop-color="${a}" stop-opacity="0.34"/>
       <stop offset="60%" stop-color="${a}" stop-opacity="0.06"/>
@@ -224,8 +230,9 @@
     </filter>
   </defs>
   <rect width="${w}" height="${h}" fill="url(#bg_${sid})"/>
-  <g opacity="0.16">${watermark}</g>
-  ${blinds}
+  <g opacity="0.18">${watermark}</g>
+  <rect width="${w}" height="${h}" fill="url(#bl_${sid})"/>
+  ${highlights}
   <rect width="${w}" height="${h}" fill="url(#gl_${sid})" style="mix-blend-mode:screen"/>
   <g transform="translate(${mx},${my}) scale(${ms})" fill="none" stroke="${a}" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" filter="url(#sh_${sid})">${motif}</g>
   <rect width="${w}" height="${h}" fill="url(#sc_${sid})"/>

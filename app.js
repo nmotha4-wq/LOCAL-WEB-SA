@@ -1,6 +1,45 @@
 /* ========== LOCAL WEB SA — Shared App ========== */
 (function(){
 
+  // ============ PURE HELPERS (also exposed on window.LWSA_APP for tests) ============
+
+  // Escape user/assistant text before injecting — prevents HTML injection.
+  const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+  // Format a number as a South African Rand string, e.g. 1299 -> "R1 299".
+  const formatZAR = n => 'R' + Number(n).toLocaleString('en-ZA');
+
+  // Resolve which nav filename should be highlighted for a given pathname.
+  // Blog post pages highlight the Blog tab.
+  function normalizeNavPath(pathname) {
+    let path = ((pathname || '').split('/').pop() || 'index.html').toLowerCase();
+    if (path === 'blog-post.html') path = 'blog.html';
+    return path;
+  }
+
+  // ---- Pricing data + math (rendering lives in the pricing-page block below) ----
+  const PRICING_PACKAGES = [
+    { id:'basic', name:'Basic Website', price:799, desc:'Perfect for getting online fast with a clean, professional look.', features:['1-page long-scroll site','Custom domain + SSL','WhatsApp CTA button','Google Business sync','Mobile-first design','7-day delivery'] },
+    { id:'professional', name:'Professional 5-Page', price:1299, desc:'Ideal for established businesses wanting a full online presence.', popular:true, features:['Up to 5 pages','Contact + enquiry form','SEO basics + sitemap','Per-page meta tags','Photo gallery','Free first revision','7-day delivery'] },
+    { id:'booking', name:'Booking System', price:1499, desc:'Take online bookings 24/7 and automate your appointment schedule.', features:['Everything in Professional','Online booking calendar','Email + WhatsApp notifications','Service & staff management','Customer reminders','Two revision rounds','10–14 day delivery'] }
+  ];
+  const PRICING_MONTHLY = { hosting:{ name:'Website Hosting', price:149 }, care:{ name:'Care & Maintenance', price:299 } };
+
+  // Given a package id and the care toggle, compute the once-off, recurring,
+  // first-month and year-1 totals. Returns null for an unknown package id.
+  function computePricing(selectedPkgId, careOn) {
+    const pkg = PRICING_PACKAGES.find(p => p.id === selectedPkgId);
+    if (!pkg) return null;
+    const recurring = careOn ? PRICING_MONTHLY.care : PRICING_MONTHLY.hosting;
+    const onceOff = pkg.price;
+    const monthlyAmt = recurring.price;
+    return {
+      pkg, recurring, onceOff, monthlyAmt,
+      firstMonth: onceOff + monthlyAmt,
+      year1: onceOff + monthlyAmt * 12,
+    };
+  }
+
   // ============ NAV / MOBILE MENU ============
   const nav = document.getElementById('nav');
   if (nav) {
@@ -8,8 +47,7 @@
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     // active link (blog posts highlight the Blog tab)
-    let path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-    if (path === 'blog-post.html') path = 'blog.html';
+    const path = normalizeNavPath(location.pathname);
     document.querySelectorAll('#nav .nav-links a, .mobile-menu a').forEach(a => {
       const href = (a.getAttribute('href')||'').toLowerCase();
       if (href === path || (path === '' && href === 'index.html')) a.classList.add('active');
@@ -50,10 +88,12 @@
   }
 
   // ============ FADE IN ============
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.fade-in').forEach(el => io.observe(el))
+  if (typeof IntersectionObserver !== 'undefined') {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  }
 
   // ============ FAQ ============
   document.querySelectorAll('.faq-q').forEach(btn => {
@@ -72,12 +112,7 @@
   const sumTotals = document.getElementById('summaryTotals');
 
   if (pricingGrid){
-    const packages = [
-      { id:'basic', name:'Basic Website', price:799, desc:'Perfect for getting online fast with a clean, professional look.', features:['1-page long-scroll site','Custom domain + SSL','WhatsApp CTA button','Google Business sync','Mobile-first design','7-day delivery'] },
-      { id:'professional', name:'Professional 5-Page', price:1299, desc:'Ideal for established businesses wanting a full online presence.', popular:true, features:['Up to 5 pages','Contact + enquiry form','SEO basics + sitemap','Per-page meta tags','Photo gallery','Free first revision','7-day delivery'] },
-      { id:'booking', name:'Booking System', price:1499, desc:'Take online bookings 24/7 and automate your appointment schedule.', features:['Everything in Professional','Online booking calendar','Email + WhatsApp notifications','Service & staff management','Customer reminders','Two revision rounds','10–14 day delivery'] }
-    ];
-    const monthly = { hosting:{ name:'Website Hosting', price:149 }, care:{ name:'Care & Maintenance', price:299 } };
+    const packages = PRICING_PACKAGES;
 
     let selectedPkg = 'professional';
     let careOn = false;
@@ -90,7 +125,7 @@
           <div class="top">
             <span class="radio" aria-hidden="true"></span>
             <span class="name">${p.name}</span>
-            <span class="price">R${p.price.toLocaleString('en-ZA')}<small>once-off</small></span>
+            <span class="price">${formatZAR(p.price)}<small>once-off</small></span>
           </div>
           <p class="desc">${p.desc}</p>
           <button class="expand" data-expand="${p.id}" aria-expanded="${openPkg===p.id}">
@@ -103,21 +138,16 @@
     }
     function renderSummary(){
       if (!sumList || !sumTotals) return;
-      const pkg = packages.find(p=>p.id===selectedPkg);
-      const recurring = careOn ? monthly.care : monthly.hosting;
-      const onceOff = pkg.price;
-      const monthlyAmt = recurring.price;
-      const firstMonth = onceOff + monthlyAmt;
-      const year1 = onceOff + monthlyAmt * 12;
+      const { pkg, recurring, onceOff, monthlyAmt, firstMonth, year1 } = computePricing(selectedPkg, careOn);
       sumList.innerHTML = `
-        <div class="summary-row"><span class="lbl"><b>${pkg.name}</b><small>Once-off build</small></span><span class="val">R${onceOff.toLocaleString('en-ZA')}</span></div>
-        <div class="summary-row"><span class="lbl"><b>${recurring.name}</b><small>Monthly recurring</small></span><span class="val">R${monthlyAmt.toLocaleString('en-ZA')}<small style="color:var(--text-grey);font-weight:600">/mo</small></span></div>
+        <div class="summary-row"><span class="lbl"><b>${pkg.name}</b><small>Once-off build</small></span><span class="val">${formatZAR(onceOff)}</span></div>
+        <div class="summary-row"><span class="lbl"><b>${recurring.name}</b><small>Monthly recurring</small></span><span class="val">${formatZAR(monthlyAmt)}<small style="color:var(--text-grey);font-weight:600">/mo</small></span></div>
       `;
       sumTotals.innerHTML = `
-        <div class="row"><span>Once-off build</span><span class="v">R${onceOff.toLocaleString('en-ZA')}</span></div>
-        <div class="row"><span>Monthly recurring</span><span class="v">R${monthlyAmt.toLocaleString('en-ZA')}<small>/mo</small></span></div>
-        <div class="row"><span>Website + 1st month</span><span class="v">R${firstMonth.toLocaleString('en-ZA')}</span></div>
-        <div class="row year1"><span>Year 1 total</span><span class="v">R${year1.toLocaleString('en-ZA')}</span></div>
+        <div class="row"><span>Once-off build</span><span class="v">${formatZAR(onceOff)}</span></div>
+        <div class="row"><span>Monthly recurring</span><span class="v">${formatZAR(monthlyAmt)}<small>/mo</small></span></div>
+        <div class="row"><span>Website + 1st month</span><span class="v">${formatZAR(firstMonth)}</span></div>
+        <div class="row year1"><span>Year 1 total</span><span class="v">${formatZAR(year1)}</span></div>
       `;
     }
 
@@ -183,9 +213,6 @@
       'Do you do e-commerce?',
       'WhatsApp me the details',
     ];
-
-    // Escape user/assistant text before injecting — prevents HTML injection
-    const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
     function saveHistory() {
       try { localStorage.setItem('lws_chat_history', JSON.stringify(history.slice(-20))); } catch (e) {}
@@ -387,6 +414,11 @@ What are you looking for?`;
         btn.disabled = false;
       }, 5000);
     });
+  }
+
+  // Expose the pure helpers for unit testing without affecting browser usage.
+  if (typeof window !== 'undefined') {
+    window.LWSA_APP = { esc, formatZAR, normalizeNavPath, computePricing, PRICING_PACKAGES, PRICING_MONTHLY };
   }
 
 })();

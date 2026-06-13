@@ -9,7 +9,7 @@ export default defineConfig({
     include: ['tests/**/*.test.js'],
     coverage: {
       provider: 'v8',
-      include: ['functions/**/*.js', 'blog-data.js'],
+      include: ['functions/**/*.js', 'blog-data.js', 'app.js'],
       reporter: ['text', 'html'],
     },
   },

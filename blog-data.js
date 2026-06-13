@@ -143,13 +143,13 @@
   function editorialCover(seed, d, w, h) {
     const sid = hashStr(seed) % 100000;
     const a = d.accent;
+    const rng = mulberry32(hashStr(seed) + 7);
 
     // Motif sits to the right; headline reads from the lower left.
-    const box = Math.round(Math.min(h * 0.56, w * 0.36));
-    const mx = Math.round(w * 0.80 - box / 2);
-    const my = Math.round(h * 0.36 - box / 2);
+    const box = Math.round(Math.min(h * 0.52, w * 0.34));
+    const mx = Math.round(w * 0.81 - box / 2);
+    const my = Math.round(h * 0.34 - box / 2);
     const ms = (box / 100).toFixed(3);
-    const gw = Math.max(40, Math.round(w / 16));
 
     const fs = Math.round(h * 0.125);
     const lh = Math.round(fs * 1.05);
@@ -162,39 +162,81 @@
 
     const motif = d.motif.replace(/__A__/g, a);
 
+    // --- Giant tiled watermark of the headline words, bleeding off-frame ---
+    const words = d.head.map(t => t.replace(/[.,“”"'’?!]/g, '').trim().toUpperCase());
+    const bgFS = Math.round(h * 0.27);
+    const bgLH = Math.round(bgFS * 0.9);
+    let watermark = '';
+    let ry = Math.round(bgFS * 0.72);
+    let wi = 0;
+    while (ry < h + bgLH) {
+      const word = words[wi % words.length] || 'LOCAL WEB SA';
+      const ox = -Math.round(w * (0.05 + (wi % 2) * 0.11));
+      watermark += `<text x="${ox}" y="${ry}" font-family="Inter, system-ui, sans-serif" font-weight="800" font-size="${bgFS}" letter-spacing="-0.03em" fill="url(#bt_${sid})">${escTxt(word)}</text>`;
+      ry += bgLH; wi++;
+    }
+
+    // --- Vertical "venetian blind" bars that slice the watermark ---
+    let blinds = '';
+    let bx = 0;
+    const base = w / 22;
+    while (bx < w) {
+      const bw = base * (0.6 + rng() * 0.85);
+      const op = (rng() * rng()) * 0.34;
+      blinds += `<rect x="${bx.toFixed(1)}" y="0" width="${(bw + 0.6).toFixed(1)}" height="${h}" fill="${d.bg2}" opacity="${op.toFixed(3)}"/>`;
+      if (rng() < 0.16) {
+        blinds += `<rect x="${bx.toFixed(1)}" y="0" width="${Math.max(2, w / 640).toFixed(1)}" height="${h}" fill="${a}" opacity="${(0.1 + rng() * 0.16).toFixed(3)}"/>`;
+      }
+      bx += bw;
+    }
+
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
   <defs>
     <linearGradient id="bg_${sid}" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="${d.bg1}"/>
       <stop offset="1" stop-color="${d.bg2}"/>
     </linearGradient>
-    <radialGradient id="gl_${sid}" cx="80%" cy="36%" r="44%">
-      <stop offset="0" stop-color="${a}" stop-opacity="0.32"/>
+    <linearGradient id="bt_${sid}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="${a}"/>
+      <stop offset="42%" stop-color="#FFFFFF"/>
+      <stop offset="58%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="${a}"/>
+    </linearGradient>
+    <radialGradient id="gl_${sid}" cx="81%" cy="34%" r="46%">
+      <stop offset="0" stop-color="${a}" stop-opacity="0.34"/>
       <stop offset="60%" stop-color="${a}" stop-opacity="0.06"/>
       <stop offset="100%" stop-color="${a}" stop-opacity="0"/>
     </radialGradient>
+    <linearGradient id="sc_${sid}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="45%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.62"/>
+    </linearGradient>
     <radialGradient id="vg_${sid}" cx="50%" cy="46%" r="80%">
-      <stop offset="42%" stop-color="#000" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#000" stop-opacity="0.55"/>
+      <stop offset="40%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.5"/>
     </radialGradient>
-    <pattern id="gr_${sid}" width="${gw}" height="${gw}" patternUnits="userSpaceOnUse">
-      <path d="M ${gw} 0 L 0 0 0 ${gw}" fill="none" stroke="${a}" stroke-width="1" opacity="0.08"/>
-    </pattern>
+    <filter id="sh_${sid}" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="${Math.round(h * 0.006)}" stdDeviation="${Math.round(h * 0.012)}" flood-color="#000" flood-opacity="0.55"/>
+    </filter>
     <filter id="nz_${sid}" x="0" y="0" width="100%" height="100%">
       <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="${sid % 1000}"/>
       <feColorMatrix values="0 0 0 0 0.65  0 0 0 0 0.82  0 0 0 0 1  0 0 0 0.10 0"/>
     </filter>
   </defs>
   <rect width="${w}" height="${h}" fill="url(#bg_${sid})"/>
-  <rect width="${w}" height="${h}" fill="url(#gr_${sid})"/>
+  <g opacity="0.16">${watermark}</g>
+  ${blinds}
   <rect width="${w}" height="${h}" fill="url(#gl_${sid})" style="mix-blend-mode:screen"/>
-  <g transform="translate(${mx},${my}) scale(${ms})" fill="none" stroke="${a}" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.92">${motif}</g>
-  <rect x="${lx}" y="${ruleY}" width="${ruleW}" height="4" rx="2" fill="${a}"/>
-  <text x="${lx}" y="${y1}" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="800" font-size="${fs}" letter-spacing="-0.02em" fill="#FFFFFF">${escTxt(d.head[0])}</text>
-  <text x="${lx}" y="${y2}" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="800" font-size="${fs}" letter-spacing="-0.02em" fill="${a}">${escTxt(d.head[1])}</text>
-  <text x="${w - Math.round(w * 0.05)}" y="${h - Math.round(h * 0.055)}" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="${foot}" letter-spacing="0.14em" fill="#FFFFFF" opacity="0.45">LOCALWEBSA.ORG</text>
+  <g transform="translate(${mx},${my}) scale(${ms})" fill="none" stroke="${a}" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" filter="url(#sh_${sid})">${motif}</g>
+  <rect width="${w}" height="${h}" fill="url(#sc_${sid})"/>
+  <g filter="url(#sh_${sid})">
+    <rect x="${lx}" y="${ruleY}" width="${ruleW}" height="4" rx="2" fill="${a}"/>
+    <text x="${lx}" y="${y1}" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="800" font-size="${fs}" letter-spacing="-0.02em" fill="#FFFFFF">${escTxt(d.head[0])}</text>
+    <text x="${lx}" y="${y2}" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="800" font-size="${fs}" letter-spacing="-0.02em" fill="${a}">${escTxt(d.head[1])}</text>
+  </g>
+  <text x="${w - Math.round(w * 0.05)}" y="${h - Math.round(h * 0.055)}" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="${foot}" letter-spacing="0.14em" fill="#FFFFFF" opacity="0.5">LOCALWEBSA.ORG</text>
   <rect width="${w}" height="${h}" fill="url(#vg_${sid})"/>
-  <rect width="${w}" height="${h}" filter="url(#nz_${sid})" opacity="0.5"/>
+  <rect width="${w}" height="${h}" filter="url(#nz_${sid})" opacity="0.45"/>
 </svg>`;
   }
 

@@ -13,7 +13,7 @@ const RATE_LIMIT_MAX = 20;
 const RATE_LIMIT_WINDOW_MS = 60 * 1000;
 const rateLimitMap = new Map();
 
-function checkRateLimit(ip) {
+export function checkRateLimit(ip) {
   const now = Date.now();
 
   // Opportunistically prune expired entries to avoid unbounded growth.

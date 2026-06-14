@@ -72,6 +72,9 @@
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0;background:var(--bg-black);color:var(--white);scroll-behavior:smooth;overflow-x:clip}
+/* Floating pill nav is fixed near the top — clear it when jumping to an anchor
+   or when the skip link moves focus, so the target never lands behind the nav. */
+html{scroll-padding-top:84px}
 body{
   font-family:var(--font-body);
   font-size:var(--text-base);line-height:1.6;font-weight:400;
@@ -164,6 +167,25 @@ section.blue .lede{color:rgba(255,255,255,0.85)}
   .h1{font-size:var(--text-3xl)}
   .h2{font-size:var(--text-2xl)}
 }
+
+/* ====== SKIP LINK ====== */
+/* Keyboard users land here first; it stays off-screen until focused, then
+   drops in as a glass pill so they can jump straight past the nav. */
+.skip-link{
+  position:fixed;top:0;left:50%;z-index:400;
+  transform:translate(-50%,-130%);
+  padding:var(--space-3) var(--space-5);border-radius:0 0 14px 14px;
+  font-size:var(--text-sm);font-weight:700;color:#fff;
+  background:linear-gradient(180deg,rgba(60,96,255,.55),rgba(0,0,255,.4));
+  border:1px solid rgba(150,178,255,.6);border-top:none;
+  -webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);
+  box-shadow:0 10px 30px rgba(0,0,255,.34);
+  transition:transform .2s var(--ease-out);
+}
+.skip-link:focus-visible{outline:2px solid var(--accent-cyan);outline-offset:2px}
+.skip-link:focus{transform:translate(-50%,0)}
+/* The focus target itself should never paint a visible focus ring */
+[id="mainContent"]:focus{outline:none}
 
 /* ====== NAV ====== */
 /* N5 · Floating pill — detached from the page edges, blur backdrop, soft shadow */
@@ -556,6 +578,13 @@ body.nav-open{overflow:hidden;position:fixed;width:100%}
   width:44px;height:44px;border-radius:11px;
   display:grid;place-items:center;color:var(--accent-cyan);
   background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.20);
+  transition:transform .25s var(--ease-out),background .25s,border-color .25s,box-shadow .25s;
+}
+/* Icon lifts and warms on hover so the services panel feels tactile, not static */
+.feature:hover .feature-ico{
+  transform:translateY(-2px) scale(1.06);
+  background:rgba(0,229,255,.16);border-color:rgba(0,229,255,.45);
+  box-shadow:0 8px 22px rgba(0,229,255,.18);
 }
 .feature-ico svg{width:22px;height:22px}
 .feature h3{grid-column:2;grid-row:1;align-self:center;font-size:var(--text-lg);font-weight:700;margin:0;color:#fff;letter-spacing:-0.01em}
@@ -1162,7 +1191,10 @@ footer::after{
 .legal-content ul{padding-left:1.2em}
 
 /* ====== FADE IN ====== */
-.fade-in{opacity:0;transform:translateY(20px);transition:opacity .7s ease, transform .7s ease}
+/* Reveal-on-scroll. Groups (feature grid, plans, cards) cascade in because
+   app.js adds the .in class with a per-sibling delay — kept out of CSS so the
+   stagger never leaks into an element's own hover/active transitions. */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease-out), transform .7s var(--ease-out)}
 .fade-in.in{opacity:1;transform:none}
 
 /* ====== FINAL CTA BLOCK ====== */

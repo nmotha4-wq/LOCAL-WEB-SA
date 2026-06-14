@@ -89,10 +89,30 @@
 
   // ============ FADE IN ============
   if (typeof IntersectionObserver !== 'undefined') {
+    // Cascade reveal: grouped items (feature grid, plans, cards) settle in
+    // sequence rather than popping at once. Each element is pre-stamped with
+    // its index among same-parent .fade-in siblings (capped so long lists
+    // don't drag), and we offset the .in class by that index on reveal. The
+    // delay lives in JS, not CSS, so it never bleeds into hover/active states.
+    const reduceMotion = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const delay = reduceMotion ? 0 : (Number(el.dataset.ri) || 0) * 70;
+        setTimeout(() => el.classList.add('in'), delay);
+        io.unobserve(el);
+      });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+    const groupIndex = new Map();
+    document.querySelectorAll('.fade-in').forEach(el => {
+      const parent = el.parentElement;
+      const i = groupIndex.get(parent) || 0;
+      el.dataset.ri = Math.min(i, 6);
+      groupIndex.set(parent, i + 1);
+      io.observe(el);
+    });
   }
 
   // ============ FAQ ============

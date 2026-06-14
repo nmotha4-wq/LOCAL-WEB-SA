@@ -1,6 +1,7 @@
 /* ========== Shared chrome (nav + footer) ========== */
 (function(){
   const navHTML = `
+  <a class="skip-link" href="#mainContent">Skip to content</a>
   <header class="nav" id="nav">
     <a href="index.html" class="brand" aria-label="Local Web SA">
       <span class="brand-mark" aria-hidden="true"></span>
@@ -118,6 +119,19 @@
   if (navMount) navMount.outerHTML = navHTML;
   const footMount = document.getElementById('footMount');
   if (footMount) footMount.outerHTML = footerHTML;
+
+  // Give the skip link a real target: the page's <main>, or the first content
+  // section after the nav. tabindex=-1 lets focus land there programmatically
+  // without adding the element to the normal tab order.
+  if (!document.getElementById('mainContent')) {
+    const main = document.querySelector('main') ||
+      document.querySelector('header.nav ~ section') ||
+      document.querySelector('section');
+    if (main) {
+      main.id = 'mainContent';
+      if (!main.hasAttribute('tabindex')) main.setAttribute('tabindex', '-1');
+    }
+  }
 
   // Run a callback once the page is fully loaded and the browser is idle, so
   // heavy work (video downloads) never competes with the initial page load.

@@ -1,7 +1,7 @@
 {
   "name": "Local Web SA",
   "short_name": "Local Web SA",
-  "description": "Affordable, modern websites for South African small businesses. From R799.",
+  "description": "Affordable, modern websites for South African small and medium enterprises (SMEs). From R799.",
   "start_url": "/index.html",
   "scope": "/",
   "display": "standalone",

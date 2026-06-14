@@ -61,7 +61,7 @@
           <img class="brand-wordmark" src="assets/logo-wordmark.png" alt="Local Web SA" width="847" height="135" />
         </a>
         <h2 class="foot-line">Where ideas <span class="cyan">go online.</span></h2>
-        <p class="foot-tagline">Affordable, modern websites for South African small businesses. Built in Pretoria, shipped in days.</p>
+        <p class="foot-tagline">Affordable, modern websites for South African small and medium enterprises (SMEs). Built in Pretoria, shipped in days.</p>
         <a href="contact.html" class="btn btn-white sm foot-cta">
           Start your website
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
